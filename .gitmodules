@@ -1,0 +1,512 @@
+[include]
+	path = .gitremotes
+	path = .borgconfig
+[submodule "a"]
+	path = lib/a
+	url = https://github.com/plexus/a.el
+[submodule "ace-pinyin"]
+	path = lib/ace-pinyin
+	url = https://github.com/xlshiz/ace-pinyin
+[submodule "ace-window"]
+	path = lib/ace-window
+	url = https://github.com/abo-abo/ace-window
+[submodule "alert"]
+	path = lib/alert
+	url = https://github.com/jwiegley/alert
+[submodule "annalist"]
+	path = lib/annalist
+	url = https://github.com/noctuid/annalist.el
+	ignore = untracked
+[submodule "apheleia"]
+	path = lib/apheleia
+	url = https://github.com/radian-software/apheleia
+[submodule "async"]
+	path = lib/async
+	url = https://github.com/jwiegley/emacs-async
+[submodule "auto-compile"]
+	path = lib/auto-compile
+	url = git@github.com:emacscollective/auto-compile.git
+[submodule "auto-minor-mode"]
+	path = lib/auto-minor-mode
+	url = https://github.com/joewreschnig/auto-minor-mode
+[submodule "auto-yasnippet"]
+	path = lib/auto-yasnippet
+	url = https://github.com/abo-abo/auto-yasnippet.git
+[submodule "avy"]
+	path = lib/avy
+	url = https://github.com/abo-abo/avy
+[submodule "avy-thing-edit"]
+	path = lib/avy-thing-edit
+	url = https://github.com/xlshiz/avy-thing-edit
+[submodule "awesome-tray"]
+	path = lib/awesome-tray
+	url = https://github.com/manateelazycat/awesome-tray
+[submodule "bazel"]
+	path = lib/bazel
+	url = https://github.com/bazelbuild/emacs-bazel-mode
+[submodule "benchmark-init"]
+	path = lib/benchmark-init
+	url = https://github.com/dholm/benchmark-init-el
+[submodule "better-jumper"]
+	path = lib/better-jumper
+	url = https://github.com/gilbertw1/better-jumper
+[submodule "borg"]
+	path = lib/borg
+	url = git@github.com:emacscollective/borg.git
+[submodule "cape"]
+	path = lib/cape
+	url = https://github.com/minad/cape
+	ignore = untracked
+[submodule "citre"]
+	path = lib/citre
+	url = https://github.com/universal-ctags/citre
+[submodule "clang-format"]
+	path = lib/clang-format
+	url = https://github.com/emacsmirror/clang-format
+[submodule "closql"]
+	path = lib/closql
+	url = git@github.com:magit/closql.git
+[submodule "cmake-mode"]
+	path = lib/cmake-mode
+	url = https://github.com/emacsmirror/cmake-mode
+[submodule "code-review"]
+	path = lib/code-review
+	url = https://github.com/wandersoncferreira/code-review
+[submodule "color-rg"]
+	path = lib/color-rg
+	url = https://github.com/manateelazycat/color-rg
+[submodule "compat"]
+	path = lib/compat
+	url = git@github.com:emacs-compat/compat.git
+[submodule "consult"]
+	path = lib/consult
+	url = https://github.com/minad/consult
+	ignore = untracked
+[submodule "consult-dir"]
+	path = lib/consult-dir
+	url = https://github.com/karthink/consult-dir
+[submodule "consult-lsp"]
+	path = lib/consult-lsp
+	url = https://github.com/gagbo/consult-lsp
+[submodule "consult-yasnippet"]
+	path = lib/consult-yasnippet
+	url = https://github.com/mohkale/consult-yasnippet
+[submodule "corfu"]
+	path = lib/corfu
+	url = https://github.com/minad/corfu
+	ignore = untracked
+[submodule "corfu-english-helper"]
+	path = lib/corfu-english-helper
+	url = https://github.com/manateelazycat/corfu-english-helper
+[submodule "dash"]
+	path = lib/dash
+	url = git@github.com:magnars/dash.el.git
+[submodule "deferred"]
+	path = lib/deferred
+	url = https://github.com/kiwanami/emacs-deferred
+[submodule "diff-hl"]
+	path = lib/diff-hl
+	url = git@github.com:dgutov/diff-hl.git
+[submodule "diminish"]
+	path = lib/diminish
+	url = https://github.com/myrjola/diminish.el
+[submodule "diredfl"]
+	path = lib/diredfl
+	url = https://github.com/purcell/diredfl
+[submodule "dirvish"]
+	path = lib/dirvish
+	url = https://github.com/alexluigit/dirvish
+[submodule "dockerfile-mode"]
+	path = lib/dockerfile-mode
+	url = https://github.com/spotify/dockerfile-mode
+[submodule "doom-themes"]
+	path = lib/doom-themes
+	url = https://github.com/doomemacs/themes
+[submodule "el-get"]
+	path = lib/el-get
+	url = https://github.com/dimitri/el-get
+[submodule "elisp-def"]
+	path = lib/elisp-def
+	url = https://github.com/Wilfred/elisp-def
+[submodule "elisp-refs"]
+	path = lib/elisp-refs
+	url = https://github.com/Wilfred/elisp-refs
+[submodule "emacsql"]
+	path = lib/emacsql
+	url = git@github.com:magit/emacsql.git
+[submodule "embark"]
+	path = lib/embark
+	url = https://github.com/oantolin/embark
+	ignore = untracked
+[submodule "epkg"]
+	path = lib/epkg
+	url = git@github.com:emacscollective/epkg.git
+[submodule "epl"]
+	path = lib/epl
+	url = https://github.com/cask/epl
+[submodule "evil"]
+	path = lib/evil
+	url = https://github.com/emacs-evil/evil
+[submodule "evil-args"]
+	path = lib/evil-args
+	url = https://github.com/wcsmith/evil-args
+[submodule "evil-collection"]
+	path = lib/evil-collection
+	url = https://github.com/xlshiz/evil-collection.git
+[submodule "evil-escape"]
+	path = lib/evil-escape
+	url = https://github.com/emacsorphanage/evil-escape
+[submodule "evil-matchit"]
+	path = lib/evil-matchit
+	url = https://github.com/redguardtoo/evil-matchit
+[submodule "evil-multiedit"]
+	path = lib/evil-multiedit
+	url = https://github.com/hlissner/evil-multiedit
+[submodule "evil-nerd-commenter"]
+	path = lib/evil-nerd-commenter
+	url = https://github.com/redguardtoo/evil-nerd-commenter
+[submodule "evil-org"]
+	path = lib/evil-org
+	url = https://github.com/Somelauw/evil-org-mode
+[submodule "evil-pinyin"]
+	path = lib/evil-pinyin
+	url = https://github.com/laishulu/evil-pinyin
+[submodule "evil-snipe"]
+	path = lib/evil-snipe
+	url = https://github.com/hlissner/evil-snipe
+[submodule "evil-surround"]
+	path = lib/evil-surround
+	url = https://github.com/emacs-evil/evil-surround
+[submodule "evil-terminal-cursor-changer"]
+	path = lib/evil-terminal-cursor-changer
+	url = https://github.com/7696122/evil-terminal-cursor-changer
+[submodule "evil-textobj-anyblock"]
+	path = lib/evil-textobj-anyblock
+	url = https://github.com/noctuid/evil-textobj-anyblock
+[submodule "evil-textobj-tree-sitter"]
+	path = lib/evil-textobj-tree-sitter
+	url = https://github.com/meain/evil-textobj-tree-sitter
+[submodule "evil-visualstar"]
+	path = lib/evil-visualstar
+	url = https://github.com/bling/evil-visualstar
+[submodule "exec-path-from-shell"]
+	path = lib/exec-path-from-shell
+	url = https://github.com/purcell/exec-path-from-shell
+[submodule "f"]
+	path = lib/f
+	url = https://github.com/rejeep/f.el
+[submodule "flycheck"]
+	path = lib/flycheck
+	url = https://github.com/flycheck/flycheck
+[submodule "flycheck-golangci-lint"]
+	path = lib/flycheck-golangci-lint
+	url = https://github.com/weijiangan/flycheck-golangci-lint
+[submodule "flycheck-popup-tip"]
+	path = lib/flycheck-popup-tip
+	url = https://github.com/flycheck/flycheck-popup-tip
+[submodule "flycheck-posframe"]
+	path = lib/flycheck-posframe
+	url = https://github.com/alexmurray/flycheck-posframe
+[submodule "flycheck-rust"]
+	path = lib/flycheck-rust
+	url = https://github.com/flycheck/flycheck-rust
+[submodule "forge"]
+	path = lib/forge
+	url = https://github.com/magit/forge
+[submodule "gcmh"]
+	path = lib/gcmh
+	url = https://gitlab.com/koral/gcmh
+[submodule "general"]
+	path = lib/general
+	url = https://github.com/noctuid/general.el
+[submodule "ghub"]
+	path = lib/ghub
+	url = https://github.com/magit/ghub
+[submodule "git-messenger"]
+	path = lib/git-messenger
+	url = https://github.com/emacsorphanage/git-messenger
+[submodule "git-modes"]
+	path = lib/git-modes
+	url = git@github.com:magit/git-modes.git
+[submodule "git-timemachine"]
+	path = lib/git-timemachine
+	url = git@github.com:emacsmirror/git-timemachine.git
+[submodule "go-eldoc"]
+	path = lib/go-eldoc
+	url = https://github.com/emacsorphanage/go-eldoc
+[submodule "go-mode"]
+	path = lib/go-mode
+	url = https://github.com/dominikh/go-mode.el
+[submodule "go-tag"]
+	path = lib/go-tag
+	url = https://github.com/brantou/emacs-go-tag
+[submodule "gotest"]
+	path = lib/gotest
+	url = https://github.com/nlamirault/gotest.el
+[submodule "goto-chg"]
+	path = lib/goto-chg
+	url = https://github.com/emacs-evil/goto-chg
+[submodule "helpful"]
+	path = lib/helpful
+	url = https://github.com/Wilfred/helpful
+[submodule "highlight-numbers"]
+	path = lib/highlight-numbers
+	url = https://github.com/Fanael/highlight-numbers
+[submodule "highlight-quoted"]
+	path = lib/highlight-quoted
+	url = https://github.com/Fanael/highlight-quoted
+[submodule "hl-todo"]
+	path = lib/hl-todo
+	url = https://github.com/tarsius/hl-todo
+[submodule "ht"]
+	path = lib/ht
+	url = https://github.com/Wilfred/ht.el
+[submodule "hydra"]
+	path = lib/hydra
+	url = https://github.com/abo-abo/hydra
+[submodule "iedit"]
+	path = lib/iedit
+	url = https://github.com/victorhge/iedit
+[submodule "inheritenv"]
+	path = lib/inheritenv
+	url = https://github.com/purcell/inheritenv
+[submodule "llama"]
+	path = lib/llama
+	url = https://git.sr.ht/~tarsius/llama
+[submodule "lsp-bridge"]
+	path = lib/lsp-bridge
+	url = https://github.com/manateelazycat/lsp-bridge
+[submodule "lsp-mode"]
+	path = lib/lsp-mode
+	url = https://github.com/emacs-lsp/lsp-mode
+[submodule "lsp-pyright"]
+	path = lib/lsp-pyright
+	url = https://github.com/emacs-lsp/lsp-pyright
+[submodule "lsp-ui"]
+	path = lib/lsp-ui
+	url = https://github.com/emacs-lsp/lsp-ui
+[submodule "lua-mode"]
+	path = lib/lua-mode
+	url = https://github.com/immerrr/lua-mode
+[submodule "macrostep"]
+	path = lib/macrostep
+	url = https://github.com/emacsorphanage/macrostep
+[submodule "magit"]
+	path = lib/magit
+	url = git@github.com:magit/magit.git
+[submodule "magit-todos"]
+	path = lib/magit-todos
+	url = https://github.com/alphapapa/magit-todos
+[submodule "marginalia"]
+	path = lib/marginalia
+	url = https://github.com/minad/marginalia
+	ignore = untracked
+[submodule "markdown-mode"]
+	path = lib/markdown-mode
+	url = https://github.com/jrblevin/markdown-mode
+[submodule "markdown-toc"]
+	path = lib/markdown-toc
+	url = https://github.com/ardumont/markdown-toc
+[submodule "modern-cpp-font-lock"]
+	path = lib/modern-cpp-font-lock
+	url = https://github.com/ludwigpacifici/modern-cpp-font-lock
+[submodule "names"]
+	path = lib/names
+	url = https://github.com/Malabarba/names
+[submodule "nerd-icons"]
+	path = lib/nerd-icons
+	url = https://github.com/rainstormstudio/nerd-icons.el
+[submodule "nerd-icons-completion"]
+	path = lib/nerd-icons-completion
+	url = https://github.com/rainstormstudio/nerd-icons-completion
+[submodule "nerd-icons-dired"]
+	path = lib/nerd-icons-dired
+	url = https://github.com/rainstormstudio/nerd-icons-dired
+[submodule "no-littering"]
+	path = lib/no-littering
+	url = https://github.com/emacscollective/no-littering
+[submodule "orderless"]
+	path = lib/orderless
+	url = https://github.com/oantolin/orderless
+	ignore = untracked
+[submodule "org"]
+	path = lib/org
+	url = git@github.com:emacsmirror/org.git
+[submodule "org-appear"]
+	path = lib/org-appear
+	url = https://github.com/awth13/org-appear
+[submodule "org-modern"]
+	path = lib/org-modern
+	url = https://github.com/minad/org-modern
+[submodule "org-pomodoro"]
+	path = lib/org-pomodoro
+	url = https://github.com/marcinkoziej/org-pomodoro
+[submodule "parent-mode"]
+	path = lib/parent-mode
+	url = https://github.com/Fanael/parent-mode
+[submodule "pcre2el"]
+	path = lib/pcre2el
+	url = https://github.com/joddie/pcre2el
+[submodule "persp-mode"]
+	path = lib/persp-mode
+	url = https://github.com/Bad-ptr/persp-mode.el
+[submodule "pinyinlib"]
+	path = lib/pinyinlib
+	url = https://github.com/xlshiz/pinyinlib.el
+[submodule "pkg-info"]
+	path = lib/pkg-info
+	url = https://github.com/emacsorphanage/pkg-info
+[submodule "popper"]
+	path = lib/popper
+	url = https://github.com/karthink/popper
+[submodule "popup"]
+	path = lib/popup
+	url = https://github.com/auto-complete/popup-el
+[submodule "pos-tip"]
+	path = lib/pos-tip
+	url = https://github.com/pitkali/pos-tip
+[submodule "posframe"]
+	path = lib/posframe
+	url = https://github.com/tumashu/posframe
+[submodule "projectile"]
+	path = lib/projectile
+	url = https://github.com/bbatsov/projectile
+[submodule "protobuf-mode"]
+	path = lib/protobuf-mode
+	url = git@github.com:emacsmirror/protobuf-mode.git
+[submodule "pyim"]
+	path = lib/pyim
+	url = https://github.com/tumashu/pyim
+[submodule "queue"]
+	path = lib/queue
+	url = git@github.com:emacsmirror/queue.git
+[submodule "rainbow-delimiters"]
+	path = lib/rainbow-delimiters
+	url = https://github.com/Fanael/rainbow-delimiters
+[submodule "rainbow-mode"]
+	path = lib/rainbow-mode
+	url = git@github.com:emacsmirror/rainbow-mode.git
+[submodule "restart-emacs"]
+	path = lib/restart-emacs
+	url = https://github.com/iqbalansari/restart-emacs
+[submodule "rfc-mode"]
+	path = lib/rfc-mode
+	url = https://github.com/galdor/rfc-mode
+[submodule "rime"]
+	path = lib/rime
+	url = https://github.com/DogLooksGood/emacs-rime
+[submodule "rust-mode"]
+	path = lib/rust-mode
+	url = https://github.com/rust-lang/rust-mode
+[submodule "s"]
+	path = lib/s
+	url = https://github.com/magnars/s.el
+[submodule "shrink-path"]
+	path = lib/shrink-path
+	url = https://gitlab.com/bennya/shrink-path.el
+[submodule "sis"]
+	path = lib/sis
+	url = https://github.com/laishulu/emacs-smart-input-source
+[submodule "smartparens"]
+	path = lib/smartparens
+	url = https://github.com/Fuco1/smartparens
+[submodule "solaire-mode"]
+	path = lib/solaire-mode
+	url = https://github.com/hlissner/emacs-solaire-mode
+[submodule "sort-tab"]
+	path = lib/sort-tab
+	url = https://github.com/xlshiz/sort-tab.git
+[submodule "spinner"]
+	path = lib/spinner
+	url = https://github.com/Malabarba/spinner.el
+[submodule "sqlite3"]
+	path = lib/sqlite3
+	url = git@github.com:pekingduck/emacs-sqlite3-api.git
+[submodule "symbol-overlay"]
+	path = lib/symbol-overlay
+	url = https://github.com/wolray/symbol-overlay
+[submodule "symbols-outline"]
+	path = lib/symbols-outline
+	url = https://github.com/xlshiz/symbols-outline.el
+[submodule "terminal-focus-reporting"]
+	path = lib/terminal-focus-reporting
+	url = https://github.com/veelenga/terminal-focus-reporting.el
+[submodule "thing-edit"]
+	path = lib/thing-edit
+	url = https://github.com/manateelazycat/thing-edit
+[submodule "toc-org"]
+	path = lib/toc-org
+	url = https://github.com/snosov1/toc-org
+[submodule "toml-mode"]
+	path = lib/toml-mode
+	url = https://github.com/dryman/toml-mode.el
+[submodule "transient"]
+	path = lib/transient
+	url = git@github.com:magit/transient.git
+[submodule "tree-sitter"]
+	path = lib/tree-sitter
+	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter
+[submodule "tree-sitter-langs"]
+	path = lib/tree-sitter-langs
+	url = https://github.com/emacs-tree-sitter/tree-sitter-langs
+[submodule "treepy"]
+	path = lib/treepy
+	url = git@github.com:volrath/treepy.el.git
+[submodule "undo-fu"]
+	path = lib/undo-fu
+	url = https://codeberg.org/ideasman42/emacs-undo-fu.git
+[submodule "undo-fu-session"]
+	path = lib/undo-fu-session
+	url = https://codeberg.org/ideasman42/emacs-undo-fu-session.git
+[submodule "use-package"]
+	path = lib/use-package
+	url = git@github.com:jwiegley/use-package.git
+[submodule "uuidgen"]
+	path = lib/uuidgen
+	url = https://github.com/kanru/uuidgen-el
+[submodule "vertico"]
+	path = lib/vertico
+	url = https://github.com/minad/vertico
+	ignore = untracked
+[submodule "vi-tilde-fringe"]
+	path = lib/vi-tilde-fringe
+	url = https://github.com/syl20bnr/vi-tilde-fringe
+[submodule "vimrc-mode"]
+	path = lib/vimrc-mode
+	url = https://github.com/mcandre/vimrc-mode
+[submodule "vterm"]
+	path = lib/vterm
+	url = https://github.com/akermu/emacs-libvterm
+[submodule "vterm-toggle"]
+	path = lib/vterm-toggle
+	url = https://github.com/jixiuf/vterm-toggle
+[submodule "vundo"]
+	path = lib/vundo
+	url = https://github.com/emacs-straight/vundo.git
+[submodule "wgrep"]
+	path = lib/wgrep
+	url = https://github.com/mhayashi1120/Emacs-wgrep
+[submodule "which-key"]
+	path = lib/which-key
+	url = https://github.com/justbur/emacs-which-key
+[submodule "winum"]
+	path = lib/winum
+	url = https://github.com/deb0ch/emacs-winum
+[submodule "with-editor"]
+	path = lib/with-editor
+	url = git@github.com:magit/with-editor.git
+[submodule "xr"]
+	path = lib/xr
+	url = https://github.com/mattiase/xr
+[submodule "yaml"]
+	path = lib/yaml
+	url = https://github.com/zkry/yaml.el
+[submodule "yaml-mode"]
+	path = lib/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode
+[submodule "yasnippet"]
+	path = lib/yasnippet
+	url = https://github.com/joaotavora/yasnippet
+[submodule "zoom-window"]
+	path = lib/zoom-window
+	url = https://github.com/emacsorphanage/zoom-window

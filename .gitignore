@@ -1,0 +1,7 @@
+/.cask
+/.hive-maint
+/eln-cache
+/elpa
+/.local
+*.elc
+/custom.el

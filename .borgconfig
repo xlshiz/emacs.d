@@ -1,0 +1,55 @@
+[submodule "dash"]
+	no-byte-compile = dash-functional.el
+	no-makeinfo = dash-template.texi
+[submodule "emacsql"]
+	no-byte-compile = emacsql-pg.el
+[submodule "magit"]
+	no-byte-compile = lisp/magit-libgit.el
+[submodule "sqlite3"]
+	build-step = make
+	build-step = borg-update-autoloads
+[submodule "vertico"]
+	load-path = .
+	load-path = extensions
+[submodule "corfu"]
+	load-path = .
+	load-path = extensions
+[submodule "lsp-bridge"]
+	load-path = .
+	load-path = acm
+	build-step = borg-update-autoloads
+[submodule "lsp-mode"]
+	load-path = .
+	load-path = clients
+	load-path = features/step-definitions
+	load-path = features/support
+	load-path = scripts
+	load-path = use-package
+[submodule "doom-themes"]
+	load-path = .
+	load-path = themes
+	load-path = extensions
+[submodule "tree-sitter"]
+	load-path = lisp
+	load-path = core
+	build-step = make build
+	build-step = borg-update-autoloads
+[submodule "liberime"]
+	build-step = EMACS_MAJOR_VERSION=29 make
+	build-step = cp src/liberime-core.so .
+	build-step = borg-update-autoloads
+[submodule "dirvish"]
+	load-path = .
+	load-path = extensions
+[submodule "pyim"]
+	no-byte-compile = pyim-liberime.el
+[submodule "vterm"]
+	build-step = "mkdir -p build;cd build;cmake -G 'Unix Makefiles' ..;make"
+	build-step = borg-compile
+	build-step = borg-update-autoloads
+[submodule "wgrep"]
+	no-byte-compile = wgrep-subtest.el
+[submodule "forge"]
+	build-step = borg-update-autoloads
+[submodule "code-review"]
+	build-step = borg-update-autoloads
