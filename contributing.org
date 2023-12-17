@@ -1,0 +1,42 @@
+#+TITLE: Contributing
+#+STARTUP: nofold
+
+* Naming conventions
+This project has a number of naming conventions that it uses in addition to the standard
+lisp conventions. Third party packages may use their own conventions as well.
+
+** Lisp Naming Conventions
+The lisp conventions are simple. Symbols follow ~NAMESPACE-SYMBOLNAME~ for
+public variables/functions (e.g. ~bookmark-default-file~ or
+~electric-indent-mode~) and ~NAMESPACE--SYMBOLNAME~ for private ones (e.g.
+~byte-compile--lexical-environment~ and ~yas--tables~).
+
+~NAMESPACE~ is usually the name of the containing file or package. E.g. the
+~company~ plugin prefixes all its variables/functions with ~company-~.
+
+** Project Naming Conventions
++ ~my/NAME~ or ~+MODULE/NAME~ :: Denotes a public command designed to be used
+  interactively, via =M-x= or a keybinding. e.g. ~my/info~, ~+popup/other~,
+  ~+ivy/rg~.
++ ~my:NAME~ :: A public evil operator, motion or command. e.g. ~+evil:align~,
+  ~+ivy:rg~.
++ ~my-[-]NAME-h~ or ~+MODULE-[-]NAME-h~ :: A non-interactive function meant to
+  be used (exclusively) as a hook. e.g. ~+cc-fontify-constants-h~,
+  ~+flycheck-buffer-h~.
++ ~my-[-]NAME-a~ or ~+MODULE-[-]NAME-a~ :: Functions designed to be used as
+  advice for other functions. e.g. ~my-set-jump-a~,
+  ~my--fix-broken-smie-modes-a~, ~+org--babel-lazy-load-library-a~
++ ~my-[-]NAME-fn~ or ~+MODULE-[-]NAME-fn~ :: Indicates an [[https://en.wikipedia.org/wiki/Strategy_pattern][strategy]] function. A
+  good rule of thumb for what makes a strategy function is: is it
+  interchangeable? Can it be replaced with another function with a matching
+  signature? e.g. ~+lookup-dumb-jump-backend-fn~, ~+magit-display-buffer-fn~,
+  ~+workspaces-set-project-action-fn~
++ ~abc!~ :: A public "autodef" function or macro. An autodef should always
+  be defined, even if its containing module is disabled (i.e. they will not
+  throw a void-function error). The purpose of this is to avoid peppering module
+  configs with conditionals or `after!` blocks before using their APIs. They
+  should noop if their module is disabled, and should be zero-cost in the case
+  their module is disabled.
+
+  Autodefs usually serve to configure or a module. e.g. ~after!~,
+  ~set-company-backends!~, ~set-evil-initial-state!~
