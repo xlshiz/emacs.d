@@ -49,8 +49,8 @@
   (advice-add #'keyboard-quit :before #'corfu-quit)
   (after! evil
     ;; https://github.com/minad/corfu/issues/12#issuecomment-869037519
-    (advice-add 'corfu--setup :after 'evil-normalize-keymaps)
-    (advice-add 'corfu--teardown :after 'evil-normalize-keymaps)
+    (advice-add 'corfu--setup :after (lambda (&rest _) (evil-normalize-keymaps)))
+    (advice-add 'corfu--teardown :after (lambda (&rest _) (evil-normalize-keymaps)))
     (evil-make-overriding-map corfu-map)
     ;; auto quit corfu when exit insert state
     (add-hook 'evil-normal-state-entry-hook (lambda ()

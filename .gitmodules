@@ -152,7 +152,7 @@
 	url = https://github.com/wcsmith/evil-args
 [submodule "evil-collection"]
 	path = lib/evil-collection
-	url = https://github.com/xlshiz/evil-collection.git
+	url = https://github.com/emacs-evil/evil-collection.git
 [submodule "evil-escape"]
 	path = lib/evil-escape
 	url = https://github.com/emacsorphanage/evil-escape
