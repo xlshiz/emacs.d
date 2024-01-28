@@ -488,7 +488,10 @@ BEG and END narrow the scope where candidates are searched."
     (setq char3 ?\n))
   (avy-with avy-goto-char-3
     (avy-jump
-     (regexp-quote (string char1 char2 char3))
+     ;; (regexp-quote (string char1 char2 char3))
+     (pinyinlib-build-regexp-string (string char1 char2 char3)                                                                                                   
+                                    (not ace-pinyin-enable-punctuation-translation)
+                                    (not ace-pinyin-simplified-chinese-only-p))
      :window-flip arg
      :beg beg
      :end end)))
