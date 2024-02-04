@@ -153,7 +153,7 @@
   :init
   (setq line-number-mode t              ; 打开行号显示
         column-number-mode t            ; 打开列号显示
-        kill-whole-line t               ; Kill line including '\n'
+        kill-whole-line nil               ; Kill line including '\n'
         line-move-visual nil            ; Move line by visual line
         track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.
         column-number-indicator-zero-based nil ; column starts from 1
