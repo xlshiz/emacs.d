@@ -80,8 +80,7 @@
   ;; (add-hook 'citre-peek--mode-hook #'evil-normalize-keymaps)
   (general-nmap
          "g C-]"  #'citre-peek
-         "C-]"    #'citre-jump
-         "M-,"    #'citre-jump-back)
+         "C-]"    #'citre-jump)
   (map! (:map citre-peek-keymap
          "M-n"     #'citre-peek-next-line
          "M-p"     #'citre-peek-prev-line

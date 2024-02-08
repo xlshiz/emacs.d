@@ -216,6 +216,12 @@
   (setq custom-file (expand-file-name "custom.el" my-local-dir)))
 
 (use-package better-jumper
+  :hook (my-first-input . better-jumper-mode)
+  :commands my-set-jump-a my-set-jump-maybe-a my-set-jump-h
+  :preface
+  ;; REVIEW Suppress byte-compiler warning spawning a *Compile-Log* buffer at
+  ;; startup. This can be removed once gilbertw1/better-jumper#2 is merged.
+  (defvar better-jumper-local-mode nil)
   :init
   (global-set-key [remap evil-jump-forward] #'better-jumper-jump-forward)
   (global-set-key [remap evil-jump-backward] #'better-jumper-jump-backward)
@@ -224,15 +230,44 @@
   (global-set-key [remap xref-go-forward] #'better-jumper-jump-forward)
   (global-set-key [remap xref-pop-marker-stack] #'better-jumper-jump-backward)
   :config
-  (better-jumper-mode +1)
   (setq better-jumper-context 'window
         better-jumper-new-window-behavior 'copy
         better-jumper-add-jump-behavior 'replace
         better-jumper-max-length 100
         better-jumper-use-evil-jump-advice t)
+
+  (defun my-set-jump-a (fn &rest args)
+    "Set a jump point and ensure fn doesn't set any new jump points."
+    (better-jumper-set-jump (if (markerp (car args)) (car args)))
+    (let ((evil--jumps-jumping t)
+          (better-jumper--jumping t))
+      (apply fn args)))
+
+  (defun my-set-jump-maybe-a (fn &rest args)
+    "Set a jump point if fn actually moves the point."
+    (let ((origin (point-marker))
+          (result
+           (let* ((evil--jumps-jumping t)
+                  (better-jumper--jumping t))
+             (apply fn args)))
+          (dest (point-marker)))
+      (unless (equal origin dest)
+        (with-current-buffer (marker-buffer origin)
+          (better-jumper-set-jump
+           (if (markerp (car args))
+               (car args)
+             origin))))
+      (set-marker origin nil)
+      (set-marker dest nil)
+      result))
+
+  (defun my-set-jump-h ()
+    "Run `better-jumper-set-jump' but return nil, for short-circuiting hooks."
+    (better-jumper-set-jump)
+    nil)
   ;; Auto set mark cmd list
-  (dolist (cmd '(lsp-bridge-find-def))
-    (advice-add cmd :after #'better-jumper-set-jump)))
+  (dolist (cmd '(lsp-bridge-find-def kill-current-buffer imenu citre-jump))
+    (advice-add cmd :around #'my-set-jump-a)))
 
 (use-package exec-path-from-shell
   :init

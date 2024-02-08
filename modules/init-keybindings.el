@@ -176,6 +176,8 @@
       :v "S"    #'evil-surround-region
       :o "s"    #'evil-surround-edit
       :o "S"    #'evil-Surround-edit
+      :nv "zp"  #'my/evil-paste-after--from-copy-register
+      :nv "zP"  #'my/evil-paste-before--from-copy-register
       ;; text objects
       :textobj "a" #'evil-inner-arg                    #'evil-outer-arg
       :textobj "B" #'evil-textobj-anyblock-inner-block #'evil-textobj-anyblock-a-block

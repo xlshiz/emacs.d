@@ -489,9 +489,21 @@ BEG and END narrow the scope where candidates are searched."
   (avy-with avy-goto-char-3
     (avy-jump
      ;; (regexp-quote (string char1 char2 char3))
-     (pinyinlib-build-regexp-string (string char1 char2 char3)                                                                                                   
+     (pinyinlib-build-regexp-string (string char1 char2 char3)
                                     (not ace-pinyin-enable-punctuation-translation)
                                     (not ace-pinyin-simplified-chinese-only-p))
      :window-flip arg
      :beg beg
      :end end)))
+
+;;;###autoload
+(defun my/evil-paste-after--from-copy-register (&optional count)
+  "So often do we paste from the copy register, let's make it a command and bind it to a key and forget about \"0p"
+  (interactive "p")
+  (evil-paste-after (or count 1) ?0))
+
+;;;###autoload
+(defun my/evil-paste-before--from-copy-register (&optional count)
+  "So often do we paste from the copy register, let's make it a command and bind it to a key and forget about \"0p"
+  (interactive "p")
+  (evil-paste-before (or count 1) ?0))
