@@ -70,6 +70,9 @@ and Emacs states, and for non-evil users.")
 (defvar my-input-method "rime"
   "Which input method to use, pyim or rim")
 
+(defvar my-workspaces-main "main"
+  "The name of the primary and initial workspace, which cannot be deleted.")
+
 (when (file-exists-p (concat my-etc-dir "mydef.el"))
   (load (concat my-etc-dir "mydef.el") nil 'nomessage))
 
