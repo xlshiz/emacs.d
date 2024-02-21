@@ -118,8 +118,10 @@
                  neotree-enter
                  xref-go-back xref-go-forward
                  evil-jump-backward evil-jump-forward
+                 evil-goto-definition pop-tag-mark
                  better-jumper-jump-forward better-jumper-jump-backward
                  diff-hl-previous-hunk diff-hl-next-hunk
+                 citre-jump
                  goto-last-change))
     (advice-add cmd :after #'my/recenter-and-pulse)))
 
