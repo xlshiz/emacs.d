@@ -54,3 +54,35 @@ Returns the last file found to meet the rules set by FILES, which can be a
 single file or nested compound statement of `and' and `or' statements."
   `(let ((p ,(my-files--build-checks files directory)))
      (and p (expand-file-name p ,directory))))
+
+;;;###autoload
+(defun my/rename-file()
+  "Rename file while using current file as default."
+  (interactive)
+  (let ((file-from (read-file-name "Move from: " default-directory buffer-file-name))
+        (file-to (read-file-name "Move to:" default-directory)))
+    (rename-file file-from file-to)
+    (when (string= (file-truename file-from) (file-truename (buffer-file-name)))
+      (kill-buffer)
+      (find-file file-to))))
+
+;;;###autoload
+(defun my/copy-file()
+  "Copy file while using current file as default."
+  (interactive)
+  (copy-file
+   (read-file-name "Copy from: " default-directory buffer-file-name)
+   (read-file-name "Copy to:" default-directory)))
+
+;;;###autoload
+(defun my/delete-file()
+  "Delete file while using current file as default."
+  (interactive)
+  (let ((file-name (read-file-name "Delete: " default-directory (buffer-file-name))))
+    (cond
+     ((file-directory-p file-name) (delete-directory file-name t))
+     ((file-exists-p file-name) (delete-file file-name))
+     (t (message "Not found!")))
+    (unless (file-exists-p (buffer-file-name))
+      (kill-current-buffer))))
+

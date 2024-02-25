@@ -213,7 +213,7 @@
 
       ;;; <leader> b --- buffer
       (:prefix-map  ("b" . "buffer")
-       :desc "Alternate buffer"            "TAB"  #'+default/alternate-buffer-in-persp
+       :desc "Alternate buffer"            "TAB"  #'my/alternate-buffer-in-persp
        :desc "Previous buffer"             "["   #'previous-buffer
        :desc "Next buffer"                 "]"   #'next-buffer
        :desc "Switch buffer"               "A"   #'eaf-kill-process
@@ -227,7 +227,7 @@
        :desc "Switch to last buffer"       "l"   #'evil-switch-to-windows-last-buffer
        :desc "Next buffer"                 "n"   #'next-buffer
        :desc "New empty buffer"            "N"   #'evil-buffer-new
-       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
+       :desc "Kill other buffers"          "O"   #'my/kill-other-buffers
        :desc "Previous buffer"             "p"   #'previous-buffer
        :desc "Revert buffer"               "r"   #'revert-buffer
        :desc "Rename buffer"               "R"   #'rename-buffer
@@ -505,7 +505,7 @@
       (:prefix-map ("q" . "quit/session")
        ;; :desc "Restart emacs server"         "d" #'+default/restart-server
        :desc "Delete frame"                 "f" #'delete-frame
-       ;; :desc "Clear current frame"          "F" #'doom/kill-all-buffers
+       :desc "Clear current frame"          "F" #'my/kill-all-buffers
        :desc "Kill Emacs (and daemon)"      "K" #'save-buffers-kill-emacs
        :desc "Quit Emacs"                   "q" #'save-buffers-kill-terminal
        :desc "Quit Emacs without saving"    "Q" #'evil-quit-all-with-error-code
