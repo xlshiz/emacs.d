@@ -65,7 +65,7 @@
   (setq nerd-icons-scale-factor 0.95))
 
 (use-package sort-tab
-  :defer 0
+  :defer t
   :custom-face
   (sort-tab-ace-keys-face ((t :inherit hydra-face-red :bold t :height 1.0)))
   :config
@@ -119,8 +119,39 @@
   (add-to-list 'awesome-tray-module-alist
                '("my-lsp" . (my-lsp-info awesome-tray-module-circe-face)))
   (setq awesome-tray-active-modules
-        '("file-path" "my-location" "mode-name" "my-lsp" "git" "evil"))
-  )
+        '("file-path" "my-location" "mode-name" "my-lsp" "git" "evil")))
+
+(use-package xsort-tab
+  :defer 0
+  :custom-face
+  (xsort-tab-ace-keys-face ((t :inherit hydra-face-red :bold t :height 1.0)))
+  :config
+  (window-divider-mode -1)
+  (setq uniquify-buffer-name-style 'forward)
+  (defhydra tabs-fast-switch (:hint nil)
+    "
+    ^^^^Tab                    ^^Misc
+   -^^^^---------------------+-^^^^---------------------------
+    _C-a_^^     select first | _C-k_^^   close tab
+    _C-e_^^     select last  | _C-j_^^   ace jump
+    _h_   _l_  switch tab    | _C-S-k_  close other tabs
+   -^^^^---------------------+-^^^^---------------------------
+  "
+    ("h" xsort-tab-select-prev-tab)
+    ("l" xsort-tab-select-next-tab)
+    ("C-a" xsort-tab-select-first-tab)
+    ("C-e" xsort-tab-select-last-tab)
+    ("C-k" xsort-tab-close-current-tab)
+    ("C-S-k" xsort-tab-close-other-tabs)
+    ("C-j" xsort-tab-ace-jump)
+    ("q" nil "quit"))
+  (setq xsort-tab-height 20)
+  (setq xsort-tab-hide-buffers (append '("COMMIT_EDITMSG" "dir-data-")
+                                 xsort-tab-hide-buffers))
+  (setq xsort-tab-hide-tabs (append '(" *snails" "COMMIT_EDITMSG" " *rime" "*color-rg*" "*vterm-popup:main*" "*Ilist*" "*Outline*")
+                              xsort-tab-hide-tabs))
+  (xsort-tab-mode t))
+
 
 (provide 'init-ui)
 ;;; init-ui ends here

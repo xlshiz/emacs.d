@@ -41,7 +41,6 @@ codespell-fix:
 
 clean-all: clean
 	@rm -f .cache/autoloads.el*
-	@cd lib/liberime; rm -f liberime-core.so; make clean
 	@rm -f lib/tree-sitter/core/tsc-dyn.so
 	@rm -f lib/vterm/vterm-module.so
 	@rm -rf lib/vterm/build

@@ -498,6 +498,9 @@
 [submodule "xr"]
 	path = lib/xr
 	url = https://github.com/mattiase/xr
+[submodule "xsort-tab"]
+	path = lib/xsort-tab
+	url = https://github.com/xlshiz/xsort-tab.git
 [submodule "yaml"]
 	path = lib/yaml
 	url = https://github.com/zkry/yaml.el

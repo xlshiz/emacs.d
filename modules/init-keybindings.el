@@ -61,9 +61,9 @@
 
 ;;; win&tab
 (map! :gni  "M-o"      #'ace-window
-      :ni "M-j"        #'sort-tab-ace-jump
-      :ni "M-h"        #'sort-tab-select-prev-tab
-      :ni "M-l"        #'sort-tab-select-next-tab
+      :ni "M-j"        #'xsort-tab-ace-jump
+      :ni "M-h"        #'xsort-tab-select-prev-tab
+      :ni "M-l"        #'xsort-tab-select-next-tab
       (:after info
        :map Info-mode-map
        :ni "M-o"       #'ace-window))
@@ -220,10 +220,9 @@
        :desc "Switch buffer"               "b"   #'+vertico/buffer
        :desc "Clone buffer"                "c"   #'clone-indirect-buffer
        :desc "Clone buffer other window"   "C"   #'clone-indirect-buffer-other-window
-       :desc "Kill tab buffer"             "d"   #'sort-tab-close-current-tab-and-select-previous
-       :desc "Kill all buffers"            "D"   #'sort-tab-close-all-tabs
-       :desc "Sort-tab kill tab buffer"    "k"   #'sort-tab-close-current-tab
-       :desc "Kill mode buffers"           "K"   #'sort-tab-close-mode-tabs
+       :desc "Kill tab buffer"             "d"   #'xsort-tab-close-current-tab-and-select-previous
+       :desc "Sort-tab kill tab buffer"    "k"   #'xsort-tab-close-current-tab
+       :desc "Kill mode buffers"           "K"   #'xsort-tab-close-mode-tabs
        :desc "ibuffer"                     "i"   #'ibuffer
        :desc "Switch to last buffer"       "l"   #'evil-switch-to-windows-last-buffer
        :desc "Next buffer"                 "n"   #'next-buffer
@@ -550,7 +549,7 @@
        :desc "Fill Column Indicator"        "c" #'global-display-fill-column-indicator-mode
        :desc "Flycheck"                     "f" #'flycheck-mode
        :desc "Indent style"                 "i" #'my/toggle-indent-style
-       :desc "Tab bar"                      "t" #'sort-tab-mode
+       :desc "Tab bar"                      "t" #'xsort-tab-mode
        :desc "Rainbow delimiter"            "r" #'rainbow-delimiters-mode
        :desc "Soft line wrapping"           "w" #'visual-line-mode)
 

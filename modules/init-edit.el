@@ -330,11 +330,6 @@ on."
       (setf (aref persp 2)
             (cl-delete-if-not #'persp-get-buffer-or-null (persp-buffers persp)))))
 
-  ;; Delete the current workspace if closing the last open window
-  (define-key! persp-mode-map
-    [remap delete-window] #'+workspace/close-window-or-workspace
-    [remap evil-window-delete] #'+workspace/close-window-or-workspace)
-
   ;; Fix #1973: visual selection surviving workspace changes
   (add-hook 'persp-before-deactivate-functions #'deactivate-mark)
 
