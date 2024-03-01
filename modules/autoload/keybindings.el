@@ -86,7 +86,7 @@ If prefix ARG is set, prompt for a known project to search from."
                (if-let (projects (projectile-relevant-known-projects))
                    (completing-read "Search project: " projects nil t)
                  (user-error "There are no known projects"))
-             (my-project-root default-directory)))))
+             (+project-project-root default-directory)))))
   (+vertico/project-search nil symbol dir))
 
 ;;;###autoload
@@ -131,7 +131,7 @@ If prefix ARG is set, prompt for a known project to search from."
           (if arg
               (if-let* ((projects (projectile-relevant-known-projects)))
                   (completing-read "Switch to project: " projects
-                                   nil t nil nil (my-project-root))
+                                   nil t nil nil (+project-project-root))
                 (user-error "There are no known projects"))
             default-directory)))
     (+vertico/project-search nil (rxt-quote-pcre symbol))))
@@ -142,13 +142,13 @@ If prefix ARG is set, prompt for a known project to search from."
   (interactive)
   (unless (bound-and-true-p org-directory)
     (require 'org))
-  (my-project-find-file org-directory))
+  (+project-find-file org-directory))
 
 ;;;###autoload
 (defun +default/find-file-under-here ()
   "Perform a recursive file search from the current directory."
   (interactive)
-  (my-project-find-file default-directory))
+  (+project-find-file default-directory))
 
 ;;;###autoload
 (defun +default/discover-projects (arg)

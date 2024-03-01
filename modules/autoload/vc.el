@@ -9,36 +9,36 @@
 ;;; Code:
 
 ;;;###autoload
-(defun git-get-current-file-relative-path ()
+(defun +vc-git-get-current-file-relative-path ()
   "Get current file relative path."
   (replace-regexp-in-string (concat "^" (file-name-as-directory default-directory))
                             ""
                             buffer-file-name))
 
 ;;;###autoload
-(defun my/git-checkout-current-file ()
+(defun +vc/git-checkout-current-file ()
   "Git checkout current file."
   (interactive)
   (when (and (buffer-file-name)
              (yes-or-no-p (format "git checkout %s?"
                                   (file-name-nondirectory (buffer-file-name)))))
-    (let* ((filename (git-get-current-file-relative-path)))
+    (let* ((filename (+vc-git-get-current-file-relative-path)))
       (shell-command (concat "git checkout " filename))
       (my/revert-buffer-no-confirm)
       (message "DONE! git checkout %s" filename))))
 
 ;;;###autoload
-(defun my/git-add-current-file ()
+(defun +vc/git-add-current-file ()
   "Git add file of current buffer."
   (interactive)
   (let ((filename))
     (when buffer-file-name
-      (setq filename (git-get-current-file-relative-path))
+      (setq filename (+vc-git-get-current-file-relative-path))
       (shell-command (concat "git add " filename))
       (message "DONE! git add %s" filename))))
 
 ;;;###autoload
-(defun my/magit-display-buffer-function (buffer)
+(defun +vc-magit-display-buffer-fn (buffer)
   (if magit-display-buffer-noselect
       ;; the code that called `magit-display-buffer-function'
       ;; expects the original window to stay alive, we can't go
@@ -53,7 +53,7 @@
     (get-buffer-window buffer)))
 
 ;;;###autload
-(defun my/magit-bury-buffer-function (&rest _)
+(defun +vc-magit-bury-buffer-fn (&rest _)
   "Restore window configuration and kill all Magit buffers."
   (interactive)
   (magit-restore-window-configuration)
@@ -67,11 +67,11 @@
                   (kill-buffer buf))))
             buffers))))
 
-(defvar +magit--stale-p nil)
+(defvar +vc--magit-stale-p nil)
 
-(defun +magit--revert-buffer (buffer)
+(defun +vc--magit-revert-buffer (buffer)
   (with-current-buffer buffer
-    (kill-local-variable '+magit--stale-p)
+    (kill-local-variable '+vc--magit-stale-p)
     (when (and buffer-file-name (file-exists-p buffer-file-name))
       (if (buffer-modified-p (current-buffer))
           (when (bound-and-true-p vc-mode)
@@ -80,7 +80,7 @@
         (revert-buffer t t t)))))
 
 ;;;###autoload
-(defun +magit-mark-stale-buffers-h ()
+(defun +vc-magit-mark-stale-buffers-h ()
   "Revert all visible buffers and mark buried buffers as stale.
 
 Stale buffers are reverted when they are switched to, assuming they haven't been
@@ -88,12 +88,12 @@ modified."
   (dolist (buffer (buffer-list))
     (when (buffer-live-p buffer)
       (if (get-buffer-window buffer)
-          (+magit--revert-buffer buffer)
+          (+vc--magit-revert-buffer buffer)
         (with-current-buffer buffer
-          (setq-local +magit--stale-p t))))))
+          (setq-local +vc--magit-stale-p t))))))
 
 ;;;###autoload
-(defun +magit/quit (&optional kill-buffer)
+(defun +vc/magit-quit (&optional kill-buffer)
   "Bury the current magit buffer.
 
 If KILL-BUFFER, kill this buffer instead of burying it.
@@ -107,16 +107,16 @@ kill all magit buffers for this repo."
                         (and (derived-mode-p 'magit-mode)
                              (equal magit--default-directory topdir))))
                     (window-list))
-        (+magit/quit-all))))
+        (+vc/magit-quit-all))))
 
 ;;;###autoload
-(defun +magit/quit-all ()
+(defun +vc/magit-quit-all ()
   "Kill all magit buffers for the current repository."
   (interactive)
-  (mapc #'+magit--kill-buffer (magit-mode-get-buffers))
-  (+magit-mark-stale-buffers-h))
+  (mapc #'+vc--magit-kill-buffer (magit-mode-get-buffers))
+  (+vc-magit-mark-stale-buffers-h))
 
-(defun +magit--kill-buffer (buf)
+(defun +vc--magit-kill-buffer (buf)
   "TODO"
   (when (and (bufferp buf) (buffer-live-p buf))
     (let ((process (get-buffer-process buf)))
@@ -124,6 +124,6 @@ kill all magit buffers for this repo."
           (kill-buffer buf)
         (with-current-buffer buf
           (if (process-live-p process)
-              (run-with-timer 5 nil #'+magit--kill-buffer buf)
+              (run-with-timer 5 nil #'+vc--magit-kill-buffer buf)
             (kill-process process)
             (kill-buffer buf)))))))

@@ -94,7 +94,7 @@ If this is a daemon session, load them all immediately instead."
                            nil #'my-load-packages-incrementally
                            (cdr my-incremental-packages) t))))
 ;;;###autoload
-(defun my/install-pkg (pkgs)
+(defun my-install-pkg (pkgs)
   (let* ((pkgs-list (if (listp pkgs)
                        pkgs
                       (list pkgs)))

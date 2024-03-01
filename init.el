@@ -54,9 +54,9 @@
 (require 'init-minibuffer)
 (require 'init-completion)
 ;; Tools
-(require 'init-projectile)
+(require 'init-project)
 (require 'init-vc)
-(require 'init-term)
+(require 'init-vterm)
 (require 'init-dired)
 (require 'init-snippet)
 (require 'init-lsp)

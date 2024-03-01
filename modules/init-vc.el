@@ -28,13 +28,13 @@
         git-commit-summary-max-length 100
         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
         git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line)
-        magit-display-buffer-function #'my/magit-display-buffer-function ; display buffer fullframe
-        magit-bury-buffer-function #'my/magit-bury-buffer-function)      ; bury or kill the current magit buffer
-  (define-key magit-mode-map "q" #'+magit/quit)
-  (define-key magit-mode-map "Q" #'+magit/quit-all)
+        magit-display-buffer-function #'+vc-magit-display-buffer-fn ; display buffer fullframe
+        magit-bury-buffer-function #'+vc-magit-bury-buffer-fn)      ; bury or kill the current magit buffer
+  (define-key magit-mode-map "q" #'+vc/magit-quit)
+  (define-key magit-mode-map "Q" #'+vc/magit-quit-all)
   (map! (:map magit-mode-map
-         :nv "q" #'+magit/quit
-         :nv "Q" #'+magit/quit-all)))
+         :nv "q" #'+vc/magit-quit
+         :nv "Q" #'+vc/magit-quit-all)))
 
 ;; Show TODOs in magit
 (use-package magit-todos

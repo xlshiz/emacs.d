@@ -99,7 +99,7 @@
         "Shorter, vim-esque save messages."
         (message "\"%s\" %dL, %dC written"
                  (if buffer-file-name
-                     (file-relative-name (file-truename buffer-file-name) (my-project-root))
+                     (file-relative-name (file-truename buffer-file-name) (+project-project-root))
                    (buffer-name))
                  (count-lines (point-min) (point-max))
                  (buffer-size)))))
@@ -150,7 +150,7 @@
   ;; normal state map
   (define-key evil-normal-state-map "Y" (kbd "y$"))
   (define-key evil-normal-state-map ";w" #'save-buffer)
-  (define-key evil-normal-state-map ";j" #'avy-goto-char-3)
+  (define-key evil-normal-state-map ";j" #'+edit/avy-goto-char-3)
   ;; visual state map
   (define-key evil-visual-state-map (kbd "C-e") 'move-end-of-line)
 

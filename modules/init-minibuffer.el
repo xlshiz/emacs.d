@@ -74,7 +74,7 @@
         :desc "Cycle marginalia views" "M-A" #'marginalia-cycle)
   :config
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
-  (advice-add #'marginalia--project-root :override #'my-project-root)
+  (advice-add #'marginalia--project-root :override #'+project-project-root)
   (pushnew! marginalia-command-categories
             '(+default/find-file-under-here . file)
             '(flycheck-error-list-set-filter . builtin)
@@ -153,7 +153,7 @@
                       consult-bookmark consult-theme
                       :preview-key '(:debounce 0.5 any))
   (consult-customize
-    my/consult-ripgrep-at-point
+    +vertico/consult-ripgrep-at-point
     snail--source-buffer snail--source-project-file snail--source-recent-file snail--source-hidden-buffer
     +embark-find-file +embark-find-file-cwd +embark-find-file-other-dir +embark-find-file-other-project
     +embark/grep-project +embark-grep-other-cwd +embark-grep-other-project
@@ -250,7 +250,7 @@ targets."
   :config (setq wgrep-auto-save-buffer t))
 
 ;; HACK: Filter boring message in echo area.
-(defadvice message (around my-message-filter activate)
+(defadvice message (around my-message-filter-a activate)
   (unless (string-match "gofmt\\|skipped\\|tsc-dyn-get" (or (ad-get-arg 0) ""))
     ad-do-it))
 

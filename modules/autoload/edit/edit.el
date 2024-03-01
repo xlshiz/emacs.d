@@ -453,7 +453,7 @@ i.e. disables `ws-butler-mode' in the current buffer."
   (evil-paste-before 1))
 
 ;;;###autoload
-(defun avy-goto-char-3 (char1 char2 char3 &optional arg beg end)
+(defun +edit/avy-goto-char-3 (char1 char2 char3 &optional arg beg end)
   "Jump to the currently visible CHAR1 followed by CHAR2.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
@@ -467,7 +467,7 @@ BEG and END narrow the scope where candidates are searched."
                               (keyboard-quit))
                              ((memq c2 avy-del-last-char-by)
                               (keyboard-escape-quit)
-                              (call-interactively 'avy-goto-char-3))
+                              (call-interactively '+edit/avy-goto-char-3))
                              (t
                               c2)))
                      (let ((c3 (read-char "char 3: " t)))
@@ -475,7 +475,7 @@ BEG and END narrow the scope where candidates are searched."
                               (keyboard-quit))
                              ((memq c3 avy-del-last-char-by)
                               (keyboard-escape-quit)
-                              (call-interactively 'avy-goto-char-3))
+                              (call-interactively '+edit/avy-goto-char-3))
                              (t
                               c3)))
                      current-prefix-arg
@@ -486,7 +486,7 @@ BEG and END narrow the scope where candidates are searched."
     (setq char2 ?\n))
   (when (eq char3 ?)
     (setq char3 ?\n))
-  (avy-with avy-goto-char-3
+  (avy-with +edit/avy-goto-char-3
     (avy-jump
      ;; (regexp-quote (string char1 char2 char3))
      (pinyinlib-build-regexp-string (string char1 char2 char3)

@@ -48,7 +48,7 @@
   :after eaf
   :config
   (add-hook! 'evil-normal-state-entry-hook
-    (defun my-eaf-map()
+    (defun my-eaf-map-a()
       (map! :map eaf-mode-map
             :gn "C-d"      #'eaf-py-proxy-scroll_down_page
             :gn "C-u"      #'eaf-py-proxy-scroll_up_page

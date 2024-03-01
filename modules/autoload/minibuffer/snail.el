@@ -13,7 +13,7 @@
   (require 'projectile)
   (let* ((ht (consult--buffer-file-hash))
           (candidates (unless (file-equal-p default-directory "~")
-                        (mapc #'substring-no-properties (if (my-project-root)
+                        (mapc #'substring-no-properties (if (+project-project-root)
                                                           (projectile-current-project-files))))))
     (if (length> candidates 100)
       candidates

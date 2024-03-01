@@ -21,13 +21,13 @@
 ;;; Library
 
 ;;;###autoload
-(defun my-project-p (&optional dir)
+(defun +project-project-p (&optional dir)
   "Return t if DIR (defaults to `default-directory') is a valid project."
-  (and (my-project-root dir)
+  (and (+project-project-root dir)
        t))
 
 ;;;###autoload
-(defun my-project-root (&optional dir)
+(defun +project-project-root (&optional dir)
   "Return the project root of DIR (defaults to `default-directory').
 Returns nil if not in a project."
   (let ((projectile-project-root
@@ -36,38 +36,38 @@ Returns nil if not in a project."
     (projectile-project-root dir)))
 
 ;;;###autoload
-(defun my-project-name (&optional dir)
+(defun +project-project-name (&optional dir)
   "Return the name of the current project.
 
 Returns '-' if not in a valid project."
-  (if-let (project-root (or (my-project-root dir)
+  (if-let (project-root (or (+project-project-root dir)
                             (if dir (expand-file-name dir))))
       (funcall projectile-project-name-function project-root)
     "-"))
 
 ;;;###autoload
-(defun my-project-expand (name &optional dir)
+(defun +project-project-expand (name &optional dir)
   "Expand NAME to project root."
-  (expand-file-name name (my-project-root dir)))
+  (expand-file-name name (+project-project-root dir)))
 
 ;;;###autoload
-(defmacro project-file-exists-p! (files &optional base-directory)
+(defmacro +project-file-exists-p! (files &optional base-directory)
   "Checks if FILES exist at the current project's root.
 
 The project's root is determined by `projectile', starting from BASE-DIRECTORY
 (defaults to `default-directory'). FILES are paths relative to the project root,
 unless they begin with a slash."
-  `(file-exists-p! ,files (my-project-root ,base-directory)))
+  `(file-exists-p! ,files (+project-project-root ,base-directory)))
 
 ;;;###autoload
-(defun my-project-ignored-p (project-root)
+(defun +project-ignored-p (project-root)
   "Return non-nil if temporary file or a straight package."
   (unless (file-remote-p project-root)
     (or (file-in-directory-p project-root temporary-file-directory)
         (file-in-directory-p project-root (concat user-emacs-directory "lib")))))
 
 ;;;###autoload
-(defun my-project-find-file (dir)
+(defun +project-find-file (dir)
   "Jump to a file in DIR (searched recursively).
 
 If DIR is not a project, it will be indexed (but not cached)."
@@ -76,10 +76,10 @@ If DIR is not a project, it will be indexed (but not cached)."
   (unless (file-readable-p dir)
     (error "Directory %S isn't readable" dir))
   (let* ((default-directory (file-truename dir))
-         (projectile-project-root (my-project-root dir))
+         (projectile-project-root (+project-project-root dir))
          (projectile-enable-caching projectile-enable-caching))
     (cond ((and projectile-project-root (file-equal-p projectile-project-root default-directory))
-           (unless (my-project-p default-directory)
+           (unless (+project-project-p default-directory)
              ;; Disable caching if this is not a real project; caching
              ;; non-projects easily has the potential to inflate the projectile
              ;; cache beyond reason.

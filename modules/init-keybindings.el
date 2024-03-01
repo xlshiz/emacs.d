@@ -216,7 +216,7 @@
        :desc "Alternate buffer"            "TAB"  #'my/alternate-buffer-in-persp
        :desc "Previous buffer"             "["   #'previous-buffer
        :desc "Next buffer"                 "]"   #'next-buffer
-       :desc "Switch buffer"               "A"   #'eaf-kill-process
+       :desc "Kill eaf buffers"            "A"   #'eaf-kill-process
        :desc "Switch buffer"               "b"   #'+vertico/buffer
        :desc "Clone buffer"                "c"   #'clone-indirect-buffer
        :desc "Clone buffer other window"   "C"   #'clone-indirect-buffer-other-window

@@ -40,7 +40,7 @@ codespell-fix:
 	  etc/codespell/ignore-files | tr "\\n" ",")
 
 clean-all: clean
-	@rm -f .cache/autoloads.el*
+	@rm -f .local/autoloads.el*
 	@rm -f lib/tree-sitter/core/tsc-dyn.so
 	@rm -f lib/vterm/vterm-module.so
 	@rm -rf lib/vterm/build

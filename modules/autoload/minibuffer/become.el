@@ -15,7 +15,7 @@
 ;;;###autoload
 (defun +embark-find-file-cwd (&rest _)
   "Perform a recursive file search from the current directory."
-  (+search-minibuf-quit-and-run (my-project-find-file default-directory)))
+  (+search-minibuf-quit-and-run (+project-find-file default-directory)))
 
 ;;;###autoload
 (defun +embark-find-file-other-dir (&optional input)
@@ -29,7 +29,7 @@
            (lambda ()
              (delete-minibuffer-contents)
              (insert input))
-         (my-project-find-file default-directory))))))
+         (+project-find-file default-directory))))))
 
 ;;;###autoload
 (defun +embark-find-file-other-project (&optional input)
@@ -46,7 +46,7 @@
            (lambda ()
              (delete-minibuffer-contents)
              (insert input))
-         (my-project-find-file default-directory))))))
+         (+project-find-file default-directory))))))
 
 ;;;###autoload
 (defun +embark-clean-input(input)

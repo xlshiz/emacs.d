@@ -162,7 +162,7 @@
   (setq dirvish-cache-dir (concat my-cache-dir "dirvish/")
         dirvish-hide-details t
         dirvish-attributes '(subtree-state collapse file-size file-time)
-        dirvish-side-auto-expand t
+        dirvish-side-auto-expand nil
         dirvish-subtree-state-style 'nerd
         dirvish-reuse-session nil
         dirvish-use-mode-line nil
@@ -178,11 +178,13 @@
     '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
   (defadvice dirvish-find-entry-a (around dirvish-find-file-single-buffer activate)
     "Replace current buffer if file is a directory."
-    (interactive)
     (let ((orig (current-buffer))
-          (filename (dired-get-file-for-visit)))
+          filename)
+      (ignore-errors
+        (setq filename (dired-get-file-for-visit)))
       ad-do-it
-      (when (and (file-directory-p filename)
+      (when (and filename
+                 (file-directory-p filename)
                  (not (eq (current-buffer) orig)))
         (kill-buffer orig))))
   (map! :map dired-mode-map

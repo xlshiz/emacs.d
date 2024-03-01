@@ -52,4 +52,4 @@
 (use-package vterm-toggle
   :defer t)
 
-(provide 'init-term)
+(provide 'init-vterm)

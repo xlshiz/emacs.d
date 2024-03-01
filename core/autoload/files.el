@@ -28,7 +28,7 @@ Returns (not precisely, but effectively):
          (and (if (file-exists-p B) B)
               (if (file-exists-p C) C))))
 
-This is used by `file-exists-p!' and `project-file-exists-p!'."
+This is used by `file-exists-p!' and `+project-file-exists-p!'."
   (declare (pure t) (side-effect-free t))
   (if (and (listp spec)
            (memq (car spec) '(or and)))

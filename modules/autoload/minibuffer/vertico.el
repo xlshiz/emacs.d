@@ -9,10 +9,10 @@
 ;;; Code:
 
 ;;;###autoload
-(defvar embark-quit-after-action)
+(defvar +vertico-embark-quit-after-action)
 
 ;;;###autoload
-(defun my/consult-set-evil-search-pattern (&optional condition)
+(defun +vertico-consult-set-evil-search-pattern (&optional condition)
   (let ((re
          (cond
           ((eq condition 'rg) (substring (car consult--grep-history) 1)) ;; HACK: assume the history begins with `#'
@@ -23,19 +23,19 @@
     (anzu-mode t)))
 
 ;;;###autoload
-(defun my/consult-line-symbol-at-point ()
+(defun +vertico/consult-line-symbol-at-point ()
   (interactive)
   (evil-without-repeat ;; I use evil always
     (consult-line (thing-at-point 'symbol))
-    (my/consult-set-evil-search-pattern)))
+    (+vertico-consult-set-evil-search-pattern)))
 
 ;;;###autoload
-(defun my/consult-ripgrep-at-point (&optional dir initial)
+(defun +vertico/consult-ripgrep-at-point (&optional dir initial)
   (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
                                   (symbol-name s))))
   (consult-ripgrep dir initial))
 
-(defvar +vertico/find-file-in--history nil)
+(defvar +vertico-find-file-in--history nil)
 ;;;###autoload
 (defun +vertico/find-file-in (&optional dir initial)
   "Jump to file under DIR (recursive).
@@ -53,7 +53,7 @@ If INITIAL is non-nil, use as initial input."
       :initial (if initial (shell-quote-argument initial))
       :add-history (thing-at-point 'filename)
       :category 'file
-      :history '(:input +vertico/find-file-in--history)))))
+      :history '(:input +vertico-find-file-in--history)))))
 
 ;;;###autoload
 (cl-defun +vertico-file-search (&key query in all-files (recursive t) prompt args)
@@ -70,7 +70,7 @@ If INITIAL is non-nil, use as initial input."
     (user-error "Couldn't find ripgrep in your PATH"))
   (require 'consult)
   (setq deactivate-mark t)
-  (let* ((project-root (or (my-project-root) default-directory))
+  (let* ((project-root (or (+project-project-root) default-directory))
          (directory (or in project-root))
          (consult-ripgrep-args
           (concat "rg "
@@ -165,7 +165,7 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
   (unless (bound-and-true-p consult--preview-function)
     (if (fboundp 'embark-dwim)
         (save-selected-window
-          (let (embark-quit-after-action)
+          (let (+vertico-embark-quit-after-action)
             (embark-dwim)))
       (user-error "Embark not installed, aborting..."))))
 
@@ -185,26 +185,6 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
     (condition-case _
         (+vertico/embark-preview)
       (user-error (vertico-directory-enter)))))
-
-(defvar +vertico/find-file-in--history nil)
-;;;###autoload
-(defun +vertico/find-file-in (&optional dir initial)
-  "Jump to file under DIR (recursive).
-If INITIAL is non-nil, use as initial input."
-  (interactive)
-  (require 'consult)
-  (let* ((default-directory (or dir default-directory))
-         (prompt-dir (consult--directory-prompt "Find" default-directory))
-         (cmd (split-string-and-unquote +vertico-consult-fd-args " ")))
-    (find-file
-     (consult--read
-      (split-string (cdr (apply #'my-call-process cmd)) "\n" t)
-      :prompt default-directory
-      :sort nil
-      :initial (if initial (shell-quote-argument initial))
-      :add-history (thing-at-point 'filename)
-      :category 'file
-      :history '(:input +vertico/find-file-in--history)))))
 
 ;;;###autoload
 (defun +vertico/jump-list (jump)

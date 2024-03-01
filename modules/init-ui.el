@@ -21,38 +21,37 @@
         doom-themes-neotree-line-spacing 2))
 
 ;; 延迟部分ui设置
-(defun my/ui-setup ()
-  ;; 加载doom主题依赖
-  (solaire-global-mode)
-  ;; 加载主题
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions (lambda (frame) (load-theme 'doom-gruvbox t)))
-    (load-theme 'doom-nord-light t))
+(add-hook 'my-after-init-hook
+          (defun my-ui-setup-h ()
+            ;; 加载doom主题依赖
+            (solaire-global-mode)
+            ;; 加载主题
+            (if (daemonp)
+                (add-hook 'after-make-frame-functions (lambda (frame) (load-theme 'doom-gruvbox t)))
+              (load-theme 'doom-nord-light t))
 
-  (when (display-graphic-p)
-    ;; Frame maximized
-    (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+            (when (display-graphic-p)
+              ;; Frame maximized
+              (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+              (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-    ;; Specify default font
-    (cl-loop for font in '("Sarasa Fixed SC" "M PLUS Code Latin 50")
-             when (font-installed-p font)
-             return (set-face-attribute 'default nil
-                                        :font font
-                                        :height 150))
-    ;; Specify font for all unicode characters
-    (cl-loop for font in '("Symbola")
-             when (font-installed-p font)
-             return(set-fontset-font t 'unicode font nil 'prepend))
-    ;; Specify font for Chinese characters
-    (cl-loop for font in '("Sarasa Fixed SC" "Source Han Mono SC" "Microsoft Yahei")
-             when (font-installed-p font)
-             return (dolist (charset '(kana han cjk-misc bopomofo))
-                      (set-fontset-font (frame-parameter nil 'font)
-                                        charset
-                                        font)))))
-
-(add-hook 'my-after-init-hook #'my/ui-setup)
+              ;; Specify default font
+              (cl-loop for font in '("Sarasa Fixed SC" "M PLUS Code Latin 50")
+                       when (font-installed-p font)
+                       return (set-face-attribute 'default nil
+                                                  :font font
+                                                  :height 150))
+              ;; Specify font for all unicode characters
+              (cl-loop for font in '("Symbola")
+                       when (font-installed-p font)
+                       return(set-fontset-font t 'unicode font nil 'prepend))
+              ;; Specify font for Chinese characters
+              (cl-loop for font in '("Sarasa Fixed SC" "Source Han Mono SC" "Microsoft Yahei")
+                       when (font-installed-p font)
+                       return (dolist (charset '(kana han cjk-misc bopomofo))
+                                (set-fontset-font (frame-parameter nil 'font)
+                                                  charset
+                                                  font))))))
 
 (use-package vi-tilde-fringe
   :if (fboundp 'set-fringe-mode)
@@ -101,14 +100,14 @@
   :config
   (add-hook 'my-load-theme-hook  #'awesome-tray-mode)
   ;; (awesome-tray-mode 1)
-  (defun my-location-info ()
+  (defun my--location-info ()
     (format "%s:%s"
             (format-mode-line "%l")
             (format-mode-line "%c")
             ))
   (add-to-list 'awesome-tray-module-alist
-               '("my-location" . (my-location-info awesome-tray-module-date-face)))
-  (defun my-lsp-info ()
+               '("loc" . (my--location-info awesome-tray-module-date-face)))
+  (defun my--lsp-info ()
     (with-demoted-errors
         ""
       (cond ((and (featurep 'lsp-mode) (functionp 'lsp-workspaces) (lsp-workspaces))
@@ -117,9 +116,9 @@
              "lsp+")
             (t ""))))
   (add-to-list 'awesome-tray-module-alist
-               '("my-lsp" . (my-lsp-info awesome-tray-module-circe-face)))
+               '("lsp+" . (my--lsp-info awesome-tray-module-circe-face)))
   (setq awesome-tray-active-modules
-        '("file-path" "my-location" "mode-name" "my-lsp" "git" "evil")))
+        '("file-path" "loc" "mode-name" "lsp+" "git" "evil")))
 
 (use-package xsort-tab
   :defer 0

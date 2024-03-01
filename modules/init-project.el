@@ -40,7 +40,7 @@ Emacs.")
         projectile-kill-buffers-filter 'kill-only-files
         projectile-known-projects-file (concat my-cache-dir "projectile.projects")
         projectile-ignored-projects '("~/")
-        projectile-ignored-project-function #'my-project-ignored-p)
+        projectile-ignored-project-function #'+project-ignored-p)
 
   ;; HACK: Projectile cleans up the known projects list at startup. If this list
   ;;   contains tramp paths, the `file-remote-p' calls will pull in tramp via
@@ -137,7 +137,7 @@ c) are not valid projectile projects."
                             my-projectile-cache-limit)
                         (member (substring proot 0 -1) blacklist)
                         (and my-projectile-cache-purge-non-projects
-                             (not (my-project-p proot)))
+                             (not (+project-project-p proot)))
                         (projectile-ignored-project-p proot))
                  do (remhash proot projectile-projects-cache)
                  and do (remhash proot projectile-projects-cache-time)
@@ -203,5 +203,5 @@ the command instead."
     :around #'projectile-default-generic-command
     (ignore-errors (apply fn args))))
 
-(provide 'init-projectile)
+(provide 'init-project)
 ;;; init-projectile ends here

@@ -65,9 +65,9 @@
                         (protobuf-mode . ".proto"))))))
     :modes '(c-mode c++-mode protobuf-mode cuda-mode))
 
-  (setf (alist-get 'other c-default-style) "my-c")
+  (setf (alist-get 'other c-default-style) "my-c-style")
   (c-add-style
-   "my-c" '("linux"
+   "my-c-style" '("linux"
             (c-comment-only-line-offset . 0)
             (tab-width . 8)
             (c-basic-offset . 8)
