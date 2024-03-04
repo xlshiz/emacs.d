@@ -165,6 +165,12 @@
                (profiler-report-mode . emacs)))
     (evil-set-initial-state (car p) (cdr p)))
 
+  (add-hook! 'my-after-init-hook
+             #'(lambda (&rest _)
+                 (when-let ((message-buffer (get-buffer "*Messages*")))
+                   (with-current-buffer message-buffer
+                     (evil-normalize-keymaps)))))
+
   ;; Change the cursor color in emacs state. We do it this roundabout way
   ;; instead of changing `evil-default-cursor' (or `evil-emacs-state-cursor') so
   ;; it won't interfere with users who have changed these variables.
@@ -201,10 +207,17 @@
     ;; The list of supported modes is configured by evil-collection-mode-list
     (evil-collection-init 'view)
     (evil-collection-init 'magit)
+    (evil-collection-init 'magit-section)
+    (evil-collection-init 'magit-todos)
+    (evil-collection-init 'forge)
     (evil-collection-init 'custom)
     (evil-collection-init 'ibuffer)
     (evil-collection-init 'calendar)
     (evil-collection-init 'flycheck)
+    (evil-collection-init 'wgrep)
+    (evil-collection-init 'macrostep)
+    (evil-collection-init 'vundo)
+    (evil-collection-init 'info)
     (evil-collection-init 'vterm))
 
   (use-package evil-terminal-cursor-changer
