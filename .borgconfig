@@ -4,6 +4,7 @@
 [submodule "emacsql"]
 	no-byte-compile = emacsql-pg.el
 	build-step = make
+	build-step = borg-update-autoloads
 	load-path = .
 	load-path = sqlite
 [submodule "magit"]

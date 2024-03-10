@@ -138,6 +138,9 @@
 	path = lib/embark
 	url = https://github.com/oantolin/embark
 	ignore = untracked
+[submodule "emojify"]
+	path = lib/emojify
+	url = https://github.com/iqbalansari/emacs-emojify
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
