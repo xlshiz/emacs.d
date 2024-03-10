@@ -73,8 +73,9 @@ and Emacs states, and for non-evil users.")
 (defvar my-workspaces-main "main"
   "The name of the primary and initial workspace, which cannot be deleted.")
 
-(when (file-exists-p (concat my-etc-dir "mydef.el"))
-  (load (concat my-etc-dir "mydef.el") nil 'nomessage))
+(unless (file-exists-p (concat my-etc-dir "mydef.el"))
+  (make-empty-file (concat my-etc-dir "mydef.el")))
+(load (concat my-etc-dir "mydef.el") nil 'nomessage)
 
 (provide 'core-defvar)
 ;;; core-const.el ends here

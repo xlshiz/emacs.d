@@ -14,8 +14,11 @@
 
 ;; Start server
 (use-package server
-  :ensure nil
-  :hook (after-init . server-mode))
+  :when (display-graphic-p)
+  :defer 1
+  :config
+  (unless (server-running-p)
+    (server-start)))
 
 ;; History
 (use-package saveplace

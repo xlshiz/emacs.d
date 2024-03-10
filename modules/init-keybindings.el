@@ -327,17 +327,6 @@
         :desc "Issue"                    "i"   #'forge-create-issue
         :desc "Pull request"             "p"   #'forge-create-pullreq))
 
-      ;; ;;; <leader> i --- insert
-      ;; (:prefix-map ("i" . "insert")
-      ;;  :desc "Emoji"                         "e"   #'emojify-insert-emoji
-      ;;  :desc "Current file name"             "f"   #'+default/insert-file-path
-      ;;  :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
-      ;;  :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
-      ;;  :desc "From evil register"            "r"   #'evil-show-registers
-      ;;  :desc "Snippet"                       "s"   #'yas-insert-snippet
-      ;;  :desc "Unicode"                       "u"   #'insert-char
-      ;;  :desc "From clipboard"                "y"   #'+default/yank-pop)
-
       ;;; <leader> j --- jump
       (:prefix-map ("j" . "jump")
        :desc "avy goto char timer"        "c"   #'evil-avy-goto-char-timer
@@ -563,6 +552,8 @@
        :desc "Split window below"         "s"   #'split-window-below
        :desc "Split window below"         "-"   #'split-window-below
        :desc "Balance window"             "="   #'balance-windows
+       :desc "Zoom window"                "z"   #'zoom-window-zoom
+       :desc "Zoom window next"           "n"   #'zoom-window-next
        :desc "Switch to left"             "h"   #'evil-window-left
        :desc "Switch to right"            "l"   #'evil-window-right
        :desc "Switch to up"               "k"   #'evil-window-up

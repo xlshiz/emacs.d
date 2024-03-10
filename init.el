@@ -43,7 +43,6 @@
 (advice-add #'display-startup-echo-area-message :override #'ignore)
 
 ;; Test packages
-(add-to-list 'load-path (expand-file-name "lib/wgrep" user-emacs-directory))
 ;; Editor
 (require 'init-evil)
 (require 'init-ui)

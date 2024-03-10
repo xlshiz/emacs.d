@@ -118,7 +118,7 @@
                      (dolist (hook (cdr deferral-list))
                        (advice-remove hook #',fn)
                        (remove-hook hook #',fn))
-                     (delq! deferral-list my--deferred-packages-alist)
+                     (delq deferral-list my--deferred-packages-alist)
                      (unintern ',fn nil)))))
          (let (forms)
            (dolist (hook hooks forms)

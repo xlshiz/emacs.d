@@ -212,6 +212,7 @@
     (evil-collection-init 'forge)
     (evil-collection-init 'custom)
     (evil-collection-init 'ibuffer)
+    (evil-collection-init 'debug)
     (evil-collection-init 'calendar)
     (evil-collection-init 'flycheck)
     (evil-collection-init 'wgrep)
