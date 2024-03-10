@@ -3,6 +3,9 @@
 	no-makeinfo = dash-template.texi
 [submodule "emacsql"]
 	no-byte-compile = emacsql-pg.el
+	build-step = make
+	load-path = .
+	load-path = sqlite
 [submodule "magit"]
 	no-byte-compile = lisp/magit-libgit.el
 [submodule "sqlite3"]

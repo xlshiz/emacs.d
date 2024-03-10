@@ -45,5 +45,6 @@ clean-all: clean
 	@rm -f lib/vterm/vterm-module.so
 	@rm -rf lib/vterm/build
 	@cd lib/sqlite3; make clean
+	@cd lib/emacsql; make clean
 
 endif
