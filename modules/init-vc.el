@@ -39,8 +39,8 @@
 (use-package forge
   ;; We defer loading even further because forge's dependencies will try to
   ;; compile emacsql, which is a slow and blocking operation.
-  :after-call magit-status
-  ;; :defer t
+  ;; :after-call magit-status
+  :defer t
   :commands forge-create-pullreq forge-create-issue
   :preface
   (setq forge-database-file (concat my-etc-dir "forge/forge-database.sqlite"))
