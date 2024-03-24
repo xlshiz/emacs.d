@@ -39,13 +39,13 @@
 (use-package forge
   ;; We defer loading even further because forge's dependencies will try to
   ;; compile emacsql, which is a slow and blocking operation.
-  ;; :after-call magit-status
-  :defer t
+  :after-call magit-status
   :commands forge-create-pullreq forge-create-issue
   :preface
   (setq forge-database-file (concat my-etc-dir "forge/forge-database.sqlite"))
   (setq forge-add-default-bindings nil)
   :config
+  (require 'emacsql-sqlite)
   ;; All forge list modes are derived from `forge-topic-list-mode'
   (map! :map forge-topic-list-mode-map :n "q" #'kill-current-buffer)
   (when (not forge-add-default-bindings)
