@@ -15,8 +15,8 @@
      :init
      (add-hook 'lsp-bridge-mode-hook #'evil-normalize-keymaps)
      :config
-     (setq lsp-bridge-enable-diagnostics t)
-     (setq lsp-bridge-enable-log nil)
+     (setq lsp-bridge-enable-diagnostics t
+           lsp-bridge-enable-log nil)
      (general-nmap lsp-bridge-mode-map
        "ga"  'xref-find-apropos
        "gd"  'lsp-bridge-find-def

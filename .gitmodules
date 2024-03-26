@@ -273,6 +273,12 @@
 [submodule "inheritenv"]
 	path = lib/inheritenv
 	url = https://github.com/purcell/inheritenv
+[submodule "js2-mode"]
+	path = lib/js2-mode
+	url = https://github.com/mooz/js2-mode
+[submodule "js2-refactor"]
+	path = lib/js2-refactor
+	url = https://github.com/js-emacs/js2-refactor.el
 [submodule "llama"]
 	path = lib/llama
 	url = https://git.sr.ht/~tarsius/llama
@@ -328,6 +334,9 @@
 [submodule "no-littering"]
 	path = lib/no-littering
 	url = https://github.com/emacscollective/no-littering
+[submodule "npm-mode"]
+	path = lib/npm-mode
+	url = https://github.com/mojochao/npm-mode
 [submodule "orderless"]
 	path = lib/orderless
 	url = https://github.com/oantolin/orderless
@@ -398,6 +407,9 @@
 [submodule "rime"]
 	path = lib/rime
 	url = https://github.com/DogLooksGood/emacs-rime
+[submodule "rjsx-mode"]
+	path = lib/rjsx-mode
+	url = https://github.com/felipeochoa/rjsx-mode
 [submodule "rust-mode"]
 	path = lib/rust-mode
 	url = https://github.com/rust-lang/rust-mode
@@ -455,6 +467,9 @@
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
+[submodule "typescript-mode"]
+	path = lib/typescript-mode
+	url = https://github.com/emacs-typescript/typescript.el
 [submodule "undo-fu"]
 	path = lib/undo-fu
 	url = https://codeberg.org/ideasman42/emacs-undo-fu.git
@@ -486,6 +501,9 @@
 [submodule "vundo"]
 	path = lib/vundo
 	url = https://github.com/emacs-straight/vundo.git
+[submodule "web-mode"]
+	path = lib/web-mode
+	url = https://github.com/fxbois/web-mode
 [submodule "wgrep"]
 	path = lib/wgrep
 	url = https://github.com/mhayashi1120/Emacs-wgrep
@@ -501,6 +519,9 @@
 [submodule "xr"]
 	path = lib/xr
 	url = https://github.com/mattiase/xr
+[submodule "xref-js2"]
+	path = lib/xref-js2
+	url = https://github.com/js-emacs/xref-js2
 [submodule "xsort-tab"]
 	path = lib/xsort-tab
 	url = https://github.com/xlshiz/xsort-tab.git
