@@ -147,7 +147,7 @@
   :config
   (add-hook 'js2-refactor-mode-hook #'evil-normalize-keymaps)
   (let ((js2-refactor-mode-map (evil-get-auxiliary-keymap js2-refactor-mode-map 'normal t t)))
-    (js2r-add-keybindings-with-prefix (format "%s r" doom-localleader-key))))
+    (js2r-add-keybindings-with-prefix (format "%s r" my-localleader-key))))
 
 (use-package npm-mode
   :hook ((js-mode typescript-mode) . npm-mode)

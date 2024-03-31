@@ -322,6 +322,9 @@
 [submodule "modern-cpp-font-lock"]
 	path = lib/modern-cpp-font-lock
 	url = https://github.com/ludwigpacifici/modern-cpp-font-lock
+[submodule "multiple-cursors"]
+	path = lib/multiple-cursors
+	url = https://github.com/magnars/multiple-cursors.el
 [submodule "names"]
 	path = lib/names
 	url = https://github.com/Malabarba/names
@@ -419,6 +422,9 @@
 [submodule "s"]
 	path = lib/s
 	url = https://github.com/magnars/s.el
+[submodule "sass-mode"]
+	path = lib/sass-mode
+	url = https://github.com/nex3/sass-mode
 [submodule "shrink-path"]
 	path = lib/shrink-path
 	url = https://gitlab.com/bennya/shrink-path.el
@@ -540,6 +546,3 @@
 [submodule "zoom-window"]
 	path = lib/zoom-window
 	url = https://github.com/emacsorphanage/zoom-window
-[submodule "sass-mode"]
-	path = lib/sass-mode
-	url = https://github.com/nex3/sass-mode
