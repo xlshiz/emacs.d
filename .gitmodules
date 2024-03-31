@@ -138,6 +138,9 @@
 	path = lib/embark
 	url = https://github.com/oantolin/embark
 	ignore = untracked
+[submodule "emmet-mode"]
+	path = lib/emmet-mode
+	url = https://github.com/smihica/emmet-mode
 [submodule "emojify"]
 	path = lib/emojify
 	url = https://github.com/iqbalansari/emacs-emojify
@@ -537,3 +540,6 @@
 [submodule "zoom-window"]
 	path = lib/zoom-window
 	url = https://github.com/emacsorphanage/zoom-window
+[submodule "sass-mode"]
+	path = lib/sass-mode
+	url = https://github.com/nex3/sass-mode

@@ -77,8 +77,8 @@
 (require 'init-data)
 (require 'init-lua)
 (require 'init-sh)
+(require 'init-web)
 (require 'init-javascript)
-(require 'init-vue)
 
 ;; Keybindings
 (require 'init-keybindings.el)

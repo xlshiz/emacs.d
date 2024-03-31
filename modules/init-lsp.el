@@ -17,19 +17,22 @@
      :config
      (setq lsp-bridge-enable-diagnostics t
            lsp-bridge-enable-log nil)
-     (general-nmap lsp-bridge-mode-map
-       "ga"  'xref-find-apropos
-       "gd"  'lsp-bridge-find-def
-       "C-t" 'lsp-bridge-find-def-return
-       "gD"  'lsp-bridge-find-def-other-window
-       "K"   'lsp-bridge-lookup-documentation
-       "gj"  'lsp-bridge-diagnostic-jump-next
-       "gk"  'lsp-bridge-diagnostic-jump-prev
-       "gl"  'lsp-bridge-diagnostic-list
-       "gi"  'lsp-bridge-find-impl
-       "gI"  'lsp-bridge-find-impl-other-window
-       "gr"  'lsp-bridge-find-references
-       "gR"  'lsp-bridge-rename)))
+     (map! (:map acm-mode-map
+           [C-return]    (cmd! (acm-hide)
+                               (newline-and-indent))))
+     (map! :map lsp-bridge-mode-map
+       :n    "ga"  #'xref-find-apropos
+       :n    "gd"  #'lsp-bridge-find-def
+       :n    "C-t" #'lsp-bridge-find-def-return
+       :n    "gD"  #'lsp-bridge-find-def-other-window
+       :n    "K"   #'lsp-bridge-lookup-documentation
+       :n    "gj"  #'lsp-bridge-diagnostic-jump-next
+       :n    "gk"  #'lsp-bridge-diagnostic-jump-prev
+       :n    "gl"  #'lsp-bridge-diagnostic-list
+       :n    "gi"  #'lsp-bridge-find-impl
+       :n    "gI"  #'lsp-bridge-find-impl-other-window
+       :n    "gr"  #'lsp-bridge-find-references
+       :n    "gR"  #'lsp-bridge-rename)))
   ('lsp-mode
    (defvar +lsp-defer-shutdown 3
      "If non-nil, defer shutdown of LSP servers for this many seconds after last
@@ -151,15 +154,15 @@ server getting expensively restarted when reverting buffers."
       '(lsp-face-highlight-read ((t (:background "honeydew" :bold t))))
       '(lsp-face-highlight-write ((t (:background "beige" :bold t)))))
 
-     (general-nmap lsp-mode-map
-       "ga" 'xref-find-apropos
-       "gd" 'lsp-find-definition
-       "gD" 'lsp-find-declaration
-       "ge" 'lsp-treemacs-errors-list
-       "gh" 'lsp-treemacs-call-hierarchy
-       "gi" 'lsp-find-implementation
-       "gr" 'lsp-find-references
-       "gt" 'lsp-find-type-definition)
+     (map! :map lsp-mode-map
+       :n    "ga" #'xref-find-apropos
+       :n    "gd" #'lsp-find-definition
+       :n    "gD" #'lsp-find-declaration
+       :n    "ge" #'lsp-treemacs-errors-list
+       :n    "gh" #'lsp-treemacs-call-hierarchy
+       :n    "gi" #'lsp-find-implementation
+       :n    "gr" #'lsp-find-references
+       :n    "gt" #'lsp-find-type-definition)
      ;; (my/local-leader-define
      ;;   "="  '(:ignore t :wk "formatting")
      ;;   "=b" 'lsp-format-buffer

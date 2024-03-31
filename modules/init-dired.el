@@ -23,57 +23,57 @@
     (interactive)
     (mapc #'kill-buffer (my-buffers-in-mode 'dired-mode))
     (message "Killed all dired buffers"))
-  (general-nmap dired-mode-map
-    "h" 'dired-up-directory
-    "j" 'dired-next-line
-    "k" 'dired-previous-line
-    "l" 'dired-find-file
-    "i" 'wdired-change-to-wdired-mode
-    "th" 'dired-omit-mode
-    "q" '+dired/quit-all
+  (map! :map dired-mode-map
+    :n "h" 'dired-up-directory
+    :n "j" 'dired-next-line
+    :n "k" 'dired-previous-line
+    :n "l" 'dired-find-file
+    :n "i" 'wdired-change-to-wdired-mode
+    :n "th" 'dired-omit-mode
+    :n "q" '+dired/quit-all
 
-    "a" 'dired-find-alternate-file
-    "d" 'dired-flag-file-deletion
-    "gy" 'dired-show-file-type
-    "gr" 'revert-buffer
-    "ti" 'dired-toggle-read-only
-    "m" 'dired-mark
-    "o" 'dired-sort-toggle-or-edit
-    "r" 'dired-do-redisplay
-    "tt" 'dired-toggle-marks
-    "u" 'dired-unmark
-    "v" 'dired-git-info-mode
-    "x" 'dired-do-flagged-delete
-    "RET" 'dired-find-file
+    :n "a" 'dired-find-alternate-file
+    :n "d" 'dired-flag-file-deletion
+    :n "gy" 'dired-show-file-type
+    :n "gr" 'revert-buffer
+    :n "ti" 'dired-toggle-read-only
+    :n "m" 'dired-mark
+    :n "o" 'dired-sort-toggle-or-edit
+    :n "r" 'dired-do-redisplay
+    :n "tt" 'dired-toggle-marks
+    :n "u" 'dired-unmark
+    :n "v" 'dired-git-info-mode
+    :n "x" 'dired-do-flagged-delete
+    :n "RET" 'dired-find-file
     ;; Commands to mark or flag certain categories of files
-    "+" 'dired-create-directory
-    "#" 'dired-flag-auto-save-files
-    "." 'dired-clean-directory
-    "~" 'dired-flag-backup-files
-    "!" 'dired-do-shell-command
-    "&" 'dired-do-async-shell-command
+    :n "+" 'dired-create-directory
+    :n "#" 'dired-flag-auto-save-files
+    :n "." 'dired-clean-directory
+    :n "~" 'dired-flag-backup-files
+    :n "!" 'dired-do-shell-command
+    :n "&" 'dired-do-async-shell-command
     ;; Upper case keys (except !) for operating on the marked files
-    "A" 'dired-do-find-regexp
-    "C" 'dired-do-copy
-    "B" 'dired-do-byte-compile
-    "D" 'dired-do-delete
-    "G" 'dired-do-chgrp
-    "H" 'dired-do-hardlink
-    "I" 'dired-maybe-insert-subdir
-    "J" 'dired-goto-file
-    "K" 'dired-do-kill-lines
-    "L" 'dired-do-load
-    "M" 'dired-do-chmod
-    "O" 'dired-do-chown
-    "P" 'dired-do-print
-    "Q" 'dired-do-find-regexp-and-replace
-    "R" 'dired-do-rename
-    "S" 'dired-do-symlink
-    "T" 'dired-do-touch
-    "W" 'browse-url-of-dired-file
-    "X" 'dired-do-shell-command
-    "Y" 'dired-copy-filename-as-kill
-    "Z" 'dired-do-compress)
+    :n "A" 'dired-do-find-regexp
+    :n "C" 'dired-do-copy
+    :n "B" 'dired-do-byte-compile
+    :n "D" 'dired-do-delete
+    :n "G" 'dired-do-chgrp
+    :n "H" 'dired-do-hardlink
+    :n "I" 'dired-maybe-insert-subdir
+    :n "J" 'dired-goto-file
+    :n "K" 'dired-do-kill-lines
+    :n "L" 'dired-do-load
+    :n "M" 'dired-do-chmod
+    :n "O" 'dired-do-chown
+    :n "P" 'dired-do-print
+    :n "Q" 'dired-do-find-regexp-and-replace
+    :n "R" 'dired-do-rename
+    :n "S" 'dired-do-symlink
+    :n "T" 'dired-do-touch
+    :n "W" 'browse-url-of-dired-file
+    :n "X" 'dired-do-shell-command
+    :n "Y" 'dired-copy-filename-as-kill
+    :n "Z" 'dired-do-compress)
   (when is-mac-p
     ;; Suppress the warning: `ls does not support --dired'.
     (setq dired-use-ls-dired nil)

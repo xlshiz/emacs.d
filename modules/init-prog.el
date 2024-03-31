@@ -78,9 +78,8 @@
   (require 'citre-config)
   ;; HACK!!
   ;; (add-hook 'citre-peek--mode-hook #'evil-normalize-keymaps)
-  (general-nmap
-         "g C-]"  #'citre-peek
-         "C-]"    #'citre-jump)
+  (map! :n "g C-]"  #'citre-peek
+        :n "C-]"    #'citre-jump)
   (map! (:map citre-peek-keymap
          "M-n"     #'citre-peek-next-line
          "M-p"     #'citre-peek-prev-line
@@ -112,14 +111,14 @@
   :config
   ;; HACK!!
   (evil-make-overriding-map symbols-outline-mode-map 'normal)
-  (general-define-key :keymaps 'symbols-outline-mode-map
-         "g"       #'symbols-outline-refresh
-         "j"       #'symbols-outline-next
-         "k"       #'symbols-outline-prev
-         "TAB"     #'symbols-outline-toggle-node
-         "RET"     #'symbols-outline-visit
-         "M-RET"   #'symbols-outline-visit-and-quit
-         "q"       #'quit-window)
+  (map :map symbols-outline-mode-map
+       :n "g"       #'symbols-outline-refresh
+       :n "j"       #'symbols-outline-next
+       :n "k"       #'symbols-outline-prev
+       :n "TAB"     #'symbols-outline-toggle-node
+       :n "RET"     #'symbols-outline-visit
+       :n "M-RET"   #'symbols-outline-visit-and-quit
+       :n "q"       #'quit-window)
   (setq symbols-outline-window-position 'right)
   (symbols-outline-follow-mode))
 

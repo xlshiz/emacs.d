@@ -28,8 +28,8 @@
   (sis-global-context-mode t)
   ;; enable the /inline english/ mode for all buffers
   (sis-global-inline-mode t)
-  (general-imap
-    "C-;"   #'sis-switch))
+  (map!
+    :gni  "C-;"   #'sis-switch))
 
 (use-package pinyinlib
   :commands (pinyinlib-build-regexp-string pinyinlib-build-regexp-char)
