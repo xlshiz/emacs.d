@@ -122,6 +122,9 @@
 [submodule "doom-themes"]
 	path = lib/doom-themes
 	url = https://github.com/doomemacs/themes
+[submodule "dtrt-indent"]
+	path = lib/dtrt-indent
+	url = https://github.com/jscheid/dtrt-indent
 [submodule "el-get"]
 	path = lib/el-get
 	url = https://github.com/dimitri/el-get

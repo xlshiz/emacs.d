@@ -23,15 +23,14 @@
      (map! :map lsp-bridge-mode-map
        :n    "ga"  #'xref-find-apropos
        :n    "gd"  #'lsp-bridge-find-def
-       :n    "C-t" #'lsp-bridge-find-def-return
-       :n    "gD"  #'lsp-bridge-find-def-other-window
-       :n    "K"   #'lsp-bridge-lookup-documentation
+       :n    "gi"  #'lsp-bridge-find-impl
+       :n    "gr"  #'lsp-bridge-find-references
+       :n    "ge"  #'lsp-bridge-diagnostic-list
+       :n    "gt"  #'lsp-bridge-find-type-def
        :n    "gj"  #'lsp-bridge-diagnostic-jump-next
        :n    "gk"  #'lsp-bridge-diagnostic-jump-prev
-       :n    "gl"  #'lsp-bridge-diagnostic-list
-       :n    "gi"  #'lsp-bridge-find-impl
-       :n    "gI"  #'lsp-bridge-find-impl-other-window
-       :n    "gr"  #'lsp-bridge-find-references
+       :n    "K"   #'lsp-bridge-popup-documentation
+       :n    "C-t" #'lsp-bridge-find-def-return
        :n    "gR"  #'lsp-bridge-rename)))
   ('lsp-mode
    (defvar +lsp-defer-shutdown 3
@@ -157,12 +156,11 @@ server getting expensively restarted when reverting buffers."
      (map! :map lsp-mode-map
        :n    "ga" #'xref-find-apropos
        :n    "gd" #'lsp-find-definition
-       :n    "gD" #'lsp-find-declaration
-       :n    "ge" #'lsp-treemacs-errors-list
-       :n    "gh" #'lsp-treemacs-call-hierarchy
        :n    "gi" #'lsp-find-implementation
        :n    "gr" #'lsp-find-references
-       :n    "gt" #'lsp-find-type-definition)
+       :n    "ge" #'lsp-treemacs-errors-list
+       :n    "gt" #'lsp-find-type-definition
+       :n    "gh" #'lsp-treemacs-call-hierarchy)
      ;; (my/local-leader-define
      ;;   "="  '(:ignore t :wk "formatting")
      ;;   "=b" 'lsp-format-buffer
@@ -177,7 +175,6 @@ server getting expensively restarted when reverting buffers."
      ;;   "gD" 'lsp-find-declaration
      ;;   "ge" 'lsp-treemacs-errors-list
      ;;   "gh" 'lsp-treemacs-call-hierarchy
-     ;;   "gi" 'lsp-find-implementation
      ;;   "gr" 'lsp-find-references
      ;;   "gt" 'lsp-find-type-definition
      ;;   "p"  '(:ignore t :wk "peek")

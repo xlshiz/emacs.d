@@ -111,7 +111,7 @@
   :config
   ;; HACK!!
   (evil-make-overriding-map symbols-outline-mode-map 'normal)
-  (map :map symbols-outline-mode-map
+  (map! :map symbols-outline-mode-map
        :n "g"       #'symbols-outline-refresh
        :n "j"       #'symbols-outline-next
        :n "k"       #'symbols-outline-prev

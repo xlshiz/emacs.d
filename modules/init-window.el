@@ -163,6 +163,7 @@
           "\\*ert\\*$" overseer-buffer-mode
           "\\*gud-debug\\*$"
           "\\*lsp-help\\*$" "\\*lsp session\\*$"
+          "\\*lsp-bridge-doc\\*$"
           "\\*quickrun\\*$"
           "\\*tldr\\*$"
           "\\*vc-.*\\*$"
@@ -198,7 +199,8 @@
       (let ((window (caar popper-open-popup-alist)))
         (when (window-live-p window)
           (delete-window window)))))
-  (advice-add #'keyboard-quit :before #'popper-close-window-hack))
+  (advice-add #'keyboard-quit :before #'popper-close-window-hack)
+  (advice-add #'evil-force-normal-state :before #'popper-close-window-hack))
 
 (provide 'init-window)
 ;;; init-window ends here
