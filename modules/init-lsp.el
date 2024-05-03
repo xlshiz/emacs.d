@@ -14,8 +14,13 @@
      :defer t
      :init
      (add-hook 'lsp-bridge-mode-hook #'evil-normalize-keymaps)
+     :custom
+     (lsp-bridge-user-langserver-dir (concat my-etc-dir "langserver"))
      :config
      (setq lsp-bridge-enable-diagnostics t
+           acm-enable-tabnine nil
+           acm-enable-yas nil
+           acm-backend-search-file-words-candidate-min-length 3
            lsp-bridge-enable-log nil)
      (map! (:map acm-mode-map
            [C-return]    (cmd! (acm-hide)

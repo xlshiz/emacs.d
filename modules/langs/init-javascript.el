@@ -63,6 +63,7 @@
     (if (= n 1) (rjsx-maybe-reparse))))
 
 (use-package typescript-mode
+  :mode "\\.ts\\'"
   :hook (typescript-mode . rainbow-delimiters-mode)
   :hook (typescript-tsx-mode . rainbow-delimiters-mode)
   :init
@@ -116,10 +117,16 @@
 ;;
 ;;; Tools
 
-(add-hook! '(js2-mode-local-vars-hook
-             typescript-mode-local-vars-hook
-             typescript-tsx-mode-local-vars-hook
-             rjsx-mode-local-vars-hook)
+(add-hook! '(js2-mode-hook
+             typescript-mode-hook
+             typescript-tsx-mode-hook
+             rjsx-mode-hook)
+           :append #'lsp!)
+
+(add-hook! '(js2-mode-hook
+             typescript-mode-hook
+             typescript-tsx-mode-hook
+             rjsx-mode-hook)
            :append #'tree-sitter!)
 
 (use-package js2-refactor
