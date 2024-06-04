@@ -25,7 +25,7 @@
 	url = https://github.com/jwiegley/emacs-async
 [submodule "auto-compile"]
 	path = lib/auto-compile
-	url = git@github.com:emacscollective/auto-compile.git
+	url = https://github.com/emacscollective/auto-compile.git
 [submodule "auto-minor-mode"]
 	path = lib/auto-minor-mode
 	url = https://github.com/joewreschnig/auto-minor-mode
@@ -52,7 +52,7 @@
 	url = https://github.com/gilbertw1/better-jumper
 [submodule "borg"]
 	path = lib/borg
-	url = git@github.com:emacscollective/borg.git
+	url = https://github.com/emacscollective/borg.git
 [submodule "cape"]
 	path = lib/cape
 	url = https://github.com/minad/cape
@@ -65,7 +65,7 @@
 	url = https://github.com/emacsmirror/clang-format
 [submodule "closql"]
 	path = lib/closql
-	url = git@github.com:magit/closql.git
+	url = https://github.com/magit/closql.git
 [submodule "cmake-mode"]
 	path = lib/cmake-mode
 	url = https://github.com/emacsmirror/cmake-mode
@@ -77,7 +77,7 @@
 	url = https://github.com/manateelazycat/color-rg
 [submodule "compat"]
 	path = lib/compat
-	url = git@github.com:emacs-compat/compat.git
+	url = https://github.com/emacs-compat/compat.git
 [submodule "consult"]
 	path = lib/consult
 	url = https://github.com/minad/consult
@@ -100,13 +100,13 @@
 	url = https://github.com/manateelazycat/corfu-english-helper
 [submodule "dash"]
 	path = lib/dash
-	url = git@github.com:magnars/dash.el.git
+	url = https://github.com/magnars/dash.el.git
 [submodule "deferred"]
 	path = lib/deferred
 	url = https://github.com/kiwanami/emacs-deferred
 [submodule "diff-hl"]
 	path = lib/diff-hl
-	url = git@github.com:dgutov/diff-hl.git
+	url = https://github.com/dgutov/diff-hl.git
 [submodule "diminish"]
 	path = lib/diminish
 	url = https://github.com/myrjola/diminish.el
@@ -136,7 +136,7 @@
 	url = https://github.com/Wilfred/elisp-refs
 [submodule "emacsql"]
 	path = lib/emacsql
-	url = git@github.com:magit/emacsql.git
+	url = https://github.com/magit/emacsql.git
 [submodule "embark"]
 	path = lib/embark
 	url = https://github.com/oantolin/embark
@@ -149,7 +149,7 @@
 	url = https://github.com/iqbalansari/emacs-emojify
 [submodule "epkg"]
 	path = lib/epkg
-	url = git@github.com:emacscollective/epkg.git
+	url = https://github.com/emacscollective/epkg.git
 [submodule "epl"]
 	path = lib/epl
 	url = https://github.com/cask/epl
@@ -236,10 +236,10 @@
 	url = https://github.com/emacsorphanage/git-messenger
 [submodule "git-modes"]
 	path = lib/git-modes
-	url = git@github.com:magit/git-modes.git
+	url = https://github.com/magit/git-modes.git
 [submodule "git-timemachine"]
 	path = lib/git-timemachine
-	url = git@github.com:emacsmirror/git-timemachine.git
+	url = https://github.com/emacsmirror/git-timemachine.git
 [submodule "go-eldoc"]
 	path = lib/go-eldoc
 	url = https://github.com/emacsorphanage/go-eldoc
@@ -308,7 +308,7 @@
 	url = https://github.com/emacsorphanage/macrostep
 [submodule "magit"]
 	path = lib/magit
-	url = git@github.com:magit/magit.git
+	url = https://github.com/magit/magit.git
 [submodule "magit-todos"]
 	path = lib/magit-todos
 	url = https://github.com/alphapapa/magit-todos
@@ -352,7 +352,7 @@
 	ignore = untracked
 [submodule "org"]
 	path = lib/org
-	url = git@github.com:emacsmirror/org.git
+	url = https://github.com/emacsmirror/org.git
 [submodule "org-appear"]
 	path = lib/org-appear
 	url = https://github.com/awth13/org-appear
@@ -394,19 +394,19 @@
 	url = https://github.com/bbatsov/projectile
 [submodule "protobuf-mode"]
 	path = lib/protobuf-mode
-	url = git@github.com:emacsmirror/protobuf-mode.git
+	url = https://github.com/emacsmirror/protobuf-mode.git
 [submodule "pyim"]
 	path = lib/pyim
 	url = https://github.com/tumashu/pyim
 [submodule "queue"]
 	path = lib/queue
-	url = git@github.com:emacsmirror/queue.git
+	url = https://github.com/emacsmirror/queue.git
 [submodule "rainbow-delimiters"]
 	path = lib/rainbow-delimiters
 	url = https://github.com/Fanael/rainbow-delimiters
 [submodule "rainbow-mode"]
 	path = lib/rainbow-mode
-	url = git@github.com:emacsmirror/rainbow-mode.git
+	url = https://github.com/emacsmirror/rainbow-mode.git
 [submodule "restart-emacs"]
 	path = lib/restart-emacs
 	url = https://github.com/iqbalansari/restart-emacs
@@ -448,7 +448,7 @@
 	url = https://github.com/Malabarba/spinner.el
 [submodule "sqlite3"]
 	path = lib/sqlite3
-	url = git@github.com:pekingduck/emacs-sqlite3-api.git
+	url = https://github.com/pekingduck/emacs-sqlite3-api.git
 [submodule "symbol-overlay"]
 	path = lib/symbol-overlay
 	url = https://github.com/wolray/symbol-overlay
@@ -469,7 +469,7 @@
 	url = https://github.com/dryman/toml-mode.el
 [submodule "transient"]
 	path = lib/transient
-	url = git@github.com:magit/transient.git
+	url = https://github.com/magit/transient.git
 [submodule "tree-sitter"]
 	path = lib/tree-sitter
 	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter
@@ -478,7 +478,7 @@
 	url = https://github.com/emacs-tree-sitter/tree-sitter-langs
 [submodule "treepy"]
 	path = lib/treepy
-	url = git@github.com:volrath/treepy.el.git
+	url = https://github.com/volrath/treepy.el.git
 [submodule "typescript-mode"]
 	path = lib/typescript-mode
 	url = https://github.com/emacs-typescript/typescript.el
@@ -490,7 +490,7 @@
 	url = https://codeberg.org/ideasman42/emacs-undo-fu-session.git
 [submodule "use-package"]
 	path = lib/use-package
-	url = git@github.com:jwiegley/use-package.git
+	url = https://github.com/jwiegley/use-package.git
 [submodule "uuidgen"]
 	path = lib/uuidgen
 	url = https://github.com/kanru/uuidgen-el
@@ -527,7 +527,7 @@
 	url = https://github.com/deb0ch/emacs-winum
 [submodule "with-editor"]
 	path = lib/with-editor
-	url = git@github.com:magit/with-editor.git
+	url = https://github.com/magit/with-editor.git
 [submodule "xr"]
 	path = lib/xr
 	url = https://github.com/mattiase/xr
