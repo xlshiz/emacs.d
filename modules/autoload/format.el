@@ -67,10 +67,12 @@
 
 ;;;###autoload
 (defun +format/buffer (&optional arg)
-  "Reformat the current buffer using LSP or `format-all-buffer'."
+  "Reformat the current buffer using `apheleia-format-buffer`.
+If the current major mode is `org-mode`, reformat the current org src block instead."
   (interactive "P")
-  (call-interactively
-    #'apheleia-format-buffer))
+  (if (eq major-mode 'org-mode)
+      (+format/org-block)
+    (call-interactively #'apheleia-format-buffer)))
 
 ;;;###autoload
 (defun +format/region (beg end &optional arg)
@@ -91,6 +93,33 @@ is selected)."
    (if (my-region-active-p)
        #'+format/region
      #'+format/buffer)))
+
+;;;###autoload
+(defun +format/org-block (&optional point)
+  "Reformat the org src block at POINT with a mode approriate formatter."
+  (interactive (list (point)))
+  (unless (derived-mode-p 'org-mode)
+    (user-error "Not an org-mode buffer!"))
+  (let ((element (org-element-at-point point)))
+    (unless (org-in-src-block-p nil element)
+      (user-error "Not in an org src block"))
+    (cl-destructuring-bind (beg end _) (org-src--contents-area element)
+      (let* ((lang (org-element-property :language element))
+             (mode (org-src-get-lang-mode lang)))
+        (save-excursion
+          (if (provided-mode-derived-p mode 'org-mode)
+              (user-error "Cannot reformat an org-mode or org-derived src block")
+            (let* ((major-mode mode)
+                   (after-change-functions
+                    ;; HACK: Silence excessive and unhelpful warnings about
+                    ;;   'org-element-at-point being used in non-org-mode
+                    ;;   buffers'.
+                    (remq 'org-indent-refresh-maybe after-change-functions))
+                   (apheleia-formatter
+                    (or (apheleia--get-formatters 'interactive)
+                        (apheleia--get-formatters 'prompt)
+                        (user-error "No formatter configured for language: %s" lang))))
+              (+format-region beg end))))))))
 
 ;;;###autoload
 (cl-defun set-formatter! (name args &key modes)
