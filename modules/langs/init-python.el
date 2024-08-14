@@ -24,6 +24,7 @@
   (when (and (executable-find "python3")
              (string= python-shell-interpreter "python"))
     (setq python-shell-interpreter "python3"))
+  (setq lsp-bridge-python-lsp-server "pyright")
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
   ;; Env vars
   (after! exec-path-from-shell
