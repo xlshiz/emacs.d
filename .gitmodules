@@ -440,6 +440,9 @@
 [submodule "solaire-mode"]
 	path = lib/solaire-mode
 	url = https://github.com/hlissner/emacs-solaire-mode
+[submodule "sort-tab"]
+	path = lib/sort-tab
+	url = https://github.com/manateelazycat/sort-tab
 [submodule "spinner"]
 	path = lib/spinner
 	url = https://github.com/Malabarba/spinner.el
