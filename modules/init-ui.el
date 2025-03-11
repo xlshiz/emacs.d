@@ -65,8 +65,6 @@
 
 (use-package sort-tab
   :defer t
-  :custom-face
-  (sort-tab-ace-keys-face ((t :inherit hydra-face-red :bold t :height 1.0)))
   :config
   (window-divider-mode -1)
   (setq uniquify-buffer-name-style 'forward)

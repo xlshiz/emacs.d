@@ -9,10 +9,10 @@
 ;;; Code:
 
 (use-package eaf
-  :commands (eaf-open eaf-open-git eaf-open-browser eaf-open-2048
+  :commands (eaf-open eaf-open-git eaf-open-browser
                       eaf-open-file-manager eaf-open-in-file-manager
-                      eaf-create-mindmap eaf-open-mindmap
-                      eaf-markdown-previewer-open eaf-open-pyqterminal)
+                      eaf-open-mind-elixir
+                      eaf-markdown-previewer-open)
   :custom
   (eaf-config-location (concat my-cache-dir "eaf"))
   :init
@@ -32,17 +32,11 @@
         :gn "RET"      #'eaf-pdf-outline-jump))
 (use-package eaf-browser
   :after eaf)
-(use-package eaf-pyqterminal
-  :after eaf)
 (use-package eaf-markdown-previewer
   :after eaf)
 (use-package eaf-org-previewer
   :after eaf)
-(use-package eaf-mindmap
-  :after eaf)
-(use-package eaf-image-viewer
-  :after eaf)
-(use-package eaf-2048
+(use-package eaf-mind-elixir
   :after eaf)
 (use-package eaf-evil
   :after eaf
@@ -57,9 +51,9 @@
             :gn "q"        (cmds! (commandp 'eaf-py-proxy-close_buffer)
                                   'eaf-py-proxy-close_buffer)
             :gn "M-o"      #'ace-window
-            :gn "M-j"      #'sort-tab-ace-jump
-            :gn "M-h"      #'sort-tab-select-prev-tab
-            :gn "M-l"      #'sort-tab-select-next-tab)))
+            :gn "M-j"      #'xsort-tab-ace-jump
+            :gn "M-h"      #'xsort-tab-select-prev-tab
+            :gn "M-l"      #'xsort-tab-select-next-tab)))
   (setq eaf-evil-leader-keymap my-leader-map)
   (setq eaf-evil-leader-key "SPC"))
 
