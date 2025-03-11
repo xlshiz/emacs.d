@@ -149,5 +149,17 @@
         :n "RET"    #'flycheck-error-list-goto-error
         :n [return] #'flycheck-error-list-goto-error))
 
+(use-package aidermacs
+  :config
+  ; Enable minor mode for Aider files
+  (aidermacs-setup-minor-mode)
+  (setenv "OPENROUTER_API_KEY" (auth-source-pick-first-password :host "openrouter.ai"))
+  :custom
+  (aidermacs-show-diff-after-change t)
+  (aidermacs-use-architect-mode t)
+  (aidermacs-architect-model "openrouter/deepseek/deepseek-r1:free")
+  (aidermacs-editor-model "openrouter/deepseek/deepseek-chat:free")
+  (aidermacs-default-model "openrouter/deepseek/deepseek-r1:free"))
+
 (provide 'init-prog)
 ;;; init-prog.el ends here
