@@ -241,6 +241,7 @@
 
       ;;; <leader> c --- code
       (:prefix-map ("c" . "code")
+       :desc "AI assister"                           "a"   #'aidermacs-transient-menu
        :desc "Compile"                               "c"   #'compile
        :desc "Recompile"                             "C"   #'recompile
        ;; :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region

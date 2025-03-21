@@ -160,7 +160,7 @@
   ;; (dirvish-peek-mode)
   ;; Dired options are respected except a few exceptions, see FAQ.org
   (setq dirvish-cache-dir (concat my-cache-dir "dirvish/")
-        dirvish-hide-details t
+        dirvish-hide-details '(dirvish-side)
         dirvish-attributes '(subtree-state collapse file-size file-time)
         dirvish-side-auto-expand nil
         dirvish-subtree-state-style 'nerd
