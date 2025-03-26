@@ -159,8 +159,8 @@
   (aidermacs-show-diff-after-change t)
   (aidermacs-use-architect-mode t)
   (aidermacs-architect-model "openrouter/deepseek/deepseek-r1:free")
-  (aidermacs-editor-model "openrouter/deepseek/deepseek-chat:free")
-  (aidermacs-default-model "openrouter/deepseek/deepseek-r1:free"))
+  (aidermacs-editor-model "openrouter/deepseek/deepseek-chat-v3-0324:free")
+  (aidermacs-default-model "openrouter/deepseek/deepseek-chat-v3-0324:free"))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here
