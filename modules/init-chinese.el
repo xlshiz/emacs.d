@@ -56,11 +56,11 @@
 
 (use-package rime
   :defer t
-  :custom
-  (rime-show-candidate 'posframe)
-  (rime-translate-keybindings
-   '("C-f" "C-b" "C-n" "C-p" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
-  (rime-user-data-dir (expand-file-name (concat my-etc-dir "rime"))))
+  :config
+  (setq rime-show-candidate 'posframe)
+  (setq rime-translate-keybindings
+   '("M-<left>" "M-<right>" "<tab>" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
+  (setq rime-user-data-dir (expand-file-name (concat my-etc-dir "rime"))))
 
 (use-package pyim
   :defer t
