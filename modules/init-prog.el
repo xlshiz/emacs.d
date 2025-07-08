@@ -155,6 +155,7 @@
   (aidermacs-setup-minor-mode)
   (setenv "OPENROUTER_API_KEY" (auth-source-pick-first-password :host "openrouter.ai"))
   (setq aidermacs-backend 'vterm)
+  (add-to-list 'aidermacs-extra-args "--chat-language zh")
   :custom
   (aidermacs-show-diff-after-change t)
   (aidermacs-use-architect-mode t)
