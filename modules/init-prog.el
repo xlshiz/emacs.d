@@ -153,15 +153,15 @@
   :config
   ; Enable minor mode for Aider files
   (aidermacs-setup-minor-mode)
-  (setenv "OPENROUTER_API_KEY" (auth-source-pick-first-password :host "openrouter.ai"))
+  (setenv "DEEPSEEK_API_KEY" (auth-source-pick-first-password :host "deepseek.com"))
   (setq aidermacs-backend 'vterm)
   (add-to-list 'aidermacs-extra-args "--chat-language zh")
   :custom
   (aidermacs-show-diff-after-change t)
-  (aidermacs-use-architect-mode t)
-  (aidermacs-architect-model "openrouter/deepseek/deepseek-r1:free")
-  (aidermacs-editor-model "openrouter/deepseek/deepseek-chat-v3-0324:free")
-  (aidermacs-default-model "openrouter/deepseek/deepseek-chat-v3-0324:free"))
+  (aidermacs-default-chat-mode 'architect)
+  (aidermacs-architect-model "deepseek/deepseek-reasoner")
+  (aidermacs-editor-model "deepseek/deepseek-chat")
+  (aidermacs-default-model "deepseek/deepseek-chat"))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here
