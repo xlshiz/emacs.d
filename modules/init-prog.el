@@ -149,19 +149,18 @@
         :n "RET"    #'flycheck-error-list-goto-error
         :n [return] #'flycheck-error-list-goto-error))
 
-(use-package aidermacs
+(use-package aider
   :config
-  ; Enable minor mode for Aider files
-  (aidermacs-setup-minor-mode)
+  ;; (setq aider-args `("--config" ,(expand-file-name "~/.aider.conf.yml")))
+  (setq aider-args '("--model" "deepseek/deepseek-coder" "--no-auto-accept-architect" "--no-auto-commits"))
   (setenv "DEEPSEEK_API_KEY" (auth-source-pick-first-password :host "deepseek.com"))
-  (setq aidermacs-backend 'vterm)
-  (add-to-list 'aidermacs-extra-args "--chat-language zh")
-  :custom
-  (aidermacs-show-diff-after-change t)
-  (aidermacs-default-chat-mode 'architect)
-  (aidermacs-architect-model "deepseek/deepseek-reasoner")
-  (aidermacs-editor-model "deepseek/deepseek-chat")
-  (aidermacs-default-model "deepseek/deepseek-chat"))
+  ;; Optional: Set a key binding for the transient menu
+  (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
+  ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
+  (aider-magit-setup-transients) ;; add aider magit function to magit menu
+  ;; auto revert buffer
+  (global-auto-revert-mode 1)
+  (auto-revert-mode 1))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here

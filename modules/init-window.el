@@ -136,7 +136,6 @@
           "\\*Calendar\\*"
           "\\*Finder\\*"
           "\\*Embark Actions\\*"
-          ;; "\\*aidermacs:"
 
           bookmark-bmenu-mode
           comint-mode

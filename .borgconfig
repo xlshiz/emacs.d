@@ -57,3 +57,6 @@
 	build-step = borg-update-autoloads
 [submodule "code-review"]
 	build-step = borg-update-autoloads
+[submodule "aider"]
+	load-path = .
+	load-path = etc
