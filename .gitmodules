@@ -258,6 +258,12 @@
 [submodule "goto-chg"]
 	path = lib/goto-chg
 	url = https://github.com/emacs-evil/goto-chg
+[submodule "grip-mode"]
+	path = lib/grip-mode
+	url = https://github.com/seagle0128/grip-mode
+[submodule "haml-mode"]
+	path = lib/haml-mode
+	url = https://github.com/nex3/haml-mode
 [submodule "helpful"]
 	path = lib/helpful
 	url = https://github.com/Wilfred/helpful
@@ -443,9 +449,6 @@
 [submodule "solaire-mode"]
 	path = lib/solaire-mode
 	url = https://github.com/hlissner/emacs-solaire-mode
-[submodule "sort-tab"]
-	path = lib/sort-tab
-	url = https://github.com/manateelazycat/sort-tab
 [submodule "spinner"]
 	path = lib/spinner
 	url = https://github.com/Malabarba/spinner.el
