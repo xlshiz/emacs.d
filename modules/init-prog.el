@@ -149,6 +149,10 @@
         :n "RET"    #'flycheck-error-list-goto-error
         :n [return] #'flycheck-error-list-goto-error))
 
+(use-package grip-mode
+  :defer t
+  :config (setq grip-command 'auto))
+
 (use-package aider
   :config
   ;; (setq aider-args `("--config" ,(expand-file-name "~/.aider.conf.yml")))

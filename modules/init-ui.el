@@ -63,35 +63,6 @@
   :config
   (setq nerd-icons-scale-factor 0.95))
 
-(use-package sort-tab
-  :defer t
-  :config
-  (window-divider-mode -1)
-  (setq uniquify-buffer-name-style 'forward)
-  (defhydra tabs-fast-switch (:hint nil)
-    "
-    ^^^^Tab                    ^^Misc
-   -^^^^---------------------+-^^^^---------------------------
-    _C-a_^^     select first | _C-k_^^   close tab
-    _C-e_^^     select last  | _C-j_^^   ace jump
-    _h_   _l_  switch tab    | _C-S-k_  close other tabs
-   -^^^^---------------------+-^^^^---------------------------
-  "
-    ("h" sort-tab-select-prev-tab)
-    ("l" sort-tab-select-next-tab)
-    ("C-a" sort-tab-select-first-tab)
-    ("C-e" sort-tab-select-last-tab)
-    ("C-k" sort-tab-close-current-tab)
-    ("C-S-k" sort-tab-close-other-tabs)
-    ("C-j" sort-tab-ace-jump)
-    ("q" nil "quit"))
-  (setq sort-tab-height 20)
-  (setq sort-tab-hide-buffers (append '("COMMIT_EDITMSG" "dir-data-")
-                                 sort-tab-hide-buffers))
-  (setq sort-tab-hide-tabs (append '(" *snails" "COMMIT_EDITMSG" " *rime" "*color-rg*" "*vterm-popup:main*" "*Ilist*" "*Outline*")
-                              sort-tab-hide-tabs))
-  (sort-tab-mode t))
-
 (use-package awesome-tray
   :init
   (setq awesome-tray-minibuffer nil)

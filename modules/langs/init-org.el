@@ -112,6 +112,7 @@ unwanted space when exporting org-mode to html."
         :localleader
         "A"            #'org-archive-subtree
         "p"            #'org-pomodoro
+        "P"            #'grip-mode
         "t"            #'org-todo))
 
 ;; Pomodoro

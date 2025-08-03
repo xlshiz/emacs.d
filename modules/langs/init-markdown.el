@@ -34,7 +34,7 @@
         :localleader
         "'" #'markdown-edit-code-block
         "o" #'markdown-open
-        "p" #'markdown-preview
+        "P" #'grip-mode
         "e" #'markdown-export
         (:prefix ("i" . "insert")
          :desc "Table Of Content"  "T" #'markdown-toc-generate-toc
