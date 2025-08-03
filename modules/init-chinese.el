@@ -59,7 +59,7 @@
   :config
   (setq rime-show-candidate 'posframe)
   (setq rime-translate-keybindings
-   '("C-a" "C-s" "C-t" "M-<left>" "M-<right>" "<tab>" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
+   '("C-t" "C-a" "C-s" "M-<left>" "M-<right>" "<tab>" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
   (setq rime-user-data-dir (expand-file-name (concat my-etc-dir "rime"))))
 
 (use-package pyim

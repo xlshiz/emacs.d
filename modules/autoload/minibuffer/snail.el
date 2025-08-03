@@ -99,8 +99,8 @@
 
 ;;;###autoload
 (defvar snail-sources
-  '(snail--source-buffer
-    snail--source-project-file
+  '(snail--source-project-file
+    snail--source-buffer
     snail--source-recent-file
     ;; hiden
     snail--source-hidden-buffer
