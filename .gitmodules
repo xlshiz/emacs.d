@@ -279,6 +279,9 @@
 [submodule "ht"]
 	path = lib/ht
 	url = https://github.com/Wilfred/ht.el
+[submodule "htmlize"]
+	path = lib/htmlize
+	url = https://github.com/hniksic/emacs-htmlize
 [submodule "hydra"]
 	path = lib/hydra
 	url = https://github.com/abo-abo/hydra
@@ -371,6 +374,9 @@
 [submodule "org-pomodoro"]
 	path = lib/org-pomodoro
 	url = https://github.com/marcinkoziej/org-pomodoro
+[submodule "org-re-reveal"]
+	path = lib/org-re-reveal
+	url = https://gitlab.com/oer/org-re-reveal
 [submodule "parent-mode"]
 	path = lib/parent-mode
 	url = https://github.com/Fanael/parent-mode

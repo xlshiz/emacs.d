@@ -220,6 +220,12 @@ unwanted space when exporting org-mode to html."
   (org-modern-table nil)
   (org-modern-keyword nil))
 
+(use-package org-re-reveal
+  :config
+  (setq org-re-reveal-root (concat "file://" (expand-file-name (concat my-etc-dir "reveal.js")))
+        org-re-reveal-revealjs-version "4"))
+
+
 
 (provide 'init-org)
 
