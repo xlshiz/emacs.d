@@ -227,7 +227,7 @@
        :desc "Switch to last buffer"       "l"   #'evil-switch-to-windows-last-buffer
        :desc "Next buffer"                 "n"   #'next-buffer
        :desc "New empty buffer"            "N"   #'evil-buffer-new
-       :desc "Kill other buffers"          "O"   #'my/kill-other-buffers
+       :desc "Kill other buffers"          "O"   #'xsort-tab-close-other-tabs
        :desc "Previous buffer"             "p"   #'previous-buffer
        :desc "Revert buffer"               "r"   #'revert-buffer
        :desc "Rename buffer"               "R"   #'rename-buffer

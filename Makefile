@@ -43,6 +43,7 @@ clean-all: clean
 	@rm -f .local/autoloads.el*
 	@rm -f lib/tree-sitter/core/tsc-dyn.so
 	@rm -f lib/vterm/vterm-module.so
+	@rm -f lib/rime/librime-emacs.so
 	@rm -rf lib/vterm/build
 	@cd lib/sqlite3; make clean
 	@cd lib/emacsql; make clean

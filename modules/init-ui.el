@@ -65,7 +65,8 @@
 
 (use-package awesome-tray
   :init
-  (setq awesome-tray-minibuffer nil)
+  (setq awesome-tray-minibuffer nil
+        awesome-tray-adjust-mode-line-color-enable t)
   :config
   (add-hook 'my-load-theme-hook  #'awesome-tray-mode)
   ;; (awesome-tray-mode 1)
