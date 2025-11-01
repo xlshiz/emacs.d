@@ -66,6 +66,9 @@
 (use-package awesome-tray
   :init
   (setq awesome-tray-minibuffer nil
+        awesome-tray-buffer-name-buffer-changed t
+        awesome-tray-file-path-truncated-name-length 16
+        awesome-tray-file-path-full-dirname-levels 2
         awesome-tray-adjust-mode-line-color-enable t)
   :config
   (add-hook 'my-load-theme-hook  #'awesome-tray-mode)
@@ -87,8 +90,9 @@
             (t ""))))
   (add-to-list 'awesome-tray-module-alist
                '("lsp+" . (my--lsp-info awesome-tray-module-circe-face)))
+
   (setq awesome-tray-active-modules
-        '("file-path" "loc" "mode-name" "lsp+" "git" "evil")))
+        '("file-path" "loc" "lsp+")))
 
 (use-package xsort-tab
   :defer 0
