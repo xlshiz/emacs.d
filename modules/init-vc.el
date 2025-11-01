@@ -197,6 +197,7 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
     ("g" diff-hl-diff-goto-hunk)
     ("r" diff-hl-revert-hunk)
     ("s" diff-hl-stage-current-hunk)
+    ("d" diff-hl-show-hunk)
     ("q" nil exit: t))
   :config
   ;; Highlight on-the-fly
