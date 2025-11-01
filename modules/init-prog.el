@@ -155,9 +155,6 @@
 
 (use-package aider
   :config
-  ;; (setq aider-args `("--config" ,(expand-file-name "~/.aider.conf.yml")))
-  (setq aider-args '("--model" "deepseek/deepseek-coder" "--no-auto-accept-architect" "--no-auto-commits"))
-  (setenv "DEEPSEEK_API_KEY" (auth-source-pick-first-password :host "deepseek.com"))
   ;; Optional: Set a key binding for the transient menu
   (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
   ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
