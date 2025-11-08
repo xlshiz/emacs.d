@@ -241,19 +241,13 @@
 
       ;;; <leader> c --- code
       (:prefix-map ("c" . "code")
-       :desc "AI assister"                           "a"   #'aider-transient-menu
-       :desc "Compile"                               "c"   #'compile
-       :desc "Recompile"                             "C"   #'recompile
-       ;; :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
-       ;; :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
-       :desc "Format buffer/region"                  "f"   #'+format/region-or-buffer
-       ;; :desc "Find implementations"                  "i"   #'+lookup/implementations
-       ;; :desc "Jump to documentation"                 "k"   #'+lookup/documentation
-       ;; :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
-       ;; :desc "Find type definition"                  "t"   #'+lookup/type-definition
-       ;; :desc "List errors"                           "x"   #'+default/diagnostics
-       :desc "Delete trailing whitespace"            "w"   #'delete-trailing-whitespace
-       :desc "Delete trailing newlines"              "W"   #'my/delete-trailing-newlines)
+       :desc "AI assister"                 "a"   #'aider-transient-menu
+       :desc "Switch to aider buffer"      "b"   #'aider-switch-to-buffer
+       :desc "Compile"                     "c"   #'compile
+       :desc "Recompile"                   "C"   #'recompile
+       :desc "Format buffer/region"        "f"   #'+format/region-or-buffer
+       :desc "Delete trailing whitespace"  "w"   #'delete-trailing-whitespace
+       :desc "Delete trailing newlines"    "W"   #'my/delete-trailing-newlines)
 
       ; <leader> f --- file
       (:prefix-map ("f" . "file")
@@ -261,14 +255,9 @@
        :desc "Open project editorconfig"   "c"   #'editorconfig-find-current-editorconfig
        :desc "Copy this file"              "C"   #'my/copy-file
        :desc "Find directory"              "d"   #'+default/dired
-       ;; :desc "Delete this file"            "D"   #'doom/delete-this-file
-       ;; :desc "Find file in emacs.d"        "e"   #'doom/find-file-in-emacsd
-       ;; :desc "Browse emacs.d"              "E"   #'doom/browse-in-emacsd
        :desc "Recursive find file"         "f"   #'+default/find-file-under-here
        :desc "Find file from here"         "F"   #'+default/find-file-under-here
        :desc "Locate file"                 "l"   #'locate
-       ;; :desc "Find file in private config" "p"   #'doom/find-file-in-private-config
-       ;; :desc "Browse private config"       "P"   #'doom/open-private-config
        :desc "Recent files"                "r"   #'recentf-open-files
        :desc "Rename/move file"            "R"   #'my/rename-file
        :desc "Save file"                   "s"   #'save-buffer

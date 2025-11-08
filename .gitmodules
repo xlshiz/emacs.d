@@ -13,6 +13,9 @@
 [submodule "aider"]
 	path = lib/aider
 	url = https://github.com/tninja/aider.el
+[submodule "aidermacs"]
+	path = lib/aidermacs
+	url = https://github.com/MatthewZMD/aidermacs
 [submodule "alert"]
 	path = lib/alert
 	url = https://github.com/jwiegley/alert
