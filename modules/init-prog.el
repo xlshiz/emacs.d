@@ -154,6 +154,7 @@
   :config (setq grip-command 'auto))
 
 (use-package aider
+  :defer t
   :config
   ;; use aider-transient-menu for wider screen
   ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
@@ -161,16 +162,6 @@
   ;; auto revert buffer
   (global-auto-revert-mode 1)
   (auto-revert-mode 1))
-
-(use-package aidermacs
-  :config
-  ;; Optional: Set a key binding for the transient menu
-  (global-set-key (kbd "C-c a") 'aidermacs-transient-menu) ;; for wider screen
-  (aidermacs-setup-minor-mode)
-  (setq aidermacs-backend 'vterm)
-  :custom
-  (aidermacs-show-diff-after-change t)
-  (aidermacs-default-chat-mode 'architect))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here
