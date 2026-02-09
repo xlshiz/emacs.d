@@ -10,6 +10,12 @@
 [submodule "ace-window"]
 	path = lib/ace-window
 	url = https://github.com/abo-abo/ace-window
+[submodule "acp"]
+	path = lib/acp
+	url = https://github.com/xenodium/acp.el.git
+[submodule "agent-shell"]
+	path = lib/agent-shell
+	url = https://github.com/xenodium/agent-shell.git
 [submodule "aider"]
 	path = lib/aider
 	url = https://github.com/tninja/aider.el
@@ -446,6 +452,9 @@
 [submodule "sass-mode"]
 	path = lib/sass-mode
 	url = https://github.com/nex3/sass-mode
+[submodule "shell-maker"]
+	path = lib/shell-maker
+	url = https://github.com/xenodium/shell-maker.git
 [submodule "shrink-path"]
 	path = lib/shrink-path
 	url = https://gitlab.com/bennya/shrink-path.el
