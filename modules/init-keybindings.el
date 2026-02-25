@@ -325,35 +325,7 @@
        :desc "avy goto line"              "l"   #'evil-avy-goto-line
        :desc "avy goto word"              "w"   #'evil-avy-goto-word-1
        :desc "avy goto symbol"            "o"   #'evil-avy-goto-symbol-1)
-      ;;
-      ;; ;;; <leader> k --- workspace
-      ;; (:when (modulep! :editor workspaces)
-      ;;  (:prefix-map ("k" . "workspace")
-      ;;   :desc "Display tab bar"           "TAB" #'+workspace/display
-      ;;   :desc "Switch workspace"          "."   #'+workspace/switch-to
-      ;;   :desc "Switch to last workspace"  "`"   #'+workspace/other
-      ;;   :desc "New workspace"             "n"   #'+workspace/new
-      ;;   :desc "New name workspace"        "N"   #'+workspace/new-named
-      ;;   :desc "Load workspace from file"  "l"   #'+workspace/load
-      ;;   :desc "Save workspace to file"    "s"   #'+workspace/save
-      ;;   :desc "Delete session"            "x"   #'+workspace/kill-session
-      ;;   :desc "Delete this workspace"     "d"   #'+workspace/delete
-      ;;   :desc "Rename workspace"          "r"   #'+workspace/rename
-      ;;   :desc "Restore last session"      "R"   #'+workspace/restore-last-session
-      ;;   :desc "Next workspace"            "]"   #'+workspace/switch-right
-      ;;   :desc "Previous workspace"        "["   #'+workspace/switch-left
-      ;;   :desc "Switch to 1st workspace"   "1"   #'+workspace/switch-to-0
-      ;;   :desc "Switch to 2nd workspace"   "2"   #'+workspace/switch-to-1
-      ;;   :desc "Switch to 3rd workspace"   "3"   #'+workspace/switch-to-2
-      ;;   :desc "Switch to 4th workspace"   "4"   #'+workspace/switch-to-3
-      ;;   :desc "Switch to 5th workspace"   "5"   #'+workspace/switch-to-4
-      ;;   :desc "Switch to 6th workspace"   "6"   #'+workspace/switch-to-5
-      ;;   :desc "Switch to 7th workspace"   "7"   #'+workspace/switch-to-6
-      ;;   :desc "Switch to 8th workspace"   "8"   #'+workspace/switch-to-7
-      ;;   :desc "Switch to 9th workspace"   "9"   #'+workspace/switch-to-8
-      ;;   :desc "Switch to final workspace" "0"   #'+workspace/switch-to-final))
-      ;;
-      ;;
+
       ;;; <leader> m --- mark
       (:prefix-map ("m" . "mark")
        :desc "Set bookmark"               "b"   #'bookmark-set
@@ -384,52 +356,12 @@
       ;;  :desc "View search"                  "v" #'org-search-view
       ;;  :desc "Org export to clipboard"        "y" #'+org/export-to-clipboard
       ;;  :desc "Org export to clipboard as RTF" "Y" #'+org/export-to-clipboard-as-rich-text
-      ;;
-      ;;  (:when (modulep! :lang org +roam)
-      ;;   (:prefix ("r" . "roam")
-      ;;    :desc "Switch to buffer"              "b" #'org-roam-switch-to-buffer
-      ;;    :desc "Org Roam Capture"              "c" #'org-roam-capture
-      ;;    :desc "Find file"                     "f" #'org-roam-find-file
-      ;;    :desc "Show graph"                    "g" #'org-roam-graph
-      ;;    :desc "Insert"                        "i" #'org-roam-insert
-      ;;    :desc "Insert (skipping org-capture)" "I" #'org-roam-insert-immediate
-      ;;    :desc "Org Roam"                      "r" #'org-roam
       ;;    (:prefix ("d" . "by date")
       ;;     :desc "Arbitrary date" "d" #'org-roam-dailies-find-date
       ;;     :desc "Today"          "t" #'org-roam-dailies-find-today
       ;;     :desc "Tomorrow"       "m" #'org-roam-dailies-find-tomorrow
       ;;     :desc "Yesterday"      "y" #'org-roam-dailies-find-yesterday)))
       ;;
-      ;;  (:when (modulep! :lang org +roam2)
-      ;;   (:prefix ("r" . "roam")
-      ;;    :desc "Open random node"           "a" #'org-roam-node-random
-      ;;    :desc "Find node"                  "f" #'org-roam-node-find
-      ;;    :desc "Find ref"                   "F" #'org-roam-ref-find
-      ;;    :desc "Show graph"                 "g" #'org-roam-graph
-      ;;    :desc "Insert node"                "i" #'org-roam-node-insert
-      ;;    :desc "Capture to node"            "n" #'org-roam-capture
-      ;;    :desc "Toggle roam buffer"         "r" #'org-roam-buffer-toggle
-      ;;    :desc "Launch roam buffer"         "R" #'org-roam-buffer-display-dedicated
-      ;;    :desc "Sync database"              "s" #'org-roam-db-sync
-      ;;    (:prefix ("d" . "by date")
-      ;;     :desc "Goto previous note"        "b" #'org-roam-dailies-goto-previous-note
-      ;;     :desc "Goto date"                 "d" #'org-roam-dailies-goto-date
-      ;;     :desc "Capture date"              "D" #'org-roam-dailies-capture-date
-      ;;     :desc "Goto next note"            "f" #'org-roam-dailies-goto-next-note
-      ;;     :desc "Goto tomorrow"             "m" #'org-roam-dailies-goto-tomorrow
-      ;;     :desc "Capture tomorrow"          "M" #'org-roam-dailies-capture-tomorrow
-      ;;     :desc "Capture today"             "n" #'org-roam-dailies-capture-today
-      ;;     :desc "Goto today"                "t" #'org-roam-dailies-goto-today
-      ;;     :desc "Capture today"             "T" #'org-roam-dailies-capture-today
-      ;;     :desc "Goto yesterday"            "y" #'org-roam-dailies-goto-yesterday
-      ;;     :desc "Capture yesterday"         "Y" #'org-roam-dailies-capture-yesterday
-      ;;     :desc "Find directory"            "-" #'org-roam-dailies-find-directory)))
-      ;;
-      ;;  (:when (modulep! :lang org +journal)
-      ;;   (:prefix ("j" . "journal")
-      ;;    :desc "New Entry"           "j" #'org-journal-new-entry
-      ;;    :desc "New Scheduled Entry" "J" #'org-journal-new-scheduled-entry
-      ;;    :desc "Search Forever"      "s" #'org-journal-search-forever)))
       ;;
       ;;; <leader> o --- open
       (:prefix-map ("o" . "open")
@@ -441,15 +373,7 @@
         :desc "Tags search"          "m"  #'org-tags-view
         :desc "View search"          "v"  #'org-search-view)
        :desc "File tree"             "f"  #'dirvish-side
-       ;; :desc "REPL"               "r"  #'+eval/open-repl-other-window
-       ;; :desc "REPL (same window)" "R"  #'+eval/open-repl-same-window
        :desc "Dired"                 "-"  #'dired-jump
-       ;; (:when (modulep! :editor neotree)
-       ;;  :desc "Project sidebar"              "p" #'+neotree/open
-       ;;  :desc "Find file in project sidebar" "P" #'+neotree/find-this-file)
-       ;; (:when (modulep! :editor treemacs)
-       ;;  :desc "Open project sidebar" "P" #'treemacs-select-window
-       ;;  :desc "Toggle project sidebar" "p" #'+treemacs/toggle)
        :desc "Toggle vterm popup"    "t" #'+vterm/toggle
        :desc "Open vterm here"       "T" #'+vterm/here
        :desc "Toggle eshell popup"   "e" #'+eshell/toggle
@@ -535,6 +459,8 @@
       ;;; <leader> w --- window
       (:prefix-map ("w" . "window")
        :desc "Alternate window"           "TAB" #'+default/alternate-window
+       :desc "Undo window"                "`"   #'winner-undo
+       :desc "Redo window"                "~"   #'winner-redo
        :desc "Other window"               "w"   #'other-window
        :desc "Tab hydra"                  "t"   #'tabs-fast-switch/body
        :desc "Split window right"         "v"   #'split-window-right

@@ -63,6 +63,16 @@
   :config
   (setq nerd-icons-scale-factor 0.95))
 
+(use-package winner
+  :preface (defvar winner-dont-bind-my-keys t) ; I'll bind keys myself
+  :hook (window-setup . winner-mode)
+  :config
+  (setq winner-boring-buffers
+        (append winner-boring-buffers
+                '("*Compile-Log*" "*inferior-lisp*" "*Fuzzy Completions*"
+                  "*Apropos*" "*Help*" "*cvs*" "*Buffer List*" "*Ibuffer*"
+                  "*esh command on file*"))))
+
 (use-package awesome-tray
   :init
   (setq awesome-tray-minibuffer nil
