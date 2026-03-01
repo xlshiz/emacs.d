@@ -129,7 +129,7 @@
     ("C-j" xsort-tab-ace-jump)
     ("q" nil "quit"))
   (setq xsort-tab-height 20)
-  (setq xsort-tab-hide-buffers (append '("COMMIT_EDITMSG" "dir-data-")
+  (setq xsort-tab-hide-buffers (append '("COMMIT_EDITMSG" "dir-data-" "acp-client-stderr")
                                  xsort-tab-hide-buffers))
   (setq xsort-tab-hide-tabs (append '(" *snails" "COMMIT_EDITMSG" " *rime" "*color-rg*" "*vterm-popup:main*" "*Ilist*" "*Outline*")
                               xsort-tab-hide-tabs))
