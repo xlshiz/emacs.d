@@ -16,6 +16,9 @@
 [submodule "agent-shell"]
 	path = lib/agent-shell
 	url = https://github.com/xenodium/agent-shell.git
+[submodule "ai-code-interface"]
+	path = lib/ai-code-interface
+	url = https://github.com/tninja/ai-code-interface.el.git
 [submodule "aider"]
 	path = lib/aider
 	url = https://github.com/tninja/aider.el
