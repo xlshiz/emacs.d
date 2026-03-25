@@ -311,7 +311,7 @@
 	url = https://github.com/js-emacs/js2-refactor.el
 [submodule "llama"]
 	path = lib/llama
-	url = https://git.sr.ht/~tarsius/llama
+	url = https://github.com/tarsius/llama.git
 [submodule "lsp-bridge"]
 	path = lib/lsp-bridge
 	url = https://github.com/manateelazycat/lsp-bridge
