@@ -104,7 +104,7 @@
     snail--source-recent-file
     ;; hiden
     snail--source-hidden-buffer
-    consult--source-modified-buffer
+    consult-source-modified-buffer
     ))
 
 ;;;###autoload
@@ -112,11 +112,11 @@
   "Mix the `buffer' `projectile' and `recentf'"
   (interactive)
   (require 'consult)
-  (when-let (sel (consult--multi snail-sources
+  (when-let* ((sel (consult--multi snail-sources
                                  :require-match nil
                                  :prompt "Snail: "
                                  :history nil
-                                 :sort nil))
+                                 :sort nil)))
     (if (cdr sel)
         (if (string= (plist-get (cdr sel) :name) "Project File")
             (find-file (projectile-expand-root (car sel))))

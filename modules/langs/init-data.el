@@ -18,12 +18,6 @@
 (use-package toml-mode
   :mode (("\\.toml$" . toml-mode)))
 
-(use-package bazel-mode
-  :mode (("/BUILD\\(\\..*\\)?\\'" . bazel-mode)
-         ("/WORKSPACE\\'" . bazel-mode)
-         ("\\.bzl\\'" . bazel-mode))
-  :init)
-
 (use-package protobuf-mode
   :mode "\\.proto\\'"
   :init

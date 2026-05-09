@@ -250,9 +250,10 @@ targets."
   :config (setq wgrep-auto-save-buffer t))
 
 ;; HACK: Filter boring message in echo area.
-(defadvice message (around my-message-filter-a activate)
-  (unless (string-match "gofmt\\|skipped\\|tsc-dyn-get" (or (ad-get-arg 0) ""))
-    ad-do-it))
+(defadvice! my-message-filter-a (orig-fun &rest args)
+  :around #'message
+  (unless (string-match "gofmt\\|skipped\\|tsc-dyn-get" (or (car args) ""))
+    (apply orig-fun args)))
 
 (provide 'init-minibuffer)
 ;;; init-minibuffer.el ends here

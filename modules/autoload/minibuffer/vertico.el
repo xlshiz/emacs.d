@@ -31,7 +31,7 @@
 
 ;;;###autoload
 (defun +vertico/consult-ripgrep-at-point (&optional dir initial)
-  (interactive (list prefix-arg (when-let ((s (symbol-at-point)))
+  (interactive (list prefix-arg (when-let* ((s (symbol-at-point)))
                                   (symbol-name s))))
   (consult-ripgrep dir initial))
 

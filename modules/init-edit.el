@@ -267,7 +267,7 @@ on."
             (persp-add-new my-workspaces-main))
           ;; HACK Fix #319: the warnings buffer gets swallowed when creating
           ;;      `my-workspaces-main', so display it ourselves, if it exists.
-          (when-let (warnings (get-buffer "*Warnings*"))
+          (when-let* ((warnings (get-buffer "*Warnings*")))
             (save-excursion
               (display-buffer-in-side-window
                warnings '((window-height . shrink-window-if-larger-than-buffer))))))))
@@ -291,7 +291,7 @@ on."
   (add-to-list 'window-persistent-parameters '(winner-ring . t))
 
   (add-hook! 'persp-before-deactivate-functions
-    (defun +workspaces-save-winner-data-h (_)
+    (defun +workspaces-save-winner-data-h (frame &rest _)
       (when (and (bound-and-true-p winner-mode)
                  (get-current-persp))
         (set-persp-parameter
@@ -300,7 +300,7 @@ on."
                             winner-pending-undo-ring)))))
 
   (add-hook! 'persp-activated-functions
-    (defun +workspaces-load-winner-data-h (_)
+    (defun +workspaces-load-winner-data-h (frame &rest _)
       (when (bound-and-true-p winner-mode)
         (cl-destructuring-bind
             (currents alist pending-undo-ring)
@@ -334,7 +334,9 @@ on."
             (cl-delete-if-not #'persp-get-buffer-or-null (persp-buffers persp)))))
 
   ;; Fix #1973: visual selection surviving workspace changes
-  (add-hook 'persp-before-deactivate-functions #'deactivate-mark)
+  (add-hook! 'persp-before-deactivate-functions
+             (defun +persp-selection-workspace (frame &rest _)
+               (deactivate-mark frame)))
 
   ;; Fix #1017: stop session persistence from restoring a broken posframe
   (after! posframe

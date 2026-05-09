@@ -51,3 +51,15 @@
 
 ;; Make UTF-8 the default coding system:
 (set-language-environment "UTF-8")
+
+(setq warning-minimum-level :error)
+(setq warning-suppress-types '((lexical-binding)))
+(add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+(require 'borg)
+(borg-initialize)
+
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
+
+(setq package-enable-at-startup nil)

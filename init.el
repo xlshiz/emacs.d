@@ -30,14 +30,13 @@
                                (setq-default inhibit-message nil
                                              inhibit-redisplay nil)
                                (redisplay)))
-(eval-and-compile ; `borg'
-  (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
-  (require 'borg)
-  (borg-initialize))
 
 ;; Load core config of emacs
-(load (concat user-emacs-directory "core/core") nil 'nomessage)
-(my/initialize-core)
+(setq evil-want-keybinding nil)
+(eval-and-compile
+  (load (concat user-emacs-directory "core/core") nil 'nomessage)
+  (my/initialize-core)
+  (require 'llama))
 
 ;; Be quiet at startup; don't load or display anything unnecessary
 (advice-add #'display-startup-echo-area-message :override #'ignore)

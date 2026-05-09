@@ -37,7 +37,7 @@
   (let* ((projectile-project-root nil)
          (disabled-command-function nil)
          (default-directory
-           (if-let (projects (projectile-relevant-known-projects))
+           (if-let* ((projects (projectile-relevant-known-projects)))
                (completing-read "Search project: " projects nil t)
              (user-error "There are no known projects"))))
     (embark--quit-and-run
@@ -76,7 +76,7 @@
   (let* ((projectile-project-root nil)
          (disabled-command-function nil)
          (default-directory
-          (if-let (projects (projectile-relevant-known-projects))
+          (if-let* ((projects (projectile-relevant-known-projects)))
               (completing-read "Search project: " projects nil t)
             (user-error "There are no known projects"))))
     (setq this-command #'+embark-grep-other-project)

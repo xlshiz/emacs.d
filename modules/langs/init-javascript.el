@@ -79,8 +79,7 @@
   (after! flycheck
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     (flycheck-add-mode 'javascript-eslint 'typescript-mode)
-    (flycheck-add-mode 'javascript-eslint 'typescript-tsx-mode)
-    (flycheck-add-mode 'typescript-tslint 'typescript-tsx-mode))
+    (flycheck-add-mode 'javascript-eslint 'typescript-tsx-mode))
   :config
   (when (fboundp 'web-mode)
     (define-derived-mode typescript-tsx-mode web-mode "TypeScript-TSX")

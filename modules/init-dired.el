@@ -90,21 +90,23 @@
     (setq dired-listing-switches "-alh --group-directories-first"))
 
   ;; Use single buffer
-  (defadvice dired-find-file (around dired-find-file-single-buffer activate)
+  (defadvice! +dired-find-file-single-buffer-a (orig-fun &rest args)
     "Replace current buffer if file is a directory."
-    (interactive)
+    :around #'dired-find-file
     (let ((orig (current-buffer))
           (filename (dired-get-file-for-visit)))
-      ad-do-it
-      (when (and (file-directory-p filename)
-                 (not (eq (current-buffer) orig)))
-        (kill-buffer orig))))
-  (defadvice dired-up-directory (around dired-up-directory-single-buffer activate)
+      (let ((result (apply orig-fun args)))
+        (when (and (file-directory-p filename)
+                   (not (eq (current-buffer) orig)))
+          (kill-buffer orig))
+        result)))
+  (defadvice! +dired-up-directory-single-buffer-a (orig-fun &rest args)
     "Replace current buffer if file is a directory."
-    (interactive)
+    :around #'dired-up-directory
     (let ((orig (current-buffer)))
-      ad-do-it
-      (kill-buffer orig)))
+      (let ((result (apply orig-fun args)))
+        (kill-buffer orig)
+        result)))
 
   ;; Colourful dired
   (use-package diredfl
@@ -176,17 +178,19 @@
                                  "\\|\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'"))
   (setq dirvish-mode-line-format
     '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
-  (defadvice dirvish-find-entry-a (around dirvish-find-file-single-buffer activate)
+  (defadvice! +dirvish-find-entry-single-buffer-a (orig-fun &rest args)
     "Replace current buffer if file is a directory."
+    :around #'dirvish-find-entry
     (let ((orig (current-buffer))
           filename)
       (ignore-errors
         (setq filename (dired-get-file-for-visit)))
-      ad-do-it
-      (when (and filename
-                 (file-directory-p filename)
-                 (not (eq (current-buffer) orig)))
-        (kill-buffer orig))))
+      (let ((result (apply orig-fun args)))
+        (when (and filename
+                   (file-directory-p filename)
+                   (not (eq (current-buffer) orig)))
+          (kill-buffer orig))
+        result)))
   (map! :map dired-mode-map
     :ng "h"   #'dired-up-directory
     :ng "j"   #'dired-next-line

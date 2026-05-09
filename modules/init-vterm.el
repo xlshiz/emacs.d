@@ -19,7 +19,8 @@
     (advice-add #'vterm-module-compile :override #'ignore)
     (provide 'vterm-module))
   ;; "M-o" to ace-window
-  (defadvice evil-collection-vterm-setup (after +evil-collection-vterm-setup-h activate)
+  (defadvice! +evil-collection-vterm-setup-h ()
+    :after #'evil-collection-vterm-setup
     (evil-collection-define-key 'insert 'vterm-mode-map
       (kbd "M-o") 'ace-window)
     (evil-collection-define-key 'insert 'vterm-mode-map

@@ -325,7 +325,7 @@ editorconfig or dtrt-indent installed."
          (let (editorconfig-lisp-use-default-indent)
            (editorconfig-set-indentation nil width)))
         ((require 'dtrt-indent nil t)
-         (when-let (vars (nth 2 (assq major-mode dtrt-indent-hook-mapping-list)))
+         (when-let* ((vars (nth 2 (assq major-mode dtrt-indent-hook-mapping-list))))
            (dolist (var (ensure-list vars))
              (set var width)))))
   (message "Changed indentation to %d" width))

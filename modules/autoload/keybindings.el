@@ -63,11 +63,11 @@ If prefix ARG is set, include ignored/hidden files."
          (current-prefix-arg (unless (eq arg 'other) arg))
          (default-directory
            (if (eq arg 'other)
-               (if-let (projects (projectile-relevant-known-projects))
-                   (completing-read "Search project: " projects nil t)
-                 (user-error "There are no known projects"))
-             default-directory)))
-    (call-interactively #'+vertico/project-search)))
+                (if-let* ((projects (projectile-relevant-known-projects)))
+                    (completing-read "Search project: " projects nil t)
+                  (user-error "There are no known projects"))
+              default-directory)))
+     (call-interactively #'+vertico/project-search)))
 
 ;;;###autoload
 (defun +default/search-other-project ()
@@ -83,10 +83,10 @@ If prefix ARG is set, prompt for a known project to search from."
    (list (rxt-quote-pcre (or (my-thing-at-point-or-region) ""))
          (let ((projectile-project-root nil))
            (if current-prefix-arg
-               (if-let (projects (projectile-relevant-known-projects))
-                   (completing-read "Search project: " projects nil t)
-                 (user-error "There are no known projects"))
-             (+project-project-root default-directory)))))
+               (if-let* ((projects (projectile-relevant-known-projects)))
+                    (completing-read "Search project: " projects nil t)
+                  (user-error "There are no known projects"))
+              (+project-project-root default-directory)))))
   (+vertico/project-search nil symbol dir))
 
 ;;;###autoload

@@ -101,17 +101,16 @@
   (add-to-list 'orderless-matching-styles '+intel-consult-regex-pinyin-builder))
 
 (after! org
-  (defadvice org-html-paragraph (before org-html-paragraph-advice
-                                        (paragraph contents info) activate)
+  (defadvice! org-html-paragraph-advice (orig-fun paragraph contents info)
     "Join consecutive Chinese lines into a single long line without
 unwanted space when exporting org-mode to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
+    :around #'org-html-paragraph
+    (let* ((fix-regexp "[[:multibyte:]]")
            (fixed-contents
             (replace-regexp-in-string
              (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
+              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" contents)))
+      (funcall orig-fun paragraph fixed-contents info)))
   ;; 让中文也可以不加空格就使用行内格式
   (setcar (nthcdr 0 org-emphasis-regexp-components) " \t('\"{[:nonascii:]")
   (setcar (nthcdr 1 org-emphasis-regexp-components) "- \t.,:!?;'\")}\\[[:nonascii:]")

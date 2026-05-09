@@ -1,4 +1,4 @@
-;; -*- no-byte-compile: t; -*-
+;;; -*- lexical-binding: t no-byte-compile: t -*-
 
 (eval-and-compile
   (require 'cl-lib)

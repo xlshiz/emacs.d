@@ -78,6 +78,9 @@
 [submodule "closql"]
 	path = lib/closql
 	url = https://github.com/magit/closql.git
+[submodule "cmake-font-lock"]
+	path = lib/cmake-font-lock
+	url = https://github.com/Lindydancer/cmake-font-lock
 [submodule "cmake-mode"]
 	path = lib/cmake-mode
 	url = https://github.com/emacsmirror/cmake-mode
@@ -90,6 +93,9 @@
 [submodule "compat"]
 	path = lib/compat
 	url = https://github.com/emacs-compat/compat.git
+[submodule "cond-let"]
+	path = lib/cond-let
+	url = https://github.com/tarsius/cond-let.git
 [submodule "consult"]
 	path = lib/consult
 	url = https://github.com/minad/consult
@@ -261,6 +267,9 @@
 [submodule "go-tag"]
 	path = lib/go-tag
 	url = https://github.com/brantou/emacs-go-tag
+[submodule "golden-ratio"]
+	path = lib/golden-ratio
+	url = https://github.com/roman/golden-ratio.el
 [submodule "gotest"]
 	path = lib/gotest
 	url = https://github.com/nlamirault/gotest.el

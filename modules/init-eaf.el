@@ -16,6 +16,7 @@
   :custom
   (eaf-config-location (concat my-cache-dir "eaf"))
   :init
+  (setq warning-suppress-types '((files lexical-binding)))
   (map! (:map embark-file-map
          :desc "Open with eaf"     "e"    #'eaf-open)))
 

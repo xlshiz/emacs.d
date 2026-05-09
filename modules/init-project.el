@@ -35,7 +35,7 @@ Emacs.")
         projectile-auto-discover nil
         projectile-enable-caching (not noninteractive)
         projectile-globally-ignored-files '(".DS_Store" "TAGS")
-        projectile-globally-ignored-file-suffixes 
+        projectile-globally-ignored-file-suffixes
         '(".dir" ".cmake" ".make" ".internal" ".elc" ".pyc" ".o")
         projectile-kill-buffers-filter 'kill-only-files
         projectile-known-projects-file (concat my-cache-dir "projectile.projects")
@@ -141,22 +141,23 @@ c) are not valid projectile projects."
                         (projectile-ignored-project-p proot))
                  do (remhash proot projectile-projects-cache)
                  and do (remhash proot projectile-projects-cache-time)
-                 and do (remhash proot projectile-project-type-cache))
-        (projectile-serialize-cache))))
+                 and do (remhash proot projectile-project-type-cache)))))
 
   ;; HACK Don't rely on VCS-specific commands to generate our file lists. That's
   ;;      7 commands to maintain, versus the more generic, reliable and
   ;;      performant `fd' or `ripgrep'.
-  (defadvice! my--only-use-generic-command-a (fn vcs)
+  (defadvice! my--only-use-generic-command-a (fn vcs &optional directory)
     "Only use `projectile-generic-command' for indexing project files.
 And if it's a function, evaluate it."
     :around #'projectile-get-ext-command
-    (if (and (functionp projectile-generic-command)
-             (not (file-remote-p default-directory)))
+    (let ((default-directory (or directory default-directory)))
+      (if (and (functionp projectile-generic-command)
+               (not (file-remote-p default-directory)))
         (funcall projectile-generic-command vcs)
-      (let ((projectile-git-submodule-command
-             (get 'projectile-git-submodule-command 'initial-value)))
-        (funcall fn vcs))))
+        (let ((projectile-git-submodule-command
+                (or projectile-git-submodule-command
+                    (get 'projectile-git-submodule-command 'initial-value))))
+          (funcall fn vcs)))))
 
   ;; `projectile-generic-command' doesn't typically support a function, but my
   ;; `my--only-use-generic-command-a' advice allows this. I do it this way so

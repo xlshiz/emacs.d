@@ -18,7 +18,10 @@
   (setq doom-dark+-blue-modeline t
         doom-gruvbox-dark-variant "medium"
         doom-themes-neotree-file-icons t
-        doom-themes-neotree-line-spacing 2))
+        doom-themes-neotree-line-spacing 2)
+  :config
+  (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
+          '(:inherit 'gnus-group-mail-1-empty :weight 'normal)))
 
 ;; 延迟部分ui设置
 (add-hook 'my-after-init-hook

@@ -23,7 +23,6 @@
         evil-want-C-w-delete t
         evil-want-Y-yank-to-eol t
         evil-want-integration t
-        evil-want-keybinding nil
         evil-want-visual-char-semi-exclusive t
         evil-indent-convert-tabs t
         evil-ex-search-vim-style-regexp t
@@ -167,7 +166,7 @@
 
   (add-hook! 'my-after-init-hook
              #'(lambda (&rest _)
-                 (when-let ((message-buffer (get-buffer "*Messages*")))
+                 (when-let* ((message-buffer (get-buffer "*Messages*")))
                    (with-current-buffer message-buffer
                      (evil-normalize-keymaps)))))
 

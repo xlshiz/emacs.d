@@ -51,35 +51,7 @@
   (when (not forge-add-default-bindings)
     (map! :map magit-mode-map [remap magit-browse-thing] #'forge-browse-dwim
           :map magit-remote-section-map [remap magit-browse-thing] #'forge-browse-remote
-          :map magit-branch-section-map [remap magit-browse-thing] #'forge-browse-branch))
-
-  (defadvice! +magit--forge-get-repository-lazily-a (&rest _)
-    "Make `forge-get-repository' return nil if the binary isn't built yet.
-This prevents emacsql getting compiled, which appears to come out of the blue
-and blocks Emacs for a short while."
-    :before-while #'forge-get-repository
-    (file-executable-p emacsql-sqlite-executable))
-
-  (defadvice! +magit--forge-build-binary-lazily-a (&rest _)
-    "Make `forge-dispatch' only build emacsql if necessary.
-Annoyingly, the binary gets built as soon as Forge is loaded. Since we've
-disabled that in `+magit--forge-get-repository-lazily-a', we must manually
-ensure it is built when we actually use Forge."
-    :before #'forge-dispatch
-    (unless (file-executable-p emacsql-sqlite-executable)
-      (emacsql-sqlite-compile 2)
-      (if (not (file-executable-p emacsql-sqlite-executable))
-          (message (concat "Failed to build emacsql; forge may not work correctly.\n"
-                           "See *Compile-Log* buffer for details"))
-        ;; HACK Due to changes upstream, forge doesn't initialize completely if
-        ;;      it doesn't find `emacsql-sqlite-executable', so we have to do it
-        ;;      manually after installing it.
-        (setq forge--sqlite-available-p t)
-        (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-pullreqs nil t)
-        (magit-add-section-hook 'magit-status-sections-hook 'forge-insert-issues   nil t)
-        (after! forge-topic
-          (dolist (hook forge-bug-reference-hooks)
-            (add-hook hook #'forge-bug-reference-setup)))))))
+          :map magit-branch-section-map [remap magit-browse-thing] #'forge-browse-branch)))
 
 (use-package code-review
   :defer t
@@ -201,6 +173,7 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
     ("q" nil exit: t))
   :config
   ;; Highlight on-the-fly
+  (require 'diff-hl-flydiff)
   (diff-hl-flydiff-mode 1)
   (setq diff-hl-flydiff-delay 0.5)
   ;; Set fringe style
@@ -235,6 +208,7 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
                                          (unknown . " ")
                                          (ignored . " ")))
     ;; Display margin since the fringe is unavailable in tty
+    (require 'diff-hl-margin)
     (diff-hl-margin-mode 1)))
 
 ;; Walk through git revisions of a file
@@ -275,7 +249,7 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
   :config
   (defun my/git-messenger:format-detail (vcs commit-id author message)
     (if (eq vcs 'git)
-        (let ((date (git-messenger:commit-date commit-id))
+        (let* ((date (git-messenger:commit-date commit-id))
               (colon (propertize ":" 'face 'font-lock-comment-face)))
           (concat
            (format "%s%s %s \n%s%s %s\n%s  %s %s \n"

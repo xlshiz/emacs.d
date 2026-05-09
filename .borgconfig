@@ -6,7 +6,9 @@
 	build-step = make
 	build-step = borg-update-autoloads
 	load-path = .
-	load-path = sqlite
+[submodule "transient"]
+	load-path = lisp
+	build-step = make
 [submodule "magit"]
 	no-byte-compile = lisp/magit-libgit.el
 [submodule "sqlite3"]

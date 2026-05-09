@@ -91,7 +91,7 @@
               (push `(define-key my-leader-map (general--kbd ,key)
                        ,bdef)
                     forms))
-            (when-let (desc (cadr (memq :which-key udef)))
+            (when-let* ((desc (cadr (memq :which-key udef))))
               (prependq!
                wkforms `((which-key-add-key-based-replacements
                            (general--concat t my-leader-alt-key ,key)
