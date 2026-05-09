@@ -32,8 +32,9 @@
                                (redisplay)))
 
 ;; Load core config of emacs
-(setq evil-want-keybinding nil)
 (eval-and-compile
+  (setq evil-want-keybinding nil)         ; suppress evil-collection compile-time warning
+  (setq forge-add-default-bindings nil)   ; suppress forge/transient compile-time warnings
   (load (concat user-emacs-directory "core/core") nil 'nomessage)
   (my/initialize-core)
   (require 'llama))
