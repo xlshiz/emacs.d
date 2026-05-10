@@ -105,7 +105,7 @@
   ;;        "q"       #'citre-peek-abort))
 
 (use-package symbols-outline
-  :commands (symbols-outline-smart-toggle)
+  :commands (symbols-outline-smart-toggle symbols-outline-follow-mode)
   :init
   (setq symbols-outline-follow-symbol-in-origin nil)
   :config
