@@ -84,9 +84,6 @@
 [submodule "cmake-mode"]
 	path = lib/cmake-mode
 	url = https://github.com/emacsmirror/cmake-mode
-[submodule "code-review"]
-	path = lib/code-review
-	url = https://github.com/wandersoncferreira/code-review
 [submodule "color-rg"]
 	path = lib/color-rg
 	url = https://github.com/manateelazycat/color-rg

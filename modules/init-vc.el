@@ -53,27 +53,7 @@
           :map magit-remote-section-map [remap magit-browse-thing] #'forge-browse-remote
           :map magit-branch-section-map [remap magit-browse-thing] #'forge-browse-branch)))
 
-(use-package code-review
-  :defer t
-  :after magit
-  :init
-  ;; TODO This needs to either a) be cleaned up or better b) better map things
-  ;; to fit
-  (after! evil-collection-magit
-    (dolist (binding evil-collection-magit-mode-map-bindings)
-      (pcase-let* ((`(,states _ ,evil-binding ,fn) binding))
-        (dolist (state states)
-          (evil-collection-define-key state 'code-review-mode-map evil-binding fn))))
-    (evil-set-initial-state 'code-review-mode evil-default-state))
-  (setq code-review-db-database-file (concat my-etc-dir "code-review/code-review-db-file.sqlite")
-        code-review-log-file (concat my-etc-dir "code-review/code-review-error.log")
-        code-review-download-dir (concat my-etc-dir "code-review/"))
-  :config
-  (transient-append-suffix 'magit-merge "i"
-    '("y" "Review pull request" +magit/start-code-review))
-  (after! forge
-    (transient-append-suffix 'forge-dispatch "c u"
-      '("c r" "Review pull request" +magit/start-code-review))))
+
 
 ;; Show TODOs in magit
 (use-package magit-todos
