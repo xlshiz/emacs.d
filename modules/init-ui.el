@@ -108,7 +108,7 @@
         '("file-path" "loc" "lsp+")))
 
 (use-package xsort-tab
-  :defer 0
+  :hook (window-setup-hook . xsort-tab-mode)
   :custom-face
   (xsort-tab-ace-keys-face ((t :inherit hydra-face-red :bold t :height 1.0)))
   :config
@@ -135,8 +135,7 @@
   (setq xsort-tab-hide-buffers (append '("COMMIT_EDITMSG" "dir-data-" "acp-client-stderr")
                                  xsort-tab-hide-buffers))
   (setq xsort-tab-hide-tabs (append '(" *snails" "COMMIT_EDITMSG" " *rime" "*color-rg*" "*vterm-popup:main*" "*Ilist*" "*Outline*")
-                              xsort-tab-hide-tabs))
-  (xsort-tab-mode t))
+                              xsort-tab-hide-tabs)))
 
 
 (provide 'init-ui)

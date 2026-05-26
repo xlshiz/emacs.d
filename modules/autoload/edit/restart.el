@@ -21,10 +21,6 @@
   "TODO"
   (cond ((require 'persp-mode nil t)
          (expand-file-name (or name persp-auto-save-fname) persp-save-dir))
-        ((require 'desktop nil t)
-         (if name
-             (expand-file-name name (file-name-directory (desktop-full-file-name)))
-           (desktop-full-file-name)))
         ((error "No session backend available"))))
 
 ;;;###autoload
@@ -64,9 +60,6 @@
                     unless (member name allowed)
                     do (persp-kill name))
            (persp-load-state-from-file file)))
-        ((and (require 'frameset nil t)
-              (require 'restart-emacs nil t))
-         (restart-emacs--restore-frames-using-desktop file))
         ((error "No session backend to load session with"))))
 ;;;###autoload
 (defun my/restart ()
@@ -104,6 +97,7 @@ switch."
     ;;   arguments at all. Should be fixed upstream, but restart-emacs seems to
     ;;   be unmaintained.
     (with-temp-file tmpfile
+      (print ";;; -*- lexical-binding: t; -*-")
       (print `(progn
                 (add-hook 'window-setup-hook #'my-load-session 100)
                 (delete-file ,tmpfile))

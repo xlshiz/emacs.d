@@ -352,7 +352,9 @@ on."
     (defun +workspaces-remote-buffer-p (buf)
       ;; And don't save TRAMP buffers; they're super slow to restore
       (let ((dir (buffer-local-value 'default-directory buf)))
-        (ignore-errors (file-remote-p dir)))))
+        (ignore-errors (file-remote-p dir))))
+    (defun +workspaces-xsort-tab-buffer-p (buf)
+      (string= (buffer-name buf) "*xsort-tab*")))
 
   (persp-def-buffer-save/load
    :mode 'eshell-mode :tag-symbol 'def-eshell-buffer

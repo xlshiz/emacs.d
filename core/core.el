@@ -6,14 +6,16 @@
 ;;
 ;;; Commentary:
 ;;
-;;   - hook: `before-init-hook'
-;;   - hook: `after-init-hook'
-;;   - hook: `emacs-startup-hook'
-;;   - hook: `window-setup-hook'
-;;   - hook: `my-load-theme-hook'
-;;   - hook: `my-after-init-hook'
+;;   1 hook: `before-init-hook'            (Step 9:  before init.el)
+;;   2 hook: `after-init-hook'             (Step 18: after init.el)
+;;   3 hook: `emacs-startup-hook'          (Step 26: after processing command-line args)
+;;   4 hook: `window-setup-hook'           (Step 28: after frame parameters are applied)
+;;   5 hook: `my-after-init-hook'          (after command-line-1 returns; calls load-theme)
+;;   6 hook: `my-load-theme-hook'
+;;   > In daemon mode, theme loading is deferred to first frame:
+;;     - hook: `after-make-frame-functions' → load-theme → `my-load-theme-hook'
 ;;   > After startup is complete:
-;;     - On first input:              `my-first-input-hook'
+;;     - On first input:               `my-first-input-hook'
 ;;
 ;;; Code:
 
