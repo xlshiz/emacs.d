@@ -412,10 +412,6 @@
        :desc "Kill Emacs (and daemon)"      "K" #'save-buffers-kill-emacs
        :desc "Quit Emacs"                   "q" #'save-buffers-kill-terminal
        :desc "Quit Emacs without saving"    "Q" #'evil-quit-all-with-error-code
-       ;; :desc "Quick save current session"   "s" #'doom/quicksave-session
-       ;; :desc "Restore last session"         "l" #'doom/quickload-session
-       ;; :desc "Save session to file"         "S" #'doom/save-session
-       ;; :desc "Restore session from file"    "L" #'doom/load-session
        :desc "Restart & restore Emacs"      "r" #'my/restart-and-restore
        :desc "Restart Emacs"                "R" #'my/restart)
 

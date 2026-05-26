@@ -1,4 +1,5 @@
 ;;; init.el --- user-init-file                    -*- lexical-binding: t -*-
+;;; (setq debug-on-error t)
 ;;; Early birds
 (when (version< emacs-version "28.1")
   (error "Your Emacs is too old -- this config requires 28.1 or higher"))
