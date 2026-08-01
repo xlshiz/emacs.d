@@ -153,15 +153,38 @@
   :defer t
   :config (setq grip-command 'auto))
 
-(use-package aider
+(use-package ai-code
   :defer t
+  :init
+  (setq ai-code-onboarding-auto-show nil)
+  (setq ai-code-pi-program-switches `("--no-themes" "--theme" ,(concat my-etc-dir "pi-theme.json")))
   :config
-  ;; use aider-transient-menu for wider screen
-  ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
-  (aider-magit-setup-transients) ;; add aider magit function to magit menu
-  ;; auto revert buffer
+  ;; use codex as backend, other options are 'pi, 'claude-code, 'gemini, 'github-copilot-cli, 'open-interpreter, 'opencode, 'kilo, 'grok, 'cursor, 'kiro, 'codebuddy, 'aider, 'eca, 'agent-shell, 'claude-code-ide, 'claude-code-el
+  (ai-code-set-backend 'pi)
+  ;; Optional: default menu stays unchanged; use a narrower 2-column layout on smaller frames
+  ;; (setq ai-code-menu-layout 'two-columns)
+  ;; Enable global keybinding for the main menu
+  ;; (global-set-key (kbd "C-c a") #'ai-code-menu)
+  ;; Optional: Use eat if you prefer, by default it is vterm
+  ;; (setq ai-code-backends-infra-terminal-backend 'eat) ;; config for native CLI backends. for external backends such as agent-shell, claude-code-ide.el and claude-code.el, please check their own config
+  ;; Optional: Try ghostel as an backend infra
+  ;; (setq ai-code-backends-infra-terminal-backend 'ghostel)
+  ;; Optional: Disable @ file completion in comments and AI sessions
+  ;; (ai-code-prompt-filepath-completion-mode -1)
+  ;; Optional: Ask AI to run test after code changes, for a tighter build-test loop
+  (setq ai-code-auto-test-type 'ask-me)
+  ;; Optional: Disable numbered next steps for discussion prompts at send time
+  ;; (enabled by default)
+  ;; (setq ai-code-discussion-auto-follow-up-enabled nil)
+  ;; Optional: In AI session buffers, SPC in Evil normal state triggers the prompt-enter UI
+  (with-eval-after-load 'evil (ai-code-backends-infra-evil-setup))
+  ;; Optional: Turn on auto-revert buffer, so that the AI code change automatically appears in the buffer
   (global-auto-revert-mode 1)
-  (auto-revert-mode 1))
+  (setq auto-revert-interval 1) ;; set to 1 second for faster update
+  ;; Optional: Set up Magit integration for AI commands in Magit popups
+  (with-eval-after-load 'magit
+    (ai-code-magit-setup-transients)))
+
 
 (use-package agent-shell
   :config

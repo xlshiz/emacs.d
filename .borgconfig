@@ -57,6 +57,6 @@
 	no-byte-compile = wgrep-subtest.el
 [submodule "forge"]
 	build-step = borg-update-autoloads
-[submodule "aider"]
+[submodule "ai-code-interface"]
 	load-path = .
 	load-path = etc

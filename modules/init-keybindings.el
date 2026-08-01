@@ -241,8 +241,8 @@
 
       ;;; <leader> c --- code
       (:prefix-map ("c" . "code")
-       :desc "AI assister"                 "a"   #'aider-transient-menu
-       :desc "Switch to aider buffer"      "b"   #'aider-switch-to-buffer
+       :desc "AI assister"                 "a"   #'ai-code-menu
+       :desc "Switch to ai buffer"         "b"   #'ai-code-cli-switch-to-buffer-or-hide
        :desc "Compile"                     "c"   #'compile
        :desc "Recompile"                   "C"   #'recompile
        :desc "Format buffer/region"        "f"   #'+format/region-or-buffer
