@@ -185,7 +185,6 @@
   (with-eval-after-load 'magit
     (ai-code-magit-setup-transients)))
 
-
 (use-package agent-shell
   :config
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send

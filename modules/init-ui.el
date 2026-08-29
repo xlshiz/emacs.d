@@ -39,7 +39,7 @@
               (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
               ;; Specify default font
-              (cl-loop for font in '("Sarasa Fixed SC" "M PLUS Code Latin 50")
+              (cl-loop for font in '("Maple Mono SL" "Sarasa Fixed SC")
                        when (font-installed-p font)
                        return (set-face-attribute 'default nil
                                                   :font font
