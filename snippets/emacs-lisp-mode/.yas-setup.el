@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t no-byte-compile: t -*-
 ;;; emacs-lisp-mode/.yas-setup.el
 
 (defvar doom-modules-dir)
