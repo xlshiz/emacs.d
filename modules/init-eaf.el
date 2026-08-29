@@ -37,8 +37,6 @@
   :after eaf)
 (use-package eaf-org-previewer
   :after eaf)
-(use-package eaf-mind-elixir
-  :after eaf)
 (use-package eaf-evil
   :after eaf
   :config
