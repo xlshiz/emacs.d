@@ -42,8 +42,9 @@
               (cl-loop for font in '("Maple Mono SL" "Sarasa Fixed SC")
                        when (font-installed-p font)
                        return (set-face-attribute 'default nil
-                                                  :font font
-                                                  :height 150))
+                                                  :height 150
+                                                  :weight 'normal
+                                                  :font font))
               ;; Specify font for all unicode characters
               (cl-loop for font in '("Symbola")
                        when (font-installed-p font)
