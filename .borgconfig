@@ -38,8 +38,14 @@
 [submodule "tree-sitter"]
 	load-path = lisp
 	load-path = core
-	build-step = make build
+	# Don't run `make build' (bin/build): its `cp -f' truncates
+	# core/tsc-dyn.so in place, corrupting the mapping when the module
+	# is already loaded by the batch Emacs (SIGSEGV at exit, err 139).
+	# The Rust module only needs rebuilding after the submodule is
+	# updated; do that manually with `make -C lib/tree-sitter build'
+	# (or `bin/build') while no Emacs has tsc-dyn loaded.
 	build-step = borg-update-autoloads
+	build-step = borg-compile
 [submodule "liberime"]
 	build-step = EMACS_MAJOR_VERSION=29 make
 	build-step = cp src/liberime-core.so .
