@@ -282,7 +282,7 @@ targets."
 ;;;###autoload
 (defun +vertico/consult-fd (&optional dir initial)
   (interactive "P")
-  (if my-projectile-fd-binary
+  (if my-fd-binary
       (pcase-let* ((`(,prompt ,paths ,dir) (consult--directory-prompt "Fd" dir))
                    (default-directory dir)
                    (builder (consult--find-make-builder paths)))

@@ -23,6 +23,27 @@
   (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
           '(:inherit 'gnus-group-mail-1-empty :weight 'normal)))
 
+(defvar my-font '("Maple Mono SL-15" "Sarasa Fixed SC-15")
+  "A list of fonts to try for the `default' face, in order.
+
+Each entry may be a font family name (\"Maple Mono SL\"), an XFT
+font string (\"Fira Code:pixelsize=14\"), or a font-spec object
+((font-spec :family \"Fira Mono\" :size 12)).
+
+The first font installed on the system wins and is set as the font
+of the `default' face (faces like `fixed-pitch' inherit it).
+
+Example:
+  (setq my-font '(\"Maple Mono SL\" (font-spec :family \"Fira Mono\" :size 12)))")
+
+(defvar my-cjk-font '("Sarasa Fixed SC" "Source Han Mono SC" "Microsoft Yahei")
+  "A list of CJK fonts to try, in order.
+
+Each entry may be a font family name, an XFT font string, or a
+font-spec object — see `my-font'.  The first font installed on the
+system wins and is applied to the `kana', `han', `cjk-misc' and
+`bopomofo' charsets.")
+
 ;; 延迟部分ui设置
 (add-hook 'my-after-init-hook
           (defun my-ui-setup-h ()
@@ -39,10 +60,11 @@
               (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
               ;; Specify default font
-              (cl-loop for font in '("Maple Mono SL" "Sarasa Fixed SC")
+              (cl-loop for font in my-font
                        when (font-installed-p font)
                        return (set-face-attribute 'default nil
-                                                  :height 150
+                                                  ;;:height 150
+                                                  :width 'normal
                                                   :weight 'normal
                                                   :font font))
               ;; Specify font for all unicode characters
@@ -50,7 +72,7 @@
                        when (font-installed-p font)
                        return(set-fontset-font t 'unicode font nil 'prepend))
               ;; Specify font for Chinese characters
-              (cl-loop for font in '("Sarasa Fixed SC" "Source Han Mono SC" "Microsoft Yahei")
+              (cl-loop for font in my-cjk-font
                        when (font-installed-p font)
                        return (dolist (charset '(kana han cjk-misc bopomofo))
                                 (set-fontset-font (frame-parameter nil 'font)

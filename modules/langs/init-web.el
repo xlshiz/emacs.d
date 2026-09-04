@@ -200,8 +200,6 @@ If set to `nil', disable all the above behaviors.")
 
   ;; css-mode hooks apply to scss and less-css modes
   (map! :localleader
-        :map scss-mode-map
-        "b" #'+css/scss-build
         :map (css-mode-map scss-mode-map less-css-mode-map)
         "rb" #'+css/toggle-inline-or-block))
 

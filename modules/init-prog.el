@@ -158,6 +158,7 @@
   :init
   (setq ai-code-onboarding-auto-show nil)
   (setq ai-code-pi-program-switches `("--no-themes" "--theme" ,(concat my-etc-dir "pi-theme.json")))
+  (setq ai-code-backends-history-file (expand-file-name (concat my-cache-dir "ai-code-backends-history.el")))
   :config
   ;; use codex as backend, other options are 'pi, 'claude-code, 'gemini, 'github-copilot-cli, 'open-interpreter, 'opencode, 'kilo, 'grok, 'cursor, 'kiro, 'codebuddy, 'aider, 'eca, 'agent-shell, 'claude-code-ide, 'claude-code-el
   (ai-code-set-backend 'pi)

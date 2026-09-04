@@ -213,7 +213,8 @@
   :init
   (setq no-littering-etc-directory (expand-file-name my-etc-dir)
         no-littering-var-directory (expand-file-name my-cache-dir))
-  (setq custom-file (expand-file-name "custom.el" my-local-dir)))
+  (setq custom-file (expand-file-name "custom.el" my-local-dir))
+  (load custom-file t 'nomessage))
 
 (use-package better-jumper
   :hook (my-first-input . better-jumper-mode)

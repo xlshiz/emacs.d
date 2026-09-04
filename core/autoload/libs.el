@@ -72,8 +72,8 @@ is:
 
 This emulates `eval-after-load' with a few key differences:
 
-1. No-ops for package that are disabled by the user (via `package!') or not
-   installed yet.
+1. When byte-compiling, forms for packages that are not installed yet are
+   wrapped in `with-no-warnings', suppressing the missing-package warnings.
 2. Supports compound package statements (see :or/:any and :and/:all above).
 
 Since the contents of these blocks will never by byte-compiled, avoid putting
@@ -308,6 +308,36 @@ NAME, ARGLIST, and BODY are the same as `defun', `defun*', `defmacro', and
                (list 'cl-letf (list (cons type rest)) body)))))))
 
 ;;;###autoload
+(defmacro lambda! (arglist &rest body)
+  "Returns (cl-function (lambda ARGLIST BODY...))
+The closure is wrapped in `cl-function', meaning ARGLIST will accept anything
+`cl-defun' will. Implicitly adds `&allow-other-keys' if `&key' is present in
+ARGLIST."
+  (declare (indent defun) (doc-string 1) (pure t) (side-effect-free t))
+  `(cl-function
+    (lambda
+      ,(letf! (defun* allow-other-keys (args)
+                (mapcar
+                 (lambda (arg)
+                   (cond ((nlistp (cdr-safe arg)) arg)
+                         ((listp arg) (allow-other-keys arg))
+                         (arg)))
+                 (if (and (memq '&key args)
+                          (not (memq '&allow-other-keys args)))
+                     (if (memq '&aux args)
+                         (let (newargs arg)
+                           (while args
+                             (setq arg (pop args))
+                             (when (eq arg '&aux)
+                               (push '&allow-other-keys newargs))
+                             (push arg newargs))
+                           (nreverse newargs))
+                       (append args (list '&allow-other-keys)))
+                   args)))
+         (allow-other-keys arglist))
+      ,@body)))
+
+;;;###autoload
 (defun my-rpartial (fn &rest args)
   "Return a partial application of FUN to right-hand ARGS.
 
@@ -389,7 +419,9 @@ This is a variadic `cl-pushnew'."
 ;;;###autoload
 (defun font-installed-p (font-name)
   "Check if font with FONT-NAME is available."
-  (find-font (font-spec :name font-name)))
+  (find-font (if (stringp font-name)
+                 (font-spec :name font-name)
+               font-name)))
 
 ;;;###autoload (put 'map! 'indent-plists-as-data t)
 ;;;###autoload

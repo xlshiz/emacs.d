@@ -52,7 +52,7 @@
     ;; return buffer's window
     (get-buffer-window buffer)))
 
-;;;###autload
+;;;###autoload
 (defun +vc-magit-bury-buffer-fn (&rest _)
   "Restore window configuration and kill all Magit buffers."
   (interactive)
