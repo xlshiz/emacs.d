@@ -9,27 +9,6 @@
 ;;; Code:
 
 ;;;###autoload
-(defvar +vertico-embark-quit-after-action)
-
-;;;###autoload
-(defun +vertico-consult-set-evil-search-pattern (&optional condition)
-  (let ((re
-         (cond
-          ((eq condition 'rg) (substring (car consult--grep-history) 1)) ;; HACK: assume the history begins with `#'
-          ((or t (eq condition 'line)) (car consult--line-history)))))
-    (add-to-history 'evil-ex-search-history re)
-    (setq evil-ex-search-pattern (list re t t))
-    (setq evil-ex-search-direction 'forward)
-    (anzu-mode t)))
-
-;;;###autoload
-(defun +vertico/consult-line-symbol-at-point ()
-  (interactive)
-  (evil-without-repeat ;; I use evil always
-    (consult-line (thing-at-point 'symbol))
-    (+vertico-consult-set-evil-search-pattern)))
-
-;;;###autoload
 (defun +vertico/consult-ripgrep-at-point (&optional dir initial)
   (interactive (list prefix-arg (when-let* ((s (symbol-at-point)))
                                   (symbol-name s))))
@@ -137,17 +116,6 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
   (consult-line (thing-at-point 'symbol)))
 
 ;;;###autoload
-(defun +vertico-embark-target-package-fn ()
-  "Targets Doom's package! statements and returns the package name"
-  (when (or (derived-mode-p 'emacs-lisp-mode) (derived-mode-p 'org-mode))
-    (save-excursion
-      (when (and (search-backward "(" nil t)
-                 (looking-at "(\\s-*package!\\s-*\\(\\(\\sw\\|\\s_\\)+\\)\\s-*"))
-        (let ((pkg (match-string 1)))
-          (set-text-properties 0 (length pkg) nil pkg)
-          `(package . ,pkg))))))
-
-;;;###autoload
 (defun +vertico/embark-export-write ()
   "Export the current vertico results to a writable buffer if possible.
 
@@ -165,34 +133,6 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
               (x (user-error "embark category %S doesn't support writable export" x)))))
          (embark-after-export-hook `(,@embark-after-export-hook ,edit-command)))
     (embark-export)))
-
-;;;###autoload
-(defun +vertico/embark-preview ()
-  "Previews candidate in vertico buffer, unless it's a consult command"
-  (interactive)
-  (unless (bound-and-true-p consult--preview-function)
-    (if (fboundp 'embark-dwim)
-        (save-selected-window
-          (let (+vertico-embark-quit-after-action)
-            (embark-dwim)))
-      (user-error "Embark not installed, aborting..."))))
-
-;;;###autoload
-(defun +vertico/enter-or-preview ()
-  "Enter directory or embark preview on current candidate."
-  (interactive)
-  (when (> 0 vertico--index)
-    (user-error "No vertico session is currently active"))
-  (if (and (let ((cand (vertico--candidate)))
-             (or (string-suffix-p "/" cand)
-                 (and (vertico--remote-p cand)
-                      (string-suffix-p ":" cand))))
-           (not (equal vertico--base ""))
-           (eq 'file (vertico--metadata-get 'category)))
-      (vertico-insert)
-    (condition-case _
-        (+vertico/embark-preview)
-      (user-error (vertico-directory-enter)))))
 
 ;;;###autoload
 (defun +vertico/jump-list (jump)
@@ -241,43 +181,6 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location 
       (goto-char (point-min))
       (forward-line (string-to-number line)))))
 
-;;;###autoload
-(defun +vertico-embark-which-key-indicator ()
-  "An embark indicator that displays keymaps using which-key.
-The which-key help message will show the type and value of the
-current target followed by an ellipsis if there are further
-targets."
-  (lambda (&optional keymap targets prefix)
-    (if (null keymap)
-        (which-key--hide-popup-ignore-command)
-      (which-key--show-keymap
-       (if (eq (plist-get (car targets) :type) 'embark-become)
-           "Become"
-         (format "Act on %s '%s'%s"
-                 (plist-get (car targets) :type)
-                 (embark--truncate-target (plist-get (car targets) :target))
-                 (if (cdr targets) "…" "")))
-       (if prefix
-           (pcase (lookup-key keymap prefix 'accept-default)
-             ((and (pred keymapp) km) km)
-             (_ (key-binding prefix 'accept-default)))
-         keymap)
-       nil nil t (lambda (binding)
-                   (not (string-suffix-p "-argument" (cdr binding))))))))
-
-;;;###autoload
-(defun +vertico--consult--fd-make-builder ()
-  (let ((cmd (split-string-and-unquote +vertico-consult-fd-args)))
-    (lambda (input)
-      (pcase-let* ((`(,arg . ,opts) (consult--command-split input))
-                   (`(,re . ,hl) (funcall consult--regexp-compiler
-                                          arg 'extended t)))
-        (when re
-          (cons (append cmd
-                        (list (consult--join-regexps re 'extended))
-                        opts)
-                hl))))))
-
 (autoload #'consult--directory-prompt "consult")
 ;;;###autoload
 (defun +vertico/consult-fd (&optional dir initial)
@@ -288,16 +191,6 @@ targets."
                    (builder (consult--find-make-builder paths)))
         (find-file (consult--find prompt builder initial)))
     (consult-find dir initial)))
-
-;;;###autoload
-(defun +vertico-basic-remote-try-completion (string table pred point)
-  (and (vertico--remote-p string)
-       (completion-basic-try-completion string table pred point)))
-
-;;;###autoload
-(defun +vertico-basic-remote-all-completions (string table pred point)
-  (and (vertico--remote-p string)
-       (completion-basic-all-completions string table pred point)))
 
 ;;;###autoload
 (defun +vertico/buffer ()

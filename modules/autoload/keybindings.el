@@ -90,84 +90,10 @@ If prefix ARG is set, prompt for a known project to search from."
   (+vertico/project-search nil symbol dir))
 
 ;;;###autoload
-(defun +default/search-notes-for-symbol-at-point (symbol)
-  "Conduct a text search in the current project for symbol at point. If prefix
-ARG is set, prompt for a known project to search from."
-  (interactive
-   (list (rxt-quote-pcre (or (my-thing-at-point-or-region) ""))))
-  (require 'org)
-  (+default/search-project-for-symbol-at-point
-   symbol org-directory))
-
-;;;###autoload
-(defun +default/org-notes-search (query)
-  "Perform a text search on `org-directory'."
-  (interactive
-   (list (if (my-region-active-p)
-             (buffer-substring-no-properties
-              (my-region-beginning)
-              (my-region-end))
-           "")))
-  (require 'org)
-  (+default/search-project-for-symbol-at-point
-   query org-directory))
-
-;;;###autoload
-(defun +default/evil-search-to-project (&optional arg symbol)
-  "Conduct a text search in the current project for symbol at point.
-If prefix ARG is set, prompt for a known project to search from."
-  (interactive
-   (list current-prefix-arg
-         (replace-regexp-in-string
-          "\\\\" ""
-          (replace-regexp-in-string
-           "\n" ""
-           (replace-regexp-in-string
-            "\\\\_<" ""
-            (replace-regexp-in-string
-             "\\\\_>" ""
-             (car evil-ex-search-history)))))))
-  (let ((default-directory
-          (if arg
-              (if-let* ((projects (projectile-relevant-known-projects)))
-                  (completing-read "Switch to project: " projects
-                                   nil t nil nil (+project-project-root))
-                (user-error "There are no known projects"))
-            default-directory)))
-    (+vertico/project-search nil (rxt-quote-pcre symbol))))
-
-;;;###autoload
-(defun +default/find-in-notes ()
-  "Find a file under `org-directory', recursively."
-  (interactive)
-  (unless (bound-and-true-p org-directory)
-    (require 'org))
-  (+project-find-file org-directory))
-
-;;;###autoload
 (defun +default/find-file-under-here ()
   "Perform a recursive file search from the current directory."
   (interactive)
   (+project-find-file default-directory))
-
-;;;###autoload
-(defun +default/discover-projects (arg)
-  "Discover projects in `projectile-project-search-path'.
-If prefix ARG is non-nil, prompt for the search path."
-  (interactive "P")
-  (if arg
-      (call-interactively #'projectile-discover-projects-in-directory)
-    (if (not projectile-project-search-path)
-        (user-error "`projectile-project-search-path' is empty; don't know where to search")
-      (letf! (defun projectile-add-known-project (project-root)
-               (unless (projectile-ignored-project-p project-root)
-                 (funcall projectile-add-known-project project-root)
-                 (message "Added %S to known project roots" project-root)))
-        (dolist (dir projectile-project-search-path)
-          (cl-destructuring-bind (dir . depth) (if (consp dir) dir (cons dir nil))
-            (if (not (file-accessible-directory-p dir))
-                (message "%S was inaccessible and couldn't be searched" dir)
-              (projectile-discover-projects-in-directory dir depth))))))))
 
 ;;;###autoload
 (defun +default/dired (arg)

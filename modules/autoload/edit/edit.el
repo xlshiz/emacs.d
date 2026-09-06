@@ -335,20 +335,6 @@ editorconfig or dtrt-indent installed."
 ;;; Hooks
 
 ;;;###autoload
-(defun my-enable-delete-trailing-whitespace-h ()
-  "Enables the automatic deletion of trailing whitespaces upon file save.
-
-i.e. enables `ws-butler-mode' in the current buffer."
-  (ws-butler-mode +1))
-
-;;;###autoload
-(defun my-disable-delete-trailing-whitespace-h ()
-  "Disables the automatic deletion of trailing whitespaces upon file save.
-
-i.e. disables `ws-butler-mode' in the current buffer."
-  (ws-butler-mode -1))
-
-;;;###autoload
 (defun my-enable-show-trailing-whitespace-h ()
   "Enable `show-trailing-whitespace' in the current buffer."
   (setq-local show-trailing-whitespace t))

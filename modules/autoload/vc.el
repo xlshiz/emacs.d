@@ -9,35 +9,6 @@
 ;;; Code:
 
 ;;;###autoload
-(defun +vc-git-get-current-file-relative-path ()
-  "Get current file relative path."
-  (replace-regexp-in-string (concat "^" (file-name-as-directory default-directory))
-                            ""
-                            buffer-file-name))
-
-;;;###autoload
-(defun +vc/git-checkout-current-file ()
-  "Git checkout current file."
-  (interactive)
-  (when (and (buffer-file-name)
-             (yes-or-no-p (format "git checkout %s?"
-                                  (file-name-nondirectory (buffer-file-name)))))
-    (let* ((filename (+vc-git-get-current-file-relative-path)))
-      (shell-command (concat "git checkout " filename))
-      (my/revert-buffer-no-confirm)
-      (message "DONE! git checkout %s" filename))))
-
-;;;###autoload
-(defun +vc/git-add-current-file ()
-  "Git add file of current buffer."
-  (interactive)
-  (let ((filename))
-    (when buffer-file-name
-      (setq filename (+vc-git-get-current-file-relative-path))
-      (shell-command (concat "git add " filename))
-      (message "DONE! git add %s" filename))))
-
-;;;###autoload
 (defun +vc-magit-display-buffer-fn (buffer)
   (if magit-display-buffer-noselect
       ;; the code that called `magit-display-buffer-function'

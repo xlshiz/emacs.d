@@ -45,27 +45,36 @@
 ;;;###autoload
 ;; https://github.com/redguardtoo/emacs.d/blob/ff06a775ef694970136fb8d26d06a339fb410d9c/lisp/init-windows.el#L29
 (defun +win/toggle-two-split-window ()
-  "Toggle two window layout vertically or horizontally."
+  "Toggle two window layout vertically or horizontally.
+Windows whose `no-other-window' parameter is non-nil (e.g. the
+xsort-tab tab bar window) are ignored, so `count-windows' counting
+such a window doesn't break the toggle; `other-window' and
+`delete-other-windows' already skip/keep them."
   (interactive)
-  (when (= (count-windows) 2)
-    (let* ((this-win-buffer (window-buffer))
-           (next-win-buffer (window-buffer (next-window)))
-           (this-win-edges (window-edges (selected-window)))
-           (next-win-edges (window-edges (next-window)))
-           (this-win-2nd (not (and (<= (car this-win-edges)
-                                       (car next-win-edges))
-                                   (<= (cadr this-win-edges)
-                                       (cadr next-win-edges)))))
-           (splitter
-            (if (= (car this-win-edges)
-                   (car (window-edges (next-window))))
-                'split-window-horizontally
-              'split-window-vertically)))
-      (delete-other-windows)
-      (let* ((first-win (selected-window)))
-        (funcall splitter)
-        (if this-win-2nd (other-window 1))
-        (set-window-buffer (selected-window) this-win-buffer)
-        (set-window-buffer (next-window) next-win-buffer)
-        (select-window first-win)
-        (if this-win-2nd (other-window 1))))))
+  (let* ((sel (selected-window))
+         (wins (delq nil (mapcar (lambda (w)
+                                   (unless (window-parameter w 'no-other-window)
+                                     w))
+                                 (window-list (selected-frame) 1)))))
+    (when (and (= (length wins) 2) (memq sel wins))
+      (let* ((this-win-buffer (window-buffer sel))
+             (next-win (other-window 1))
+             (next-win-buffer (window-buffer next-win))
+             (this-win-edges (window-edges sel))
+             (next-win-edges (window-edges next-win))
+             (this-win-2nd (not (and (<= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (<= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (if (= (car this-win-edges) (car next-win-edges))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (when this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (when this-win-2nd (other-window 1)))))))

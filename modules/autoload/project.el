@@ -36,21 +36,6 @@ Returns nil if not in a project."
     (projectile-project-root dir)))
 
 ;;;###autoload
-(defun +project-project-name (&optional dir)
-  "Return the name of the current project.
-
-Returns '-' if not in a valid project."
-  (if-let* ((project-root (or (+project-project-root dir)
-                             (if dir (expand-file-name dir)))))
-      (funcall projectile-project-name-function project-root)
-    "-"))
-
-;;;###autoload
-(defun +project-project-expand (name &optional dir)
-  "Expand NAME to project root."
-  (expand-file-name name (+project-project-root dir)))
-
-;;;###autoload
 (defmacro +project-file-exists-p! (files &optional base-directory)
   "Checks if FILES exist at the current project's root.
 

@@ -43,28 +43,6 @@
       (message "Reach to first line."))))
 
 ;;;###autoload
-(defun +search/swiper-to-color-rg ()
-  (interactive)
-  (let ((search-text
-         (replace-regexp-in-string
-          "\n" ""
-          (replace-regexp-in-string
-           "\\\\_<" ""
-           (replace-regexp-in-string
-            "\\\\_>" ""
-            (replace-regexp-in-string "^.*Swiper: " "" (thing-at-point 'line)))))))
-    (ivy-quit-and-run (color-rg-search-input search-text (expand-file-name (buffer-file-name))))))
-
-;;;###autoload
-(defun +search/counsel-to-color-rg ()
-  (interactive)
-  (let ((search-text
-         (replace-regexp-in-string
-          "\n" ""
-          (replace-regexp-in-string "^.*Search project \\[.*\\]: " "" (thing-at-point 'line)))))
-    (ivy-quit-and-run (color-rg-search-input search-text default-directory))))
-
-;;;###autoload
 (defmacro +search-minibuf-quit-and-run (&rest body)
   "Quit the minibuffer and run BODY afterwards."
   (declare (indent 0))

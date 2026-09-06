@@ -251,13 +251,11 @@
 
       ; <leader> f --- file
       (:prefix-map ("f" . "file")
-       :desc "Find file"                   "."   #'find-file
+       :desc "Find file from here"         "."   #'find-file
        :desc "Open project editorconfig"   "c"   #'editorconfig-find-current-editorconfig
        :desc "Copy this file"              "C"   #'my/copy-file
        :desc "Find directory"              "d"   #'+default/dired
        :desc "Recursive find file"         "f"   #'+default/find-file-under-here
-       :desc "Find file from here"         "F"   #'+default/find-file-under-here
-       :desc "Locate file"                 "l"   #'locate
        :desc "Recent files"                "r"   #'recentf-open-files
        :desc "Rename/move file"            "R"   #'my/rename-file
        :desc "Save file"                   "s"   #'save-buffer
@@ -319,6 +317,8 @@
 
       ;;; <leader> j --- jump
       (:prefix-map ("j" . "jump")
+       :desc "Jump to bookmark"           "b"   #'bookmark-jump
+       :desc "Show jump list"             "t"   #'+vertico/jump-list
        :desc "avy goto char timer"        "c"   #'evil-avy-goto-char-timer
        :desc "avy goto 2 char"            "j"   #'evil-avy-goto-char-2
        :desc "avy goto char"              "C"   #'evil-avy-goto-char
@@ -332,37 +332,7 @@
        :desc "Delete bookmark"            "B"   #'bookmark-delete
        :desc "Mark symbol highlight"      "m"   #'symbol-overlay-put
        :desc "Clear all highlight"        "c"   #'symbol-overlay-remove-all)
-      ;;
-      ;; ;;; <leader> n --- notes
-      ;; (:prefix-map ("n" . "notes")
-      ;;  :desc "Search notes for symbol"      "*" #'+default/search-notes-for-symbol-at-point
-      ;;  :desc "Org agenda"                   "a" #'org-agenda
-      ;;  :desc "Toggle last org-clock"        "c" #'+org/toggle-last-clock
-      ;;  :desc "Cancel current org-clock"     "C" #'org-clock-cancel
-      ;;  :desc "Open deft"                    "d" #'deft
-      ;;  (:when (modulep! :lang org +noter)
-      ;;   :desc "Org noter"                  "e" #'org-noter)
-      ;;
-      ;;  :desc "Find file in notes"           "f" #'+default/find-in-notes
-      ;;  :desc "Browse notes"                 "F" #'+default/browse-notes
-      ;;  :desc "Org store link"               "l" #'org-store-link
-      ;;  :desc "Tags search"                  "m" #'org-tags-view
-      ;;  :desc "Org capture"                  "n" #'org-capture
-      ;;  :desc "Goto capture"                 "N" #'org-capture-goto-target
-      ;;  :desc "Active org-clock"             "o" #'org-clock-goto
-      ;;  :desc "Todo list"                    "t" #'org-todo-list
-      ;;  :desc "Search notes"                 "s" #'+default/org-notes-search
-      ;;  :desc "Search org agenda headlines"  "S" #'+default/org-notes-headlines
-      ;;  :desc "View search"                  "v" #'org-search-view
-      ;;  :desc "Org export to clipboard"        "y" #'+org/export-to-clipboard
-      ;;  :desc "Org export to clipboard as RTF" "Y" #'+org/export-to-clipboard-as-rich-text
-      ;;    (:prefix ("d" . "by date")
-      ;;     :desc "Arbitrary date" "d" #'org-roam-dailies-find-date
-      ;;     :desc "Today"          "t" #'org-roam-dailies-find-today
-      ;;     :desc "Tomorrow"       "m" #'org-roam-dailies-find-tomorrow
-      ;;     :desc "Yesterday"      "y" #'org-roam-dailies-find-yesterday)))
-      ;;
-      ;;
+
       ;;; <leader> o --- open
       (:prefix-map ("o" . "open")
        :desc "Imenu sidebar"         "i"  #'symbols-outline-smart-toggle
@@ -381,16 +351,12 @@
 
       ;;; <leader> p --- project
       (:prefix-map ("p" . "project")
-       ;; :desc "Search project"               "n" #'+default/evil-search-to-project
        :desc "Run shell in project"         "'" #'+vterm/here
-       ;; :desc "Browse project"               "." #'+default/browse-project
-       ;; :desc "Browse other project"         ">" #'doom/browse-in-other-project
        :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
        :desc "Add new project"              "a" #'projectile-add-known-project
        :desc "Compile in project"           "c" #'projectile-compile-project
        :desc "Repeat last command"          "C" #'projectile-repeat-last-command
        :desc "Remove known project"         "d" #'projectile-remove-known-project
-       ;; :desc "Discover projects in folder"  "D" #'+default/discover-projects
        :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
        :desc "Find file in project"         "f" #'projectile-find-file
        :desc "Configure project"            "g" #'projectile-configure-project
@@ -421,24 +387,16 @@
        :desc "Search all open buffers"      "B" #'consult-line-multi
        :desc "Search current directory"     "d" #'+default/search-cwd
        :desc "Search other directory"       "D" #'+default/search-other-cwd
-       :desc "Search .emacs.d"              "e" #'+default/search-emacsd
-       :desc "Locate file"                  "f" #'locate
        :desc "Jump to symbol"               "i" #'imenu
        :desc "Jump to symbol in open buffers" "I" #'consult-imenu-multi
        :desc "Jump to link"                 "L" #'ffap-menu
        :desc "Jump list"                    "j" #'evil-show-jumps
        :desc "Jump to bookmark"             "m" #'bookmark-jump
-       ;; :desc "Look up online"               "o" #'+lookup/online
-       ;; :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select
-       ;; :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
-       ;; :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
        :desc "Search project"               "p" #'+default/search-project
        :desc "Search other project"         "P" #'+default/search-other-project
        :desc "Jump to mark"                 "r" #'evil-show-marks
        :desc "Search buffer"                "s" #'+default/search-buffer
        :desc "Search buffer for thing at point" "S" #'+vertico/search-symbol-at-point
-       ;; :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
-       ;; :desc "Thesaurus"                    "T" #'+lookup/synonyms
        (:when (fboundp 'vundo)
          :desc "Undo history"               "u" #'vundo)
        :desc "Search Yasnippet"             "y" #'consult-yasnippet)
@@ -460,9 +418,10 @@
        :desc "Other window"               "w"   #'other-window
        :desc "Tab hydra"                  "t"   #'tabs-fast-switch/body
        :desc "Split window right"         "v"   #'split-window-right
-       :desc "Split window right"         "|"   #'split-window-right
+       :desc "Split window right"         "|"   #'+win/split-window-right-and-focus
        :desc "Split window below"         "s"   #'split-window-below
-       :desc "Split window below"         "-"   #'split-window-below
+       :desc "Split window below"         "-"   #'+win/split-window-below-and-focus
+       :desc "Toggle window split"        "r"   #'+win/toggle-two-split-window
        :desc "Balance window"             "="   #'balance-windows
        :desc "Zoom window"                "z"   #'zoom-window-zoom
        :desc "Zoom window next"           "n"   #'zoom-window-next

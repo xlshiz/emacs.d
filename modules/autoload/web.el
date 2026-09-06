@@ -51,7 +51,7 @@
 
 Meant for `comment-line-break-function' in `css-mode' and `scss-mode'."
   (interactive)
-  (cond ((or (not (doom-point-in-comment-p))
+  (cond ((or (not (my-point-in-comment-p))
              (and comment-use-syntax
                   (not (save-excursion (comment-beginning)))))
          (let (comment-line-break-function)
