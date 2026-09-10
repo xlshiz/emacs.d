@@ -159,7 +159,10 @@
   (setq ai-code-onboarding-auto-show nil)
   (setq ai-code-pi-program-switches `("--no-themes" "--theme" ,(concat my-etc-dir "pi-theme.json")))
   (setq ai-code-backends-history-file (expand-file-name (concat my-cache-dir "ai-code-backends-history.el")))
+  (global-set-key (kbd "C-c a") #'ai-code-menu)
   :config
+  (setq xsort-tab-hide-whitelist (append '("*pi")
+                                         xsort-tab-hide-whitelist))
   ;; use codex as backend, other options are 'pi, 'claude-code, 'gemini, 'github-copilot-cli, 'open-interpreter, 'opencode, 'kilo, 'grok, 'cursor, 'kiro, 'codebuddy, 'aider, 'eca, 'agent-shell, 'claude-code-ide, 'claude-code-el
   (ai-code-set-backend 'pi)
   ;; Optional: default menu stays unchanged; use a narrower 2-column layout on smaller frames
