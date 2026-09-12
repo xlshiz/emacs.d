@@ -10,12 +10,12 @@
 
 ;;;###autoload
 (defun +embark-find-file (&rest _)
-  (+search-minibuf-quit-and-run (call-interactively 'find-file)))
+  (quit-minibuf-and-run! (call-interactively 'find-file)))
 
 ;;;###autoload
-(defun +embark-find-file-cwd (&rest _)
+(defun +embark-find-file-cwd (&optional input)
   "Perform a recursive file search from the current directory."
-  (+search-minibuf-quit-and-run (+project-find-file default-directory)))
+  (embark--quit-and-run #'+consult--fd :dir default-directory :initial input))
 
 ;;;###autoload
 (defun +embark-find-file-other-dir (&optional input)
@@ -23,13 +23,7 @@
   (let* ((projectile-project-root nil)
          (disabled-command-function nil)
          (default-directory (expand-file-name (read-directory-name "Search directory: "))))
-    (embark--quit-and-run
-     (lambda ()
-       (minibuffer-with-setup-hook
-           (lambda ()
-             (delete-minibuffer-contents)
-             (insert input))
-         (+project-find-file default-directory))))))
+    (embark--quit-and-run #'+consult--fd :dir default-directory :initial input)))
 
 ;;;###autoload
 (defun +embark-find-file-other-project (&optional input)
@@ -40,13 +34,14 @@
            (if-let* ((projects (projectile-relevant-known-projects)))
                (completing-read "Search project: " projects nil t)
              (user-error "There are no known projects"))))
+    ;;NOTE!!
     (embark--quit-and-run
      (lambda ()
        (minibuffer-with-setup-hook
            (lambda ()
              (delete-minibuffer-contents)
              (insert input))
-         (+project-find-file default-directory))))))
+         (+consult--fd :dir default-directory))))))
 
 ;;;###autoload
 (defun +embark-clean-input(input)
@@ -55,21 +50,16 @@
     input))
 
 ;;;###autoload
-(defun +embark/grep-project ()
-  (interactive)
-  (+default/search-project))
-
-;;;###autoload
 (defun +embark-grep-buffer (input)
   (embark--quit-and-run #'consult-line (+embark-clean-input input)))
 
 ;;;###autoload
-(defun +embark-grep-other-cwd (input)
+(defun +embark-grep-other-dir (input)
   (let* ((projectile-project-root nil)
          (disabled-command-function nil)
          (default-directory (expand-file-name (read-directory-name "Search directory: "))))
-    (setq this-command #'+embark-grep-other-cwd)
-    (embark--quit-and-run #'+vertico/project-search nil (+embark-clean-input input) default-directory)))
+    (setq this-command #'+embark-grep-other-dir)
+    (embark--quit-and-run #'+consult/grep-project nil (+embark-clean-input input) default-directory)))
 
 ;;;###autoload
 (defun +embark-grep-other-project (input)
@@ -80,4 +70,4 @@
               (completing-read "Search project: " projects nil t)
             (user-error "There are no known projects"))))
     (setq this-command #'+embark-grep-other-project)
-    (embark--quit-and-run #'+vertico/project-search nil (+embark-clean-input input) default-directory)))
+    (embark--quit-and-run #'+consult/grep-project nil (+embark-clean-input input) default-directory)))

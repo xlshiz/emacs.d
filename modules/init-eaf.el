@@ -38,6 +38,9 @@
 (use-package eaf-org-previewer
   :after eaf)
 (use-package eaf-evil
+  :init
+  (setq eaf-evil-leader-keymap my-leader-map)
+  (setq eaf-evil-leader-key "SPC")
   :after eaf
   :config
   (add-hook! 'evil-normal-state-entry-hook
@@ -52,8 +55,6 @@
             :gn "M-o"      #'ace-window
             :gn "M-j"      #'xsort-tab-ace-jump
             :gn "M-h"      #'xsort-tab-select-prev-tab
-            :gn "M-l"      #'xsort-tab-select-next-tab)))
-  (setq eaf-evil-leader-keymap my-leader-map)
-  (setq eaf-evil-leader-key "SPC"))
+            :gn "M-l"      #'xsort-tab-select-next-tab))))
 
 (provide 'init-eaf)

@@ -192,11 +192,10 @@
       :textobj "x" #'evil-inner-xml-attr               #'evil-outer-xml-attr)
 
 (map! :leader
-      :desc "Find file"                    "."    #'find-file
       :desc "Switch to last buffer"        "`"    #'evil-switch-to-windows-last-buffer
       :desc "Run terminal"                 "'"    #'vterm
-      :desc "Search symbol in project"     "*"    #'+default/search-project-for-symbol-at-point
-      :desc "Search project"               "/"    #'+embark/grep-project
+      :desc "Search symbol in project"     "*"    #'+consult/grep-symbol-in-project
+      :desc "Search project"               "/"    #'+consult/grep-project
 
       :desc "M-x"                          "SPC"  #'execute-extended-command
       :desc "Jump to bookmark"             "RET"  #'bookmark-jump
@@ -217,7 +216,7 @@
        :desc "Previous buffer"             "["   #'previous-buffer
        :desc "Next buffer"                 "]"   #'next-buffer
        :desc "Kill eaf buffers"            "A"   #'eaf-kill-process
-       :desc "Switch buffer"               "b"   #'+vertico/buffer
+       :desc "Switch buffer"               "b"   #'+consult/buffer
        :desc "Clone buffer"                "c"   #'clone-indirect-buffer
        :desc "Clone buffer other window"   "C"   #'clone-indirect-buffer-other-window
        :desc "Kill tab buffer"             "d"   #'xsort-tab-close-current-tab-and-select-previous
@@ -243,27 +242,24 @@
       (:prefix-map ("c" . "code")
        :desc "AI assister"                 "a"   #'agent-shell
        :desc "Switch to ai buffer"         "b"   #'agent-shell-switch-buffer
-       :desc "Compile"                     "c"   #'compile
-       :desc "Recompile"                   "C"   #'recompile
+       :desc "Compile"                     "c"   #'+default/compile
+       :desc "Recompile"                   "C"   #'compile
        :desc "Format buffer/region"        "f"   #'+format/region-or-buffer
        :desc "Delete trailing whitespace"  "w"   #'delete-trailing-whitespace
        :desc "Delete trailing newlines"    "W"   #'my/delete-trailing-newlines)
 
       ; <leader> f --- file
       (:prefix-map ("f" . "file")
-       :desc "Find file from here"         "."   #'find-file
+       :desc "Search file"                 "."   #'+consult/search-file-cwd
        :desc "Open project editorconfig"   "c"   #'editorconfig-find-current-editorconfig
        :desc "Copy this file"              "C"   #'my/copy-file
        :desc "Find directory"              "d"   #'+default/dired
-       :desc "Recursive find file"         "f"   #'+default/find-file-under-here
+       :desc "Find file"                   "f"   #'find-file
+       :desc "Search file in project"      "p"   #'+consult/search-file-project
        :desc "Recent files"                "r"   #'recentf-open-files
        :desc "Rename/move file"            "R"   #'my/rename-file
        :desc "Save file"                   "s"   #'save-buffer
-       :desc "Save file as..."             "S"   #'write-file
-       ;; :desc "Sudo find file"              "u"   #'doom/sudo-find-file
-       ;; :desc "Sudo this file"              "U"   #'doom/sudo-this-file
-       :desc "Yank file path"              "y"   #'+default/yank-buffer-path
-       :desc "Yank file path from project" "Y"   #'+default/yank-buffer-path-relative-to-project)
+       :desc "Save file as..."             "S"   #'write-file)
 
       ; <leader> g --- git/version control
       (:prefix-map ("g" . "git")
@@ -318,7 +314,7 @@
       ;;; <leader> j --- jump
       (:prefix-map ("j" . "jump")
        :desc "Jump to bookmark"           "b"   #'bookmark-jump
-       :desc "Show jump list"             "t"   #'+vertico/jump-list
+       :desc "Show jump list"             "t"   #'+consult/jump-list
        :desc "avy goto char timer"        "c"   #'evil-avy-goto-char-timer
        :desc "avy goto 2 char"            "j"   #'evil-avy-goto-char-2
        :desc "avy goto char"              "C"   #'evil-avy-goto-char
@@ -335,19 +331,20 @@
 
       ;;; <leader> o --- open
       (:prefix-map ("o" . "open")
-       :desc "Imenu sidebar"         "i"  #'symbols-outline-smart-toggle
+       :desc "Dired"                 "-"  #'dired-jump
        :desc "Org agenda"            "A"  #'org-agenda
        (:prefix ("a" . "org agenda")
         :desc "Agenda"               "a"  #'org-agenda
         :desc "Todo list"            "t"  #'org-todo-list
         :desc "Tags search"          "m"  #'org-tags-view
         :desc "View search"          "v"  #'org-search-view)
+       :desc "Toggle eshell popup"   "e"  #'+eshell/toggle
+       :desc "Open eshell here"      "E"  #'+eshell/here
        :desc "File tree"             "f"  #'dirvish-side
-       :desc "Dired"                 "-"  #'dired-jump
-       :desc "Toggle vterm popup"    "t" #'+vterm/toggle
-       :desc "Open vterm here"       "T" #'+vterm/here
-       :desc "Toggle eshell popup"   "e" #'+eshell/toggle
-       :desc "Open eshell here"      "E" #'+eshell/here)
+       :desc "Imenu sidebar"         "i"  #'symbols-outline-smart-toggle
+       :desc "Toggle vterm popup"    "t"  #'+vterm/toggle
+       :desc "Open vterm here"       "T"  #'+vterm/here
+       :desc "Open Web url"          "w"  #'eaf-open-browser)
 
       ;;; <leader> p --- project
       (:prefix-map ("p" . "project")
@@ -358,11 +355,9 @@
        :desc "Repeat last command"          "C" #'projectile-repeat-last-command
        :desc "Remove known project"         "d" #'projectile-remove-known-project
        :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
-       :desc "Find file in project"         "f" #'projectile-find-file
        :desc "Configure project"            "g" #'projectile-configure-project
        :desc "Invalidate project cache"     "i" #'projectile-invalidate-cache
        :desc "Kill project buffers"         "k" #'projectile-kill-buffers
-       :desc "Find other file"              "o" #'projectile-find-other-file
        :desc "Switch project"               "p" #'projectile-switch-project
        :desc "Find recent project files"    "r" #'projectile-recentf
        :desc "Run project"                  "R" #'projectile-run-project
@@ -372,7 +367,6 @@
 
       ;;; <leader> q --- quit/session
       (:prefix-map ("q" . "quit/session")
-       ;; :desc "Restart emacs server"         "d" #'+default/restart-server
        :desc "Delete frame"                 "f" #'delete-frame
        :desc "Clear current frame"          "F" #'my/kill-all-buffers
        :desc "Kill Emacs (and daemon)"      "K" #'save-buffers-kill-emacs
@@ -383,20 +377,19 @@
 
       ;;; <leader> s --- search
       (:prefix-map ("s" . "search")
-       :desc "Search buffer"                "b" #'+default/search-buffer
-       :desc "Search all open buffers"      "B" #'consult-line-multi
-       :desc "Search current directory"     "d" #'+default/search-cwd
-       :desc "Search other directory"       "D" #'+default/search-other-cwd
+       :desc "Grep in buffer"               "b" #'+consult/grep-buffer
+       :desc "Grep symbol in buffer"        "B" #'+consult/grep-symbol-in-buffer
+       :desc "Grep in current directory"    "." #'+consult/grep-cwd
+       :desc "Grep in other directory"      "D" #'+consult/grep-dir
        :desc "Jump to symbol"               "i" #'imenu
        :desc "Jump to symbol in open buffers" "I" #'consult-imenu-multi
        :desc "Jump to link"                 "L" #'ffap-menu
        :desc "Jump list"                    "j" #'evil-show-jumps
        :desc "Jump to bookmark"             "m" #'bookmark-jump
-       :desc "Search project"               "p" #'+default/search-project
-       :desc "Search other project"         "P" #'+default/search-other-project
+       :desc "Grep in project"              "p" #'+consult/grep-project
+       :desc "Grep in other project"        "P" #'+consult/grep-another-project
        :desc "Jump to mark"                 "r" #'evil-show-marks
-       :desc "Search buffer"                "s" #'+default/search-buffer
-       :desc "Search buffer for thing at point" "S" #'+vertico/search-symbol-at-point
+       :desc "Grep in all open buffers"     "s" #'consult-line-multi
        (:when (fboundp 'vundo)
          :desc "Undo history"               "u" #'vundo)
        :desc "Search Yasnippet"             "y" #'consult-yasnippet)
@@ -412,7 +405,6 @@
 
       ;;; <leader> w --- window
       (:prefix-map ("w" . "window")
-       :desc "Alternate window"           "TAB" #'+default/alternate-window
        :desc "Undo window"                "`"   #'winner-undo
        :desc "Redo window"                "~"   #'winner-redo
        :desc "Other window"               "w"   #'other-window

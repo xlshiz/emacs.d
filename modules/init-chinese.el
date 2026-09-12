@@ -98,7 +98,7 @@
               (pyim-page-select-word-by-number 3)))))
 
 (after! orderless
-  (add-to-list 'orderless-matching-styles '+intel-consult-regex-pinyin-builder))
+  (add-to-list 'orderless-matching-styles '+intel-regex-pinyin-builder))
 
 (after! org
   (defadvice! org-html-paragraph-advice (orig-fun paragraph contents info)

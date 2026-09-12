@@ -51,10 +51,9 @@
 (require 'init-edit)
 (require 'init-window)
 (require 'init-undo)
-(require 'init-minibuffer)
+(require 'init-search)
 (require 'init-completion)
 ;; Tools
-(require 'init-project)
 (require 'init-vc)
 (require 'init-vterm)
 (require 'init-dired)

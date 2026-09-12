@@ -1,4 +1,4 @@
-;;; init-minibuffer.el --- minibuffer config. -*- lexical-binding: t -*-
+;;; init-search.el --- search config. -*- lexical-binding: t -*-
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -7,6 +7,98 @@
 ;;; Commentary:
 ;;
 ;;; Code:
+
+(use-package projectile
+  :diminish projectile-mode "ⓟ"
+  :hook (after-init . projectile-mode)
+  :commands (projectile-project-root
+             projectile-project-name
+             projectile-project-p
+             projectile-locate-dominating-file
+             projectile-relevant-known-projects)
+  :config
+  (setq projectile-cache-file (concat my-cache-dir "projectile.cache")
+        projectile-frecency-file (concat my-cache-dir "projectile-frecency.eld")
+        projectile-known-projects-file (concat my-cache-dir "projectile.projects")
+        ;; v2.9+: stale known projects are cleaned lazily on access, never at
+        ;; startup, and remote projects are kept without probing.
+        projectile-auto-cleanup-known-projects t
+        projectile-enable-caching (not noninteractive)
+        projectile-globally-ignored-files '(".DS_Store" "TAGS")
+        projectile-globally-ignored-file-suffixes
+        '(".dir" ".cmake" ".make" ".internal" ".elc" ".pyc" ".o")
+        projectile-kill-buffers-filter 'kill-only-files
+        projectile-ignored-projects '("~/")
+        projectile-ignored-project-function #'+project-ignored-p)
+
+  ;; Trim projectile's marker lists: root resolution is faster when a file has
+  ;; no project (it must search every candidate marker).
+  (setq projectile-project-root-files-bottom-up
+        (append '(".projectile"  ; projectile's root marker
+                  ".project"     ; project marker
+                  ".git")        ; Git VCS root dir
+                (when (executable-find "hg")
+                  '(".hg"))      ; Mercurial VCS root dir
+                (when (executable-find "bzr")
+                  '(".bzr")))    ; Bazaar VCS root dir
+        ;; Populated by other modules; keep it minimal here so projectile does
+        ;; fewer file checks when resolving a root.
+        projectile-project-root-files '()
+        projectile-project-root-files-top-down-recurring '("Makefile"))
+
+  ;; Never index build output.  These entries are gitignore-style patterns
+  ;; matched against paths *relative to the project root*, so the abbreviated
+  ;; absolute paths this used to hold (`~/.emacs.d/lib' and friends) could
+  ;; never match anything; those dirs are excluded nowhere now (an anchored
+  ;; pattern such as "/lib" here, or a dirconfig file, would do it).
+  (add-to-list 'projectile-globally-ignored-directories "build")
+
+  ;; `fd' walks submodule working trees as part of the superproject listing
+  ;; (`projectile-git-use-fd'), so projectile's own per-submodule listings are
+  ;; pure duplication: in this repo (188 submodules) they spent ~12s spawning
+  ;; one lister per submodule and returned no file the superproject listing
+  ;; didn't already contain.  Keep them when fd isn't driving the listing -
+  ;; `git ls-files' stops at submodule boundaries, so then they are the only
+  ;; way submodule files are seen at all.
+  (setq projectile-git-submodule-command
+        (unless projectile-git-use-fd projectile-git-submodule-command))
+
+  ;; Per-project compilation buffers
+  (setq compilation-buffer-name-function #'projectile-compilation-buffer-name
+        compilation-save-buffers-predicate #'projectile-current-project-buffer-p)
+
+  ;; Disable commands that won't work, as is, and that Doom already provides a
+  ;; better alternative for.
+  (put 'projectile-ag 'disabled "Use +consult/grep-project instead")
+  (put 'projectile-ripgrep 'disabled "Use +consult/grep-project instead")
+  (put 'projectile-grep 'disabled "Use +consult/grep-project instead")
+
+  ;; v2.8+ indexes git projects with fd natively (`projectile-git-use-fd',
+  ;; with per-host detection on TRAMP). Keep the old single-command semantics:
+  ;; hidden files and followed symlinks are included for git and generic
+  ;; projects alike, and fd falls back to find when missing.
+  ;; Not `alien': its fd `--exclude' patterns carry a trailing slash that fd
+  ;; never matches, and the Lisp filtering is skipped in the same breath.
+  (setq projectile-indexing-method 'hybrid
+        projectile-git-fd-args
+        "-H -0 -E .git --type file --type symlink --follow --strip-cwd-prefix -c never"
+        projectile-generic-command
+        (if-let* ((fd projectile-fd-executable))
+            (concat fd
+                    " . -0 -H --color=never --type file --type symlink"
+                    " --follow --exclude .git --strip-cwd-prefix")
+          "find . -type f -print0"))
+
+  (defadvice! my--projectile-default-generic-command-a (fn &rest args)
+    "If projectile can't tell what kind of project you're in, it issues an error
+when using many of projectile's command, e.g. `projectile-compile-command',
+`projectile-run-project', `projectile-test-project', and
+`projectile-configure-project', for instance.
+
+This suppresses the error so these commands will still run, but prompt you for
+the command instead."
+    :around #'projectile-default-generic-command
+    (ignore-errors (apply fn args))))
 
 (use-package vertico
   :hook (after-init . vertico-mode)
@@ -76,7 +168,7 @@
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
   (advice-add #'marginalia--project-root :override #'+project-project-root)
   (pushnew! marginalia-command-categories
-            '(+default/find-file-under-here . file)
+            '(+consult/search-file-cwd . file)
             '(flycheck-error-list-set-filter . builtin)
             '(projectile-find-file . project-file)
             '(projectile-recentf . project-file)
@@ -128,9 +220,24 @@
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
-  (defvar +vertico-consult-fd-args nil
+  (defvar +vertico-fd-args
+    (if my-fd-binary
+        (format "%s --color=never -i -H -E .git --regex %s"
+                my-fd-binary
+                (if is-windows-p "--path-separator=/" ""))
+      consult-find-args)
     "Shell command and arguments the vertico module uses for fd.")
-
+  (defvar +vertico-rg-args
+    (if my-rg-binary
+        (format "%s %s "
+                my-rg-binary
+                (concat
+                 "--null --line-buffered --color=never --max-columns=1000 "
+                 "--path-separator /   --smart-case --no-heading "
+                 "--with-filename --line-number --search-zip "
+                 "--hidden -g !.git -g !.svn -g !.hg "))
+      consult-grep-args)
+    "Shell command and arguments the vertico module uses for rg.")
   :config
   (setq consult-line-numbers-widen t
         consult-narrow-key "<"
@@ -139,13 +246,6 @@
         consult-async-input-throttle 0.2
         consult-async-input-debounce 0.1
         consult-project-root-function #'projectile-project-root)
-  (unless +vertico-consult-fd-args
-    (setq +vertico-consult-fd-args
-          (if my-fd-binary
-              (format "%s --color=never -i -H -E .git --regex %s"
-                      my-fd-binary
-                      (if is-windows-p "--path-separator=/" ""))
-            consult-find-args)))
   (consult-customize  consult-bookmark consult-recent-file
                       consult-xref consult-buffer
                       consult-ripgrep consult-git-grep consult-grep
@@ -153,13 +253,10 @@
                       consult-bookmark consult-theme
                       :preview-key '(:debounce 0.5 any))
   (consult-customize
-    +vertico/consult-ripgrep-at-point
     snail--source-buffer snail--source-project-file snail--source-recent-file snail--source-hidden-buffer
     +embark-find-file +embark-find-file-cwd +embark-find-file-other-dir +embark-find-file-other-project
-    +embark/grep-project +embark-grep-other-cwd +embark-grep-other-project
-    +default/search-project +default/search-other-project
-    +default/search-project-for-symbol-at-point
-    +default/search-cwd +default/search-other-cwd
+    +embark-grep-other-dir +embark-grep-other-project
+    +consult/grep-symbol-in-project
     :preview-key "C-.")
 
   (use-package consult-dir
@@ -174,7 +271,7 @@
           ("M-." . embark-become)
           ("C-c C-;" . embark-export)
           ("C-c C-l" . embark-collect)
-          ("C-c C-e" . +vertico/embark-export-write))
+          ("C-c C-e" . +embark-export-write))
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq which-key-use-C-h-commands nil
@@ -223,20 +320,21 @@ targets."
   (defvar-keymap +embark-become-snail-map
                  :doc "Keymap for Embark become."
                  :parent nil
+                 "A" #'snail
                  "." #'+embark-find-file
                  "f" #'+embark-find-file-cwd
-                 "F" #'+embark-find-file-other-dir
-                 "P" #'+embark-find-file-other-project
-                 "A" #'snail)
+                 "d" #'+embark-find-file-other-dir
+                 "p" #'+embark-find-file-other-project)
   (add-to-list 'embark-become-keymaps '+embark-become-snail-map)
 
   (defvar-keymap +embark-become-grep-map
                  :doc "Keymap for Embark become."
                  :parent nil
-                 "p" #'+embark/grep-project
-                 "P" #'+embark-grep-other-project
-                 "G" #'+embark-grep-other-cwd
-                 "g" #'+default/search-project-for-symbol-at-point
+                 "P" #'+consult/grep-project
+                 "G" #'+consult/grep-symbol-in-project
+                 "B" #'+consult/grep-buffer
+                 "p" #'+embark-grep-other-project
+                 "d" #'+embark-grep-other-dir
                  "b" #'+embark-grep-buffer)
   (add-to-list 'embark-become-keymaps '+embark-become-grep-map))
 
@@ -249,11 +347,56 @@ targets."
   :commands wgrep-change-to-wgrep-mode
   :config (setq wgrep-auto-save-buffer t))
 
+(use-package color-rg
+  :commands (color-rg-search-input color-rg-search-symbol
+              color-rg-search-symbol-in-current-file color-rg-search-project)
+  :init
+  (defconst evil-collection-color-rg-maps '(color-rg-mode-map
+                                             color-rg-mode-edit-map))
+  (after! evil-collection
+    (+evil-collection-color-rg-setup))
+  :config
+  (advice-add #'color-rg-update-header-line :override #'ignore)
+  (defhydra color-rg-hydra (:hint nil)
+    "
+    ^^^^Move               ^^^^filter                     ^^toggle            ^^change
+   -^^^^-----------------+-^^^^-------------------------+-^^------------------+-^^---------------------------
+    _n_   next keyword   | _r_   replace all            | _I_  toggle ignore  | _d_  change dir
+    _p_   prev keyword   | _f_   filter match result    | _c_  toggle case    | _z_  change globs
+    _N_   next file      | _F_   filter mismatch result | _i_  open edit mode | _Z_  change exclude
+    _P_   prev file      | _x_   filter match files     | ^^                  | _t_  return literal
+    _D_   remove line    | _X_   filter mismatch files  | _u_  unfilter       | _s_  return regexp
+   -^^^^-----------------+-^^^^-------------------------+-^^------------------+-^^---------------------------
+  "
+    ("n" color-rg-jump-next-keyword)
+    ("p" color-rg-jump-prev-keyword)
+    ("N" color-rg-jump-next-file)
+    ("P" color-rg-jump-prev-file)
+
+    ("r" color-rg-replace-all-matches)
+    ("f" color-rg-filter-match-results)
+    ("F" color-rg-filter-mismatch-results)
+    ("x" color-rg-filter-match-files)
+    ("X" color-rg-mismatch-files)
+    ("u" color-rg-unfilter)
+    ("D" color-rg-remove-line-from-results)
+
+    ("I" color-rg-rerun-toggle-ignore)
+    ("t" color-rg-rerun-literal)
+    ("c" color-rg-rerun-toggle-case)
+    ("s" color-rg-rerun-regexp)
+    ("d" color-rg-rerun-change-dir)
+    ("z" color-rg-rerun-change-globs)
+    ("Z" color-rg-rerun-change-exclude-files)
+    ("C" color-rg-customized-search)
+    ("i" color-rg-switch-to-edit-mode)
+    ("q" nil "quit")))
+
 ;; HACK: Filter boring message in echo area.
 (defadvice! my-message-filter-a (orig-fun &rest args)
   :around #'message
   (unless (string-match "gofmt\\|skipped\\|tsc-dyn-get" (or (car args) ""))
     (apply orig-fun args)))
 
-(provide 'init-minibuffer)
+(provide 'init-search)
 ;;; init-minibuffer.el ends here

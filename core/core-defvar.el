@@ -47,8 +47,12 @@
 
 (defvar my-fd-binary
   (cl-find-if #'executable-find (list "fdfind" "fd"))
-  "The filename of the `fd' executable. On some distros it's 'fdfind' (ubuntu,
+  "The filename of the `find' executable. On some distros it's 'fdfind' (ubuntu,
 debian, and derivatives). On most it's 'fd'.")
+
+(defvar my-rg-binary
+  (cl-find-if #'executable-find (list "rg" "ag"))
+  "The filename of the `grep'.")
 
 (defvar my-leader-key "SPC"
   "The leader prefix key for Evil users.")

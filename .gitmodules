@@ -518,9 +518,6 @@
 [submodule "undo-fu-session"]
 	path = lib/undo-fu-session
 	url = https://codeberg.org/ideasman42/emacs-undo-fu-session.git
-[submodule "use-package"]
-	path = lib/use-package
-	url = https://github.com/jwiegley/use-package.git
 [submodule "uuidgen"]
 	path = lib/uuidgen
 	url = https://github.com/kanru/uuidgen-el
@@ -549,9 +546,6 @@
 [submodule "wgrep"]
 	path = lib/wgrep
 	url = https://github.com/mhayashi1120/Emacs-wgrep
-[submodule "which-key"]
-	path = lib/which-key
-	url = https://github.com/justbur/emacs-which-key
 [submodule "winum"]
 	path = lib/winum
 	url = https://github.com/deb0ch/emacs-winum

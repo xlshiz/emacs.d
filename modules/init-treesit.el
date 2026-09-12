@@ -8,6 +8,10 @@
 ;;
 ;;; Code:
 
+(use-package treesit
+  :init
+  (setq treesit-extra-load-path `(,(concat my-etc-dir "tree-sitter"))))
+
 (use-package tree-sitter
   :defer t
   :custom-face

@@ -9,7 +9,7 @@
 ;;; Code:
 
 ;;;###autoload
-(defun +intel-consult-regex-pinyin-builder (str)
+(defun +intel-regex-pinyin-builder (str)
   (orderless-regexp (pinyinlib-build-regexp-string str)))
 
 ;;;###autoload

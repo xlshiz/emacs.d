@@ -43,28 +43,15 @@
       (message "Reach to first line."))))
 
 ;;;###autoload
-(defmacro +search-minibuf-quit-and-run (&rest body)
-  "Quit the minibuffer and run BODY afterwards."
-  (declare (indent 0))
-  `(progn
-     (put 'quit 'error-message "")
-     (run-at-time nil nil
-                  (lambda ()
-                    (put 'quit 'error-message "Quit")
-                    (with-demoted-errors "Error: %S"
-                      ,@body)))
-     (abort-recursive-edit)))
-
-;;;###autoload
 (defun +search/consult-to-color-rg ()
   (interactive)
   (let ((search-text (minibuffer-contents-no-properties)))
     (if (equal (substring search-text 0 1) "#")
-        (+search-minibuf-quit-and-run (color-rg-search-input (substring search-text 1) (+project-project-root)))
-      (+search-minibuf-quit-and-run (color-rg-search-input search-text (expand-file-name (buffer-file-name)))))))
+        (quit-minibuf-and-run! (color-rg-search-input (substring search-text 1) (+project-project-root)))
+      (quit-minibuf-and-run! (color-rg-search-input search-text (expand-file-name (buffer-file-name)))))))
 
 ;;;###autoload
-(defun evil-collection-color-rg-setup ()
+(defun +evil-collection-color-rg-setup ()
   "Set up `evil' bindings for `color-rg'."
   (eval-when-compile (require 'evil-collection))
   (evil-collection-define-key 'normal 'color-rg-mode-map

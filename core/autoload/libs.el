@@ -417,6 +417,20 @@ This is a variadic `cl-pushnew'."
   `(setq ,sym (append ,@lists ,sym)))
 
 ;;;###autoload
+(defmacro quit-minibuf-and-run! (&rest body)
+  "Quit the minibuffer and run BODY afterwards."
+  (declare (indent 0))
+  `(progn
+     (put 'quit 'error-message "")
+     (run-at-time nil nil
+                  (lambda ()
+                    (put 'quit 'error-message "Quit")
+                    (with-demoted-errors "Error: %S"
+                      ,@body)))
+     (abort-recursive-edit)))
+
+
+;;;###autoload
 (defun font-installed-p (font-name)
   "Check if font with FONT-NAME is available."
   (find-font (if (stringp font-name)
