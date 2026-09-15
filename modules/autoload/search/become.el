@@ -70,4 +70,4 @@
               (completing-read "Search project: " projects nil t)
             (user-error "There are no known projects"))))
     (setq this-command #'+embark-grep-other-project)
-    (embark--quit-and-run #'+consult/grep-project nil (+embark-clean-input input) default-directory)))
+    (embark--quit-and-run #'+consult--grep :query (+embark-clean-input input) :in default-directory)))

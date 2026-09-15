@@ -78,7 +78,7 @@ Returns nil if not in a project."
       (consult--grep "Grep" #'consult--ripgrep-make-builder directory query))))
 
 ;;;###autoload
-(defun +consult/grep-project (&optional all initial-query directory)
+(defun +consult/grep-project (&optional all initial-query)
   "Performs a live project search from the project root using ripgrep.
 If ARG (universal argument), include all files, even hidden or compressed ones,
 in the search."
@@ -159,7 +159,7 @@ If prefix ARG is set, prompt for a known project to search from."
                    (completing-read "Search project: " projects nil t)
                  (user-error "There are no known projects"))
              (+project-project-root default-directory)))))
-  (+consult/grep-project nil symbol dir))
+  (+consult--grep :query symbol :in dir))
 
 (defvar +consult-find-file-in--history nil)
 ;;;###autoload
