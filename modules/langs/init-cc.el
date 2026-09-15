@@ -110,7 +110,7 @@
 
   (use-package cmake-font-lock
     :config
-    (add-hook 'cmake-mode-hook 'font-lock-refresh-defaults)))
+    (add-hook! 'cmake-mode-hook #'font-lock-refresh-defaults)))
 
 (after! consult-imenu
         (add-to-list 'consult-imenu-config '(c-mode :toplevel "function"

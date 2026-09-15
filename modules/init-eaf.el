@@ -45,16 +45,17 @@
   :config
   (add-hook! 'evil-normal-state-entry-hook
     (defun my-eaf-map-a()
-      (map! :map eaf-mode-map
-            :gn "C-d"      #'eaf-py-proxy-scroll_down_page
-            :gn "C-u"      #'eaf-py-proxy-scroll_up_page
-            :gn "<next>"   #'eaf-py-proxy-scroll_up_page
-            :gn "<prior>"  #'eaf-py-proxy-scroll_down_page
-            :gn "q"        (cmds! (commandp 'eaf-py-proxy-close_buffer)
-                                  'eaf-py-proxy-close_buffer)
-            :gn "M-o"      #'ace-window
-            :gn "M-j"      #'xsort-tab-ace-jump
-            :gn "M-h"      #'xsort-tab-select-prev-tab
-            :gn "M-l"      #'xsort-tab-select-next-tab))))
+      (when (derived-mode-p 'eaf-mode)
+        (map! :map eaf-mode-map
+              :gn "C-d"      #'eaf-py-proxy-scroll_down_page
+              :gn "C-u"      #'eaf-py-proxy-scroll_up_page
+              :gn "<next>"   #'eaf-py-proxy-scroll_up_page
+              :gn "<prior>"  #'eaf-py-proxy-scroll_down_page
+              :gn "q"        (cmds! (commandp 'eaf-py-proxy-close_buffer)
+                                    'eaf-py-proxy-close_buffer)
+              :gn "M-o"      #'ace-window
+              :gn "M-j"      #'xsort-tab-ace-jump
+              :gn "M-h"      #'xsort-tab-select-prev-tab
+              :gn "M-l"      #'xsort-tab-select-next-tab)))))
 
 (provide 'init-eaf)

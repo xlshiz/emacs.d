@@ -55,7 +55,7 @@
   "Set up `evil' bindings for `color-rg'."
   (eval-when-compile (require 'evil-collection))
   (evil-collection-define-key 'normal 'color-rg-mode-map
-    (kbd "M-o") 'color-rg-hydra/body
+    (kbd "M-r") 'color-rg-hydra/body
     (kbd "RET") 'color-rg-open-file-and-stay
     (kbd "C-.") 'color-rg-open-file
     "j" 'evil-next-line

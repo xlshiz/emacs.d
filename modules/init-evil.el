@@ -175,9 +175,9 @@
   ;; it won't interfere with users who have changed these variables.
   (defvar my/default-cursor-color "#ffffff")
   (defvar my/emacs-cursor-color "#ff9999")
-  (add-hook 'my-load-theme-hook (lambda ()
-                                  (setq my/default-cursor-color (face-background 'cursor)
-                                        my/emacs-cursor-color (face-foreground 'warning))))
+  (add-hook! 'my-load-theme-hook (lambda ()
+                                   (setq my/default-cursor-color (face-background 'cursor)
+                                         my/emacs-cursor-color (face-foreground 'warning))))
 
   (use-package evil-escape
     :diminish evil-escape-mode
@@ -188,7 +188,7 @@
           evil-escape-excluded-major-modes '(neotree-mode)
           evil-escape-excluded-states '(normal visual multiedit emacs motion))
     ;; no `evil-escape' in minibuffer
-    (add-hook 'evil-escape-inhibit-functions #'minibufferp))
+    (add-hook! 'evil-escape-inhibit-functions #'minibufferp))
 
   (use-package evil-surround
     :hook (evil-mode . global-evil-surround-mode))

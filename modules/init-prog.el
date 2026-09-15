@@ -15,10 +15,10 @@
     (setq xref-search-program 'ripgrep))
   (setq xref-show-xrefs-function #'xref-show-definitions-completing-read
         xref-show-definitions-function #'xref-show-definitions-completing-read)
-  (add-hook #'xref-after-jump-hook #'recenter)
-  (add-hook #'xref-after-jump-hook #'better-jumper-set-jump)
-  (add-hook #'xref-after-return-hook #'recenter)
-  (add-hook #'xref-after-return-hook #'better-jumper-set-jump))
+  (add-hook! 'xref-after-jump-hook #'recenter)
+  (add-hook! 'xref-after-jump-hook #'better-jumper-set-jump)
+  (add-hook! 'xref-after-return-hook #'recenter)
+  (add-hook! 'xref-after-return-hook #'better-jumper-set-jump))
 
 ;; Hiding structured data
 ;;
@@ -77,7 +77,7 @@
   :config
   (require 'citre-config)
   ;; HACK!!
-  ;; (add-hook 'citre-peek--mode-hook #'evil-normalize-keymaps)
+  ;; (add-hook! 'citre-peek--mode-hook #'evil-normalize-keymaps)
   (map! :n "g C-]"  #'citre-peek
         :n "C-]"    #'citre-jump)
   (map! (:map citre-peek-keymap
@@ -195,10 +195,10 @@
   ;; (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
   ;; (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
   ;; Configure *agent-shell-diff* buffers to start in Emacs state
-  (add-hook 'diff-mode-hook
-	    (lambda ()
-	      (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
-		(evil-emacs-state)))))
+  (add-hook! 'diff-mode-hook
+    (lambda ()
+      (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
+        (evil-emacs-state)))))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here

@@ -144,7 +144,7 @@ the command instead."
     :ensure nil
     :bind ("C-c C-r" . vertico-repeat)
     :config
-    (add-hook 'minibuffer-setup-hook #'vertico-repeat-save))
+    (add-hook! 'minibuffer-setup-hook #'vertico-repeat-save))
   ;;  Ido-like directory navigation
   (use-package vertico-directory
     :after vertico
@@ -165,7 +165,7 @@ the command instead."
   (map! :map minibuffer-local-map
         :desc "Cycle marginalia views" "M-A" #'marginalia-cycle)
   :config
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
+  (add-hook! 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
   (advice-add #'marginalia--project-root :override #'+project-project-root)
   (pushnew! marginalia-command-categories
             '(+consult/search-file-cwd . file)

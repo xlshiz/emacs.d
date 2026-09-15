@@ -59,7 +59,7 @@
          (disabled-command-function nil)
          (default-directory (expand-file-name (read-directory-name "Search directory: "))))
     (setq this-command #'+embark-grep-other-dir)
-    (embark--quit-and-run #'+consult/grep-project nil (+embark-clean-input input) default-directory)))
+    (embark--quit-and-run #'+consult--grep :query (+embark-clean-input input) :in default-directory)))
 
 ;;;###autoload
 (defun +embark-grep-other-project (input)

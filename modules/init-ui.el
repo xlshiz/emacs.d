@@ -12,9 +12,9 @@
 
 (use-package doom-themes
   :init
-  (add-hook 'my-load-theme-hook #'doom-themes-org-config)
-  (add-hook 'my-load-theme-hook #'doom-themes-neotree-config)
-  (add-hook 'my-load-theme-hook #'doom-themes-visual-bell-config)
+  (add-hook! 'my-load-theme-hook #'doom-themes-org-config)
+  (add-hook! 'my-load-theme-hook #'doom-themes-neotree-config)
+  (add-hook! 'my-load-theme-hook #'doom-themes-visual-bell-config)
   (setq doom-dark+-blue-modeline t
         doom-gruvbox-dark-variant "medium"
         doom-themes-neotree-file-icons t
@@ -45,39 +45,39 @@ system wins and is applied to the `kana', `han', `cjk-misc' and
 `bopomofo' charsets.")
 
 ;; 延迟部分ui设置
-(add-hook 'my-after-init-hook
-          (defun my-ui-setup-h ()
-            ;; 加载doom主题依赖
-            (solaire-global-mode)
-            ;; 加载主题
-            (if (daemonp)
-                (add-hook 'after-make-frame-functions (lambda (frame) (load-theme 'doom-gruvbox t)))
-              (load-theme 'doom-nord-light t))
+(add-hook! 'my-after-init-hook
+  (defun my-ui-setup-h ()
+    ;; 加载doom主题依赖
+    (solaire-global-mode)
+    ;; 加载主题
+    (if (daemonp)
+        (add-hook! 'after-make-frame-functions #'(lambda (frame) (load-theme 'doom-gruvbox t)))
+      (load-theme 'doom-nord-light t))
 
-            (when (display-graphic-p)
-              ;; Frame maximized
-              (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-              (add-to-list 'default-frame-alist '(fullscreen . maximized))
+    (when (display-graphic-p)
+      ;; Frame maximized
+      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-              ;; Specify default font
-              (cl-loop for font in my-font
-                       when (font-installed-p font)
-                       return (set-face-attribute 'default nil
-                                                  ;;:height 150
-                                                  :width 'normal
-                                                  :weight 'normal
-                                                  :font font))
-              ;; Specify font for all unicode characters
-              (cl-loop for font in '("Symbola")
-                       when (font-installed-p font)
-                       return(set-fontset-font t 'unicode font nil 'prepend))
-              ;; Specify font for Chinese characters
-              (cl-loop for font in my-cjk-font
-                       when (font-installed-p font)
-                       return (dolist (charset '(kana han cjk-misc bopomofo))
-                                (set-fontset-font (frame-parameter nil 'font)
-                                                  charset
-                                                  font))))))
+      ;; Specify default font
+      (cl-loop for font in my-font
+               when (font-installed-p font)
+               return (set-face-attribute 'default nil
+                                          ;;:height 150
+                                          :width 'normal
+                                          :weight 'normal
+                                          :font font))
+      ;; Specify font for all unicode characters
+      (cl-loop for font in '("Symbola")
+               when (font-installed-p font)
+               return(set-fontset-font t 'unicode font nil 'prepend))
+      ;; Specify font for Chinese characters
+      (cl-loop for font in my-cjk-font
+               when (font-installed-p font)
+               return (dolist (charset '(kana han cjk-misc bopomofo))
+                        (set-fontset-font (frame-parameter nil 'font)
+                                          charset
+                                          font))))))
 
 (use-package vi-tilde-fringe
   :if (fboundp 'set-fringe-mode)
@@ -107,7 +107,7 @@ system wins and is applied to the `kana', `han', `cjk-misc' and
         awesome-tray-file-path-full-dirname-levels 2
         awesome-tray-adjust-mode-line-color-enable t)
   :config
-  (add-hook 'my-load-theme-hook  #'awesome-tray-mode)
+  (add-hook! 'my-load-theme-hook  #'awesome-tray-mode)
   ;; (awesome-tray-mode 1)
   (defun my--location-info ()
     (format "%s:%s"

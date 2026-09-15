@@ -53,8 +53,8 @@
     (advice-add 'corfu--teardown :after (lambda (&rest _) (evil-normalize-keymaps)))
     (evil-make-overriding-map corfu-map)
     ;; auto quit corfu when exit insert state
-    (add-hook 'evil-normal-state-entry-hook (lambda ()
-                                              (when corfu--candidates (corfu-quit)))))
+    (add-hook! 'evil-normal-state-entry-hook (lambda ()
+                                               (when corfu--candidates (corfu-quit)))))
 
   ;; extensions
   (use-package corfu-quick
@@ -108,8 +108,8 @@
                                                  #'cape-dabbrev)
                                                 'equal))))
 
-  ;; (add-hook 'lsp-bridge-mode-hook #'my/set-mixed-capf)
-  (add-hook 'lsp-completion-mode-hook #'my/set-mixed-capf))
+  ;; (add-hook! 'lsp-bridge-mode-hook #'my/set-mixed-capf)
+  (add-hook! 'lsp-completion-mode-hook #'my/set-mixed-capf))
 
 (provide 'init-completion)
 ;;; init-completion.el ends here

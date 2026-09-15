@@ -151,7 +151,7 @@
           (:prefix ("w" . "wrap"))
           (:prefix ("3" . "ternary"))))
   :config
-  (add-hook 'js2-refactor-mode-hook #'evil-normalize-keymaps)
+  (add-hook! 'js2-refactor-mode-hook #'evil-normalize-keymaps)
   (let ((js2-refactor-mode-map (evil-get-auxiliary-keymap js2-refactor-mode-map 'normal t t)))
     (js2r-add-keybindings-with-prefix (format "%s r" my-localleader-key))))
 

@@ -196,15 +196,11 @@ unwanted space when exporting org-mode to html."
   :hook (org-mode . org-appear-mode)
   :init
   (setq org-appear-trigger 'manual)
-  (add-hook 'org-mode-hook (lambda ()
-                             (add-hook 'evil-insert-state-entry-hook
-                                       #'org-appear-manual-start
-                                       nil
-                                       t)
-                             (add-hook 'evil-insert-state-exit-hook
-                                       #'org-appear-manual-stop
-                                       nil
-                                       t)))
+  (add-hook! 'org-mode-hook (lambda ()
+                              (add-hook! 'evil-insert-state-entry-hook
+                                         :local #'org-appear-manual-start)
+                              (add-hook! 'evil-insert-state-exit-hook
+                                         :local #'org-appear-manual-stop)))
   (setq org-appear-autolinks t))
 
 (use-package org-modern

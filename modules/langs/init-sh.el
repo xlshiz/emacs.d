@@ -19,7 +19,7 @@
                            (unless indent-tabs-mode
                              (list "-i" (number-to-string tab-width)))))
 
-  (add-hook 'sh-mode-hook #'tree-sitter! 'append)
+  (add-hook! 'sh-mode-hook :append #'tree-sitter!)
 
   (setq sh-indent-after-continuation 'always)
 
@@ -67,7 +67,7 @@
              (,(regexp-opt +sh-builtin-keywords 'symbols)
               (0 'font-lock-type-face append))))))
   ;; 4. Fontify delimiters by depth
-  (add-hook 'sh-mode-hook #'rainbow-delimiters-mode)
+  (add-hook! 'sh-mode-hook #'rainbow-delimiters-mode)
 
   ;; autoclose backticks
   (sp-local-pair 'sh-mode "`" "`" :unless '(sp-point-before-word-p sp-point-before-same-p)))

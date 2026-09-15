@@ -22,7 +22,7 @@ If set to `nil', disable all the above behaviors.")
   :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
   :config
   (when (require 'yasnippet nil t)
-    (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
+    (add-hook! 'emmet-mode-hook #'yas-minor-mode-on))
   (setq emmet-move-cursor-between-quotes t)
   (setq-hook! 'rjsx-mode-hook emmet-expand-jsx-className? t)
   (map! :map emmet-mode-keymap
@@ -221,7 +221,7 @@ If set to `nil', disable all the above behaviors.")
              less-css-mode-hook)
            :append #'lsp!)
 
-(add-hook 'css-mode-hook #'tree-sitter! 'append)
+(add-hook! 'css-mode-hook :append #'tree-sitter!)
 
 (provide 'init-web)
 ;;; init-web ends here

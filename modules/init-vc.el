@@ -161,12 +161,12 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
   (setq vc-git-diff-switches '("--histogram"))
 
   ;; Reset faces after changing the color theme
-  (add-hook 'after-load-theme-hook
-            (lambda ()
-              (custom-set-faces
-               '(diff-hl-insert ((t (:inherit diff-added :background nil))))
-               '(diff-hl-delete ((t (:inherit diff-removed :background nil))))
-               `(diff-hl-change ((t (:foreground ,(face-background 'highlight) :background nil)))))))
+  (add-hook! 'after-load-theme-hook
+             #'(lambda ()
+                 (custom-set-faces
+                  '(diff-hl-insert ((t (:inherit diff-added :background nil))))
+                  '(diff-hl-delete ((t (:inherit diff-removed :background nil))))
+                  `(diff-hl-change ((t (:foreground ,(face-background 'highlight) :background nil)))))))
 
   (defun my/diff-hl-fringe-bmp-function (_type _pos)
     "Fringe bitmap function for use as `diff-hl-fringe-bmp-function'."
@@ -177,8 +177,8 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
   (setq diff-hl-fringe-bmp-function #'my/diff-hl-fringe-bmp-function)
 
   (after! magit
-    (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
-    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+    (add-hook! 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+    (add-hook! 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
   ;; Set diff-hl-margin-mode
   (unless (display-graphic-p)

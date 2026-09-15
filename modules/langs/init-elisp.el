@@ -16,7 +16,8 @@
     ;; with a tab width of 8. Any smaller and the indentation will be
     ;; unreadable. Since Emacs' lisp indenter doesn't respect this variable it's
     ;; safe to ignore this setting otherwise.
-    tab-width 8)
+    tab-width 8
+    symbols-outline-fetch-fn #'symbols-outline-imenu-fetch)
   (add-hook! 'emacs-lisp-mode-hook
              ;; Allow folding of outlines in comments
              #'outline-minor-mode

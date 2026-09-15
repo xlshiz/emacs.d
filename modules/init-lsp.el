@@ -11,7 +11,7 @@
 (use-package lsp-bridge
   :defer t
   :init
-  (add-hook 'lsp-bridge-mode-hook #'evil-normalize-keymaps)
+  (add-hook! 'lsp-bridge-mode-hook #'evil-normalize-keymaps)
   :custom
   (lsp-bridge-user-langserver-dir (concat my-etc-dir "langserver"))
   :config

@@ -236,7 +236,7 @@ on."
              ;; (setq uniquify-buffer-name-style nil)
              ;; Ensure `persp-kill-buffer-query-function' is last
              (remove-hook 'kill-buffer-query-functions #'persp-kill-buffer-query-function)
-             (add-hook 'kill-buffer-query-functions #'persp-kill-buffer-query-function t))
+             (add-hook! 'kill-buffer-query-functions :append #'persp-kill-buffer-query-function))
             (t
              (when +workspace--old-uniquify-style
                (setq uniquify-buffer-name-style +workspace--old-uniquify-style))))))
