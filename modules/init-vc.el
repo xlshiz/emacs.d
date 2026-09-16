@@ -123,9 +123,13 @@ otherwise in default state."
     ("R" smerge-kill-current)
     ("q" nil :color blue))
   :hook (find-file . (lambda ()
+                       ;; Require all three markers so files that merely
+                       ;; contain "<<<" as content don't trigger smerge
                        (save-excursion
                          (goto-char (point-min))
-                         (when (re-search-forward "^<<<<<<< " nil t)
+                         (when (and (re-search-forward "^<<<<<<< " nil t)
+                                    (re-search-forward "^=======$" nil t)
+                                    (re-search-forward "^>>>>>>> " nil t))
                            (hydra-smerge-mode/body))))))
 
 
@@ -221,7 +225,7 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
   :init
   (setq git-messenger:show-detail t
         git-messenger:use-magit-popup t)
-  (defhydra git-messenger-hydra (:color blue)
+  (defhydra hydra-git-messenger (:color blue)
     ("s" git-messenger:popup-show "show")
     ("c" git-messenger:copy-commit-id "copy hash")
     ("m" git-messenger:copy-message "copy message")
@@ -265,7 +269,7 @@ _k_: previous _j_: next _m_: mark _g_: goto nth _r_: revert _s_ stage _q_: quit"
             git-messenger:last-message msg
             git-messenger:last-commit-id commit-id)
       (run-hook-with-args 'git-messenger:before-popup-hook popuped-message)
-      (git-messenger-hydra/body)
+      (hydra-git-messenger/body)
       (cond ((and (fboundp 'posframe-workable-p) (posframe-workable-p))
              (let ((buffer-name "*git-messenger*"))
                (posframe-show buffer-name

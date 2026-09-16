@@ -408,7 +408,7 @@
        :desc "Undo window"                "`"   #'winner-undo
        :desc "Redo window"                "~"   #'winner-redo
        :desc "Other window"               "w"   #'other-window
-       :desc "Tab hydra"                  "t"   #'tabs-fast-switch/body
+       :desc "Tab hydra"                  "t"   #'hydra-tabs-switch/body
        :desc "Split window right"         "v"   #'split-window-right
        :desc "Split window right"         "|"   #'+win/split-window-right-and-focus
        :desc "Split window below"         "s"   #'split-window-below

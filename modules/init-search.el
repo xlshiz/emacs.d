@@ -357,7 +357,7 @@ targets."
     (+evil-collection-color-rg-setup))
   :config
   (advice-add #'color-rg-update-header-line :override #'ignore)
-  (defhydra color-rg-hydra (:hint nil)
+  (defhydra hydra-color-rg (:hint nil)
     "
     ^^^^Move               ^^^^filter                     ^^toggle            ^^change
    -^^^^-----------------+-^^^^-------------------------+-^^------------------+-^^---------------------------

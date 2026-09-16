@@ -137,7 +137,7 @@ system wins and is applied to the `kana', `han', `cjk-misc' and
   :config
   (window-divider-mode -1)
   (setq uniquify-buffer-name-style 'forward)
-  (defhydra tabs-fast-switch (:hint nil)
+  (defhydra hydra-tabs-switch (:hint nil)
     "
     ^^^^Tab                    ^^Misc
    -^^^^---------------------+-^^^^---------------------------

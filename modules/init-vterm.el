@@ -35,6 +35,8 @@
   (setq vterm-buffer-name "vterm*")
   :config
   (setq vterm-keymap-exceptions (cl-delete "C-u" vterm-keymap-exceptions :test #'equal))
+  (map! (:map vterm-mode-map
+    :e "M-o" #'ace-window))
   ;; Once vterm is dead, the vterm buffer is useless. Why keep it aroun
   ;; spawn another if want one.
   (setq vterm-kill-buffer-on-exit t)

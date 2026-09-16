@@ -154,12 +154,11 @@
   :config (setq grip-command 'auto))
 
 (use-package ai-code
-  :defer t
+  :bind ("C-c a" . ai-code-menu)
   :init
   (setq ai-code-onboarding-auto-show nil)
   (setq ai-code-pi-program-switches `("--no-themes" "--theme" ,(concat my-etc-dir "pi-theme.json")))
   (setq ai-code-backends-history-file (expand-file-name (concat my-cache-dir "ai-code-backends-history.el")))
-  (global-set-key (kbd "C-c a") #'ai-code-menu)
   :config
   (setq xsort-tab-hide-whitelist (append '("*pi")
                                          xsort-tab-hide-whitelist))

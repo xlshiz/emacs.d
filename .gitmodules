@@ -186,9 +186,6 @@
 [submodule "evil-nerd-commenter"]
 	path = lib/evil-nerd-commenter
 	url = https://github.com/redguardtoo/evil-nerd-commenter
-[submodule "evil-org"]
-	path = lib/evil-org
-	url = https://github.com/Somelauw/evil-org-mode
 [submodule "evil-pinyin"]
 	path = lib/evil-pinyin
 	url = https://github.com/laishulu/evil-pinyin

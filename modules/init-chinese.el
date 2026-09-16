@@ -100,24 +100,5 @@
 (after! orderless
   (add-to-list 'orderless-matching-styles '+intel-regex-pinyin-builder))
 
-(after! org
-  (defadvice! org-html-paragraph-advice (orig-fun paragraph contents info)
-    "Join consecutive Chinese lines into a single long line without
-unwanted space when exporting org-mode to html."
-    :around #'org-html-paragraph
-    (let* ((fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" contents)))
-      (funcall orig-fun paragraph fixed-contents info)))
-  ;; 让中文也可以不加空格就使用行内格式
-  (setcar (nthcdr 0 org-emphasis-regexp-components) " \t('\"{[:nonascii:]")
-  (setcar (nthcdr 1 org-emphasis-regexp-components) "- \t.,:!?;'\")}\\[[:nonascii:]")
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
-  (org-element-update-syntax)
-  ;; 规定上下标必须加 {}，否则中文使用下划线时它会以为是两个连着的下标
-  (setq org-use-sub-superscripts "{}"))
-
 (provide 'init-chinese)
-;;; init-misc.el ends here
+;;; init-chinese.el ends here

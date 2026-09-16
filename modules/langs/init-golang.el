@@ -58,24 +58,27 @@
     :init
     (setq flycheck-golangci-lint-tests t
           flycheck-golangci-lint-disable-linters '("staticcheck" "misspell" "errcheck"))
+    :config
+    ;; One-time setup, runs once when the package is loaded
+    (flycheck-golangci-lint-setup)
+    ;; Remove default go flycheck-checkers except:go-build and go-test
+    (setq flycheck-disabled-checkers '(go-gofmt
+                                       go-golint
+                                       go-vet
+                                       go-errcheck
+                                       go-unconvert
+                                       go-staticcheck))
+    ;; Make sure to only run golangci after go-build
+    ;; to ensure we show at least basic errors in the buffer
+    ;; when golangci fails. Make also sure to run go-test if possible.
+    ;; See #13580 for details
+    (flycheck-add-next-checker 'go-build '(warning . golangci-lint) t)
+    (flycheck-add-next-checker 'go-test '(warning . golangci-lint) t)
     :hook (go-mode . (lambda ()
-                       ;; Remove default go flycheck-checkers except:go-build and go-test
-                       (setq flycheck-disabled-checkers '(go-gofmt
-                                                          go-golint
-                                                          go-vet
-                                                          go-errcheck
-                                                          go-unconvert
-                                                          go-staticcheck))
-                       (flycheck-golangci-lint-setup)
-                       ;; Make sure to only run golangci after go-build
-                       ;; to ensure we show at least basic errors in the buffer
-                       ;; when golangci fails. Make also sure to run go-test if possible.
-                       ;; See #13580 for details
-                       (flycheck-add-next-checker 'go-build '(warning . golangci-lint) t)
-                       (flycheck-add-next-checker 'go-test '(warning . golangci-lint) t)
-                       ;; Set basic checkers explicitly as flycheck will
-                       ;; select the better golangci-lint automatically.
-                       ;; However if it fails we require these as fallbacks.
+                       ;; Ensure the package (and flycheck) is loaded so the
+                       ;; one-time setup in :config has run; then just select
+                       ;; the per-buffer checker.
+                       (require 'flycheck-golangci-lint nil t)
                        (cond ((flycheck-may-use-checker 'go-test) (flycheck-select-checker 'go-test))
                              ((flycheck-may-use-checker 'go-build) (flycheck-select-checker 'go-build))))))
 

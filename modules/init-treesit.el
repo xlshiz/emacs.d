@@ -24,13 +24,11 @@
     If it is t, it is enabled in all modes.
     If nil, it is disabled in all modes")
   :config
-  (require 'tree-sitter-langs)
   (setq tree-sitter-debug-jump-buttons t
         tree-sitter-debug-highlight-jump-region t))
 
 (use-package evil-textobj-tree-sitter
   :defer t
-  :init (after! tree-sitter (require 'evil-textobj-tree-sitter))
   :config
   (defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
   (defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))

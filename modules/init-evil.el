@@ -271,14 +271,7 @@
 
   (use-package evil-matchit
     :config
-    (global-evil-matchit-mode))
-
-  (use-package evil-org
-    :after org
-    :hook (org-mode . (lambda () evil-org-mode))
-    :config
-    (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys)))
+    (global-evil-matchit-mode)))
 
 (provide 'init-evil)
 ;;; init-evil ends here

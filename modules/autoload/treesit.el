@@ -14,6 +14,9 @@ Used as a hook function which turns on `tree-sitter-mode'
 and selectively turn on `tree-sitter-hl-mode'.
 according to `+tree-sitter-hl-enabled-modes'"
   (interactive)
+  (require 'tree-sitter)
+  (require 'tree-sitter-langs)
+  (require 'evil-textobj-tree-sitter)
   (turn-on-tree-sitter-mode)
   ;; conditionally enable `tree-sitter-hl-mode'
   (let ((mode (bound-and-true-p tree-sitter-hl-mode)))

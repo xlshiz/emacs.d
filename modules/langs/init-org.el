@@ -88,7 +88,7 @@
                                '((emacs-lisp . t)
                                  (python . t)
                                  (ruby . t)))
-  (defadvice! org-html-paragraph-advice (orig-fun paragraph contents info)
+  (defadvice! org-html-paragraph-advice-a (orig-fun paragraph contents info)
     "Join consecutive Chinese lines into a single long line without
 unwanted space when exporting org-mode to html."
     :around #'org-html-paragraph
