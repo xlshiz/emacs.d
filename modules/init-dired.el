@@ -29,7 +29,7 @@
     :n "k" 'dired-previous-line
     :n "l" 'dired-find-file
     :n "i" 'wdired-change-to-wdired-mode
-    :n "th" 'dired-omit-mode
+    :n "." 'dired-omit-mode
     :n "q" '+dired/quit-all
 
     :n "a" 'dired-find-alternate-file
@@ -42,13 +42,11 @@
     :n "r" 'dired-do-redisplay
     :n "tt" 'dired-toggle-marks
     :n "u" 'dired-unmark
-    :n "v" 'dired-git-info-mode
     :n "x" 'dired-do-flagged-delete
     :n "RET" 'dired-find-file
     ;; Commands to mark or flag certain categories of files
     :n "+" 'dired-create-directory
     :n "#" 'dired-flag-auto-save-files
-    :n "." 'dired-clean-directory
     :n "~" 'dired-flag-backup-files
     :n "!" 'dired-do-shell-command
     :n "&" 'dired-do-async-shell-command
@@ -162,7 +160,8 @@
   ;; (dirvish-peek-mode)
   ;; Dired options are respected except a few exceptions, see FAQ.org
   (setq dirvish-cache-dir (concat my-cache-dir "dirvish/")
-        dirvish-hide-details '(dirvish-side)
+        dirvish-default-layout '(0 0.6 0.4)
+        dirvish-hide-details '(dirvish-side dirvish)
         dirvish-attributes '(subtree-state collapse file-size file-time)
         dirvish-side-auto-expand nil
         dirvish-subtree-state-style 'nerd
@@ -192,12 +191,6 @@
           (kill-buffer orig))
         result)))
   (map! :map dired-mode-map
-    :ng "h"   #'dired-up-directory
-    :ng "j"   #'dired-next-line
-    :ng "k"   #'dired-previous-line
-    :ng "l"   #'dired-find-file
-    :ng "i"   #'wdired-change-to-wdired-mode
-    :ng "."   #'dired-omit-mode
     :ng "TAB" #'dirvish-subtree-toggle
     :ng "M-n" #'dirvish-history-go-forward
     :ng "M-p" #'dirvish-history-go-backward
