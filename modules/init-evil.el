@@ -218,6 +218,7 @@
     (evil-collection-init 'macrostep)
     (evil-collection-init 'vundo)
     (evil-collection-init 'info)
+    (evil-collection-init 'eat)
     (evil-collection-init 'vterm))
 
   (use-package evil-terminal-cursor-changer

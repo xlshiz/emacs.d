@@ -68,4 +68,7 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
   :after (ghostel evil)
   :hook (ghostel-mode . evil-ghostel-mode))
 
+(use-package eat
+  :defer t)
+
 (provide 'init-shell)

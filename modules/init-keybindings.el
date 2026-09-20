@@ -338,8 +338,7 @@
         :desc "Todo list"            "t"  #'org-todo-list
         :desc "Tags search"          "m"  #'org-tags-view
         :desc "View search"          "v"  #'org-search-view)
-       :desc "Toggle eshell popup"   "e"  #'+eshell/toggle
-       :desc "Open eshell here"      "E"  #'+eshell/here
+       :desc "Toggle eat"            "e"  #'eat
        :desc "File tree"             "f"  #'dirvish-side
        :desc "Imenu sidebar"         "i"  #'symbols-outline-smart-toggle
        :desc "Toggle vterm popup"    "t"  #'+shell/toggle

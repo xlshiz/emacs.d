@@ -137,6 +137,9 @@
 [submodule "dtrt-indent"]
 	path = lib/dtrt-indent
 	url = https://github.com/jscheid/dtrt-indent
+[submodule "eat"]
+	path = lib/eat
+	url = https://codeberg.org/akib/emacs-eat
 [submodule "el-get"]
 	path = lib/el-get
 	url = https://github.com/dimitri/el-get
