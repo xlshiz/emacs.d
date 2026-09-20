@@ -56,6 +56,8 @@
   :bind (:map ghostel-semi-char-mode-map
          ("C-s"  . consult-line)
          ("C-k"  . my/ghostel-send-C-k-and-kill))
+  :init
+  (setq ghostel-module-directory (concat my-etc-dir "ghostel"))
   :config
   (defun my/ghostel-send-C-k-and-kill ()
     "Send `C-k' to ghostel.
