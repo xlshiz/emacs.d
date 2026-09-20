@@ -1,4 +1,4 @@
-;;; init-term.el --- config shell. -*- lexical-binding: t; -*-
+;;; init-shell.el --- config shell. -*- lexical-binding: t; -*-
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -52,7 +52,20 @@
               hscroll-margin 0)
   (add-to-list 'vterm-keymap-exceptions "C-j"))
 
-(use-package vterm-toggle
-  :defer t)
+(use-package ghostel
+  :bind (:map ghostel-semi-char-mode-map
+         ("C-s"  . consult-line)
+         ("C-k"  . my/ghostel-send-C-k-and-kill))
+  :config
+  (defun my/ghostel-send-C-k-and-kill ()
+    "Send `C-k' to ghostel.
+Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
+    (interactive)
+    (kill-ring-save (point) (line-end-position))
+    (ghostel-send-key "k" "ctrl")))
 
-(provide 'init-vterm)
+(use-package evil-ghostel
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode))
+
+(provide 'init-shell)

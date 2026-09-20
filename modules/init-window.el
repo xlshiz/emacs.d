@@ -153,7 +153,7 @@
 
           "^\\*eshell.*\\*$" eshell-mode
           "^\\*shell.*\\*$"  shell-mode
-          "^\\*vterm-popup:.*\\*$"
+          "^\\*shell-popup:.*\\*$"
 
           "\\*DAP Templates\\*$" dap-server-log-mode
           "\\*ELP Profiling Restuls\\*" profiler-report-mode

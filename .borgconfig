@@ -66,3 +66,7 @@
 [submodule "ai-code-interface"]
 	load-path = .
 	load-path = etc
+[submodule "ghostel"]
+	load-path = lisp
+	load-path = extensions/evil-ghostel
+	load-path = extensions/consult-ghostel

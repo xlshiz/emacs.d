@@ -8,21 +8,21 @@
 ;;
 ;;; Code:
 
-(defvar +vterm--id nil)
+(defvar +shell--popup-id nil)
 
 ;;;###autoload
-(defun +vterm/toggle (arg)
+(defun +shell/toggle (arg)
   "Toggles a terminal popup window at project root.
 
-If prefix ARG is non-nil, recreate vterm buffer in the current project's root.
+If prefix ARG is non-nil, recreate shell buffer in the current project's root.
 
-Returns the vterm buffer."
+Returns the shell buffer."
   (interactive "P")
-  (+vterm--configure-project-root-and-display
+  (+shell--configure-project-root-and-display
    arg
    (lambda ()
      (let ((buffer-name
-            (format "*vterm-popup:%s*"
+            (format "*shell-popup:%s*"
                     (if (bound-and-true-p persp-mode)
                         (safe-persp-name (get-current-persp))
                       "main")))
@@ -38,26 +38,26 @@ Returns the vterm buffer."
        (if-let* ((win (get-buffer-window buffer-name)))
            (delete-window win)
          (let ((buffer (or (cl-loop for buf in (my-buffers-in-mode 'vterm-mode)
-                                    if (equal (buffer-local-value '+vterm--id buf)
+                                    if (equal (buffer-local-value '+shell--popup-id buf)
                                               buffer-name)
                                     return buf)
                            (get-buffer-create buffer-name))))
            (with-current-buffer buffer
-             (setq-local +vterm--id buffer-name)
+             (setq-local +shell--popup-id buffer-name)
              (unless (eq major-mode 'vterm-mode)
                (vterm-mode)))
            (pop-to-buffer buffer)))
        (get-buffer buffer-name)))))
 
 ;;;###autoload
-(defun +vterm/here (arg)
+(defun +shell/here (arg)
   "Open a terminal buffer in the current window at project root.
 
 If prefix ARG is non-nil, cd into `default-directory' instead of project root.
 
-Returns the vterm buffer."
+Returns the shell buffer."
   (interactive "P")
-  (+vterm--configure-project-root-and-display
+  (+shell--configure-project-root-and-display
    arg
    (lambda()
      (require 'vterm)
@@ -67,14 +67,12 @@ Returns the vterm buffer."
      (let (display-buffer-alist)
        (vterm vterm-buffer-name)))))
 
-(defun +vterm--configure-project-root-and-display (arg display-fn)
+(defun +shell--configure-project-root-and-display (arg display-fn)
   "Sets the environment variable PROOT and displays a terminal using `display-fn`.
 
 If prefix ARG is non-nil, cd into `default-directory' instead of project root.
 
-Returns the vterm buffer."
-  (unless (fboundp 'module-load)
-    (user-error "Your build of Emacs lacks dynamic modules support and cannot load vterm"))
+Returns the shell buffer."
   (let* ((project-root (or (+project-project-root) default-directory))
          (default-directory
            (if arg

@@ -55,7 +55,7 @@
 (require 'init-completion)
 ;; Tools
 (require 'init-vc)
-(require 'init-vterm)
+(require 'init-shell)
 (require 'init-dired)
 (require 'init-snippet)
 (require 'init-lsp)

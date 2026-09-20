@@ -237,6 +237,9 @@
 [submodule "general"]
 	path = lib/general
 	url = https://github.com/noctuid/general.el
+[submodule "ghostel"]
+	path = lib/ghostel
+	url = https://github.com/dakra/ghostel.git
 [submodule "ghub"]
 	path = lib/ghub
 	url = https://github.com/magit/ghub
@@ -531,9 +534,6 @@
 [submodule "vterm"]
 	path = lib/vterm
 	url = https://github.com/akermu/emacs-libvterm
-[submodule "vterm-toggle"]
-	path = lib/vterm-toggle
-	url = https://github.com/jixiuf/vterm-toggle
 [submodule "vundo"]
 	path = lib/vundo
 	url = https://github.com/emacs-straight/vundo.git

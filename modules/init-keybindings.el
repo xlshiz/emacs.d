@@ -69,8 +69,8 @@
        :ni "M-o"       #'ace-window))
 
 ;;; term
-(map! :ni   "M-t"      #'+vterm/toggle
-      :ni   [f5]       #'+vterm/toggle)
+(map! :ni   "M-t"      #'+shell/toggle
+      :ni   [f5]       #'+shell/toggle)
 
 ;;; avy-thing-edit
 (map! (:prefix-map ("M-y" . "avy-copy-and-yank")
@@ -342,13 +342,13 @@
        :desc "Open eshell here"      "E"  #'+eshell/here
        :desc "File tree"             "f"  #'dirvish-side
        :desc "Imenu sidebar"         "i"  #'symbols-outline-smart-toggle
-       :desc "Toggle vterm popup"    "t"  #'+vterm/toggle
-       :desc "Open vterm here"       "T"  #'+vterm/here
+       :desc "Toggle vterm popup"    "t"  #'+shell/toggle
+       :desc "Open vterm here"       "T"  #'+shell/here
        :desc "Open Web url"          "w"  #'eaf-open-browser)
 
       ;;; <leader> p --- project
       (:prefix-map ("p" . "project")
-       :desc "Run shell in project"         "'" #'+vterm/here
+       :desc "Run shell in project"         "'" #'+shell/here
        :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
        :desc "Add new project"              "a" #'projectile-add-known-project
        :desc "Compile in project"           "c" #'projectile-compile-project
