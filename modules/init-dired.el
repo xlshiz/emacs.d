@@ -16,12 +16,14 @@
         dired-recursive-copies 'always ; always copy recursively
         dired-recursive-deletes 'top   ; always delete recursively
         dired-auto-revert-buffer t
+        +my-dired-auto-delte-buffer t
         dired-hide-details-hide-symlink-targets nil)
   :config
   (defun +dired/quit-all ()
     "Kill all `dired-mode' buffers."
     (interactive)
     (mapc #'kill-buffer (my-buffers-in-mode 'dired-mode))
+    (setq +my-dired-auto-delte-buffer t)
     (message "Killed all dired buffers"))
   (map! :map dired-mode-map
     :n "h" 'dired-up-directory
@@ -95,7 +97,8 @@
           (filename (dired-get-file-for-visit)))
       (let ((result (apply orig-fun args)))
         (when (and (file-directory-p filename)
-                   (not (eq (current-buffer) orig)))
+                   (not (eq (current-buffer) orig))
+                   +my-dired-auto-delte-buffer)
           (kill-buffer orig))
         result)))
   (defadvice! +dired-up-directory-single-buffer-a (orig-fun &rest args)
@@ -103,8 +106,15 @@
     :around #'dired-up-directory
     (let ((orig (current-buffer)))
       (let ((result (apply orig-fun args)))
-        (kill-buffer orig)
+        (when +my-dired-auto-delte-buffer
+          (kill-buffer orig))
         result)))
+  (defadvice! +dired-mark-a (orig-fun &rest args)
+    "Disable auto delete dired buffer."
+    :around #'dired-mark
+    (let ((result (apply orig-fun args)))
+      (setq +my-dired-auto-delte-buffer nil)
+      result))
 
   ;; Colourful dired
   (use-package diredfl
@@ -190,6 +200,12 @@
                    (not (eq (current-buffer) orig)))
           (kill-buffer orig))
         result)))
+  (defadvice! +dirvish-yank-menu-a (orig-fun &rest args)
+    "Disable auto delete dired buffer."
+    :around #'dirvish-yank-menu
+    (let ((result (apply orig-fun args)))
+      (setq +my-dired-auto-delte-buffer t)
+      result))
   (map! :map dired-mode-map
     :ng "TAB" #'dirvish-subtree-toggle
     :ng "M-n" #'dirvish-history-go-forward
