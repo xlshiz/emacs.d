@@ -15,6 +15,8 @@
                       eaf-markdown-previewer-open)
   :custom
   (eaf-config-location (concat my-cache-dir "eaf"))
+  (eaf-dired-advisor-enable nil)
+  (eaf-find-file-advisor-enable nil)
   :init
   (setq warning-suppress-types '((files lexical-binding)))
   (map! (:map embark-file-map
