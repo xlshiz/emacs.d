@@ -9,9 +9,10 @@
 ;;; Code:
 
 (use-package eaf
-  :commands (eaf-open eaf-open-git eaf-open-browser
+  :commands (eaf-open eaf-open-bookmakr
+                      eaf-open-browse
+                      eaf-open-git 
                       eaf-open-file-manager eaf-open-in-file-manager
-                      eaf-open-mind-elixir
                       eaf-markdown-previewer-open)
   :custom
   (eaf-config-location (concat my-cache-dir "eaf"))

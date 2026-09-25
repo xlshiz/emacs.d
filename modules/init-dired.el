@@ -174,7 +174,7 @@
   ;; Go back home? Just press `bh'
   (dirvish-quick-access-entries
     '(("d" "~/Downloads/"                "Downloads")
-      ("j" "~/workdir/src/jd/"           "JD")
+      ("w" "~/workdir"                   "work")
       ("h" "~/"                          "Home")))
   :init
   (dirvish-override-dired-mode)
