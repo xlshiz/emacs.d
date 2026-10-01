@@ -28,7 +28,8 @@
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
   ;; Env vars
   (after! exec-path-from-shell
-    (exec-path-from-shell-copy-env "PYTHONPATH")))
+    (unless (file-remote-p default-directory)
+      (exec-path-from-shell-copy-env "PYTHONPATH"))))
 
 (provide 'init-python)
 ;;; init-python.el ends here

@@ -45,7 +45,8 @@
                  :desc "go clean" "c" (cmd! (compile "go clean"))))
 
   (after! exec-path-from-shell
-    (exec-path-from-shell-copy-envs '("GOPATH" "GOBIN" "GO111MODULE" "GOPROXY")))
+    (unless (file-remote-p default-directory)
+      (exec-path-from-shell-copy-envs '("GOPATH" "GOBIN" "GO111MODULE" "GOPROXY"))))
 
   (use-package go-tag
     :init (setq go-tag-args (list "-transform" "camelcase")))
