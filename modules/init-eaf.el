@@ -33,6 +33,7 @@
   :after eaf
   :config
   (map! :map eaf-pdf-outline-mode-map
+        :gn "q"        #'delete-window
         :gn "RET"      #'eaf-pdf-outline-jump))
 (use-package eaf-browser
   :after eaf)
@@ -50,9 +51,9 @@
     (defun my-eaf-map-a()
       (when (derived-mode-p 'eaf-mode)
         (map! :map eaf-mode-map
-              :gn "C-d"      #'eaf-py-proxy-scroll_down_page
-              :gn "C-u"      #'eaf-py-proxy-scroll_up_page
+              :gn "C-d"      #'eaf-py-proxy-scroll_up_page
               :gn "<next>"   #'eaf-py-proxy-scroll_up_page
+              :gn "C-u"      #'eaf-py-proxy-scroll_down_page
               :gn "<prior>"  #'eaf-py-proxy-scroll_down_page
               :gn "q"        (cmds! (commandp 'eaf-py-proxy-close_buffer)
                                     'eaf-py-proxy-close_buffer)
