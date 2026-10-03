@@ -23,7 +23,7 @@
   (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
           '(:inherit 'gnus-group-mail-1-empty :weight 'normal)))
 
-(defvar my-font '("Maple Mono SL-15" "Sarasa Fixed SC-15")
+(defvar my-font '("Maple Mono SL-18" "Sarasa Fixed SC-18")
   "A list of fonts to try for the `default' face, in order.
 
 Each entry may be a font family name (\"Maple Mono SL\"), an XFT
@@ -36,7 +36,7 @@ of the `default' face (faces like `fixed-pitch' inherit it).
 Example:
   (setq my-font '(\"Maple Mono SL\" (font-spec :family \"Fira Mono\" :size 12)))")
 
-(defvar my-cjk-font '("Sarasa Fixed SC" "Source Han Mono SC" "Microsoft Yahei")
+(defvar my-cjk-font '("Sarasa Fixed SC-18" "Source Han Mono SC" "Microsoft Yahei")
   "A list of CJK fonts to try, in order.
 
 Each entry may be a font family name, an XFT font string, or a
