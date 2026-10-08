@@ -10,8 +10,8 @@
 
 (use-package eaf
   :commands (eaf-open eaf-open-bookmakr
-                      eaf-open-browse
-                      eaf-open-git 
+                      eaf-open-browser
+                      eaf-open-git
                       eaf-open-file-manager eaf-open-in-file-manager
                       eaf-markdown-previewer-open)
   :custom
