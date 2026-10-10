@@ -30,9 +30,7 @@
   :init
   (setq recentf-max-saved-items 200
         recentf-auto-cleanup 'never
-        recentf-exclude '("/tmp/"
-                          "/usr/local/Cellar/"
-                          "recentf$"
+        recentf-exclude '("recentf$"
                           "\\.cask$"
                           "\\.mkv$"
                           "\\.mp[34]$"
@@ -45,6 +43,12 @@
                           "COMMIT_EDITMSG\\'"
                           "bookmarks"
                           "pyim"
+                          "/tmp/"
+                          "~/.cargo"
+                          "~/.rustup"
+                          "~/.go"
+                          "~/.config/go"
+                          "~/.config/npm/lib"
                           my-local-dir
                           my-cache-dir
                           my-etc-dir
