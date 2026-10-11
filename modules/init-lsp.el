@@ -12,8 +12,17 @@
   :defer t
   :init
   (add-hook! 'lsp-bridge-mode-hook #'evil-normalize-keymaps)
+  (setq lsp-bridge-multi-lang-server-extension-list
+      '(
+        (("vue") . "volar_vtsls")
+        (("ts" "mts")  . "typescript_eslint")
+        (("tsx") . "typescriptreact_eslint")
+        (("component.html") . "angular_template_html")
+        (("component.ts") . "angular_template_typescript")
+        ))
   :custom
-  (lsp-bridge-user-langserver-dir (concat my-etc-dir "langserver"))
+  (lsp-bridge-user-langserver-dir (concat my-etc-dir "lsp-bridge/langserver"))
+  (lsp-bridge-user-multiserver-dir (concat my-etc-dir "lsp-bridge/multiserver"))
   :config
   (setq lsp-bridge-enable-diagnostics t
         acm-enable-tabnine nil

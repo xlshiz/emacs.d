@@ -45,14 +45,6 @@
                                   "../../src/*/*"
                                   "../../../src/*/*/*")))
   :config
-  (when (eq my-lsp-backend 'lsp-mode)
-    (setq lsp-clients-clangd-args '("-j=3"
-                                    "--background-index"
-                                    "--clang-tidy"
-                                    "--completion-style=detailed"
-                                    "--header-insertion=never"
-                                    "--header-insertion-decorators=0")))
-
   (set-formatter!
     'clang-format
     '("clang-format"

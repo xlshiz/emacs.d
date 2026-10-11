@@ -83,8 +83,6 @@
   :config
   (when (fboundp 'web-mode)
     (define-derived-mode typescript-tsx-mode web-mode "TypeScript-TSX")
-    (after! lsp-mode
-      (add-to-list 'lsp--formatting-indent-alist '(typescript-tsx-mode . typescript-indent-level)))
     (after! evil-textobj-tree-sitter
       (pushnew! evil-textobj-tree-sitter-major-mode-language-alist '(typescript-tsx-mode . "tsx")))
     (after! tree-sitter
